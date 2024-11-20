@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  loginForm :FormGroup;
+  loginForm !:FormGroup;
   logInData : any;
 
   constructor(private fb : FormBuilder,private router : Router)
@@ -28,5 +28,8 @@ export class LoginComponent {
   //     this.toastr.error("err")
   //   }
   // )    
+  console.log("hi");
+  
   }
+
 }

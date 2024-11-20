@@ -11,6 +11,12 @@ import { RegisterComponent } from './register/register.component';
 import { FormBuilder } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { BlankComponent } from './layouts/blank/blank.component';
+import { CommonModule } from '@angular/common';
+import { HttpClientModule, provideHttpClient } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
+import { RouterModule } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -25,9 +31,18 @@ import { BlankComponent } from './layouts/blank/blank.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,ReactiveFormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    CommonModule,
+    HttpClientModule,
+    ToastrModule,
+    RouterModule,
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule,
   ],
-  providers: [],
+  providers: [
+   
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

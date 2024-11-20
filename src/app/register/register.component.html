@@ -1,105 +1,164 @@
-<section class="vh-100" style="background-color: #eee;">
-    <div class="container h-100">
-      <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="col-lg-12 col-xl-11">
-          <div class="card text-black" style="border-radius: 25px;">
-            <div class="card-body p-md-5">
-              <div class="row justify-content-center">
-                <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
-  
-                  <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Register</p>
-  
-                  <form [formGroup]="registerForm"  class="mx-1 mx-md-4">
-  
-                    <div class="d-flex flex-row align-items-center mb-4">
-                      <i class="fas fa-user fa-lg me-3 fa-fw"></i>
-                      <div data-mdb-input-init class="form-outline flex-fill mb-0">
-                        <label class="form-label" for="name">Name</label>
-                        <input type="text" class="form-control" id="name" name="name" formControlName="name" />
-                        <small class="text-danger" *ngIf="registerForm.get('name')?.invalid && registerForm.get('name')?.touched">
-                          Name is required
-                        </small>
-                      </div>
-                    </div>
-  
-                    <div class="d-flex flex-row align-items-center mb-4">
-                      <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
-                      <div data-mdb-input-init class="form-outline flex-fill mb-0">
-                        <label class="form-label" for="email">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" formControlName="email"/>
-                        <small class="text-danger" *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
-                          Email is required
-                        </small>
-                      </div>
-                    </div>
-  
-                    <div class="d-flex flex-row align-items-center mb-4">
-                      <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
-                      <div data-mdb-input-init class="form-outline flex-fill mb-0">
-                        <label class="form-label" for="password">Password</label>
-                        <input type="password" class="form-control" id="passwordHash" name="papasswordHashssword" formControlName="passwordHash" [(ngModel)]="this.password" />
-                          <small class="text-danger" *ngIf="registerForm.get('passwordHash')?.invalid && registerForm.get('passwordHash')?.touched">
-                            Password is required
-                          </small>
-                      </div>
-                    </div>
-  
-                    <div class="d-flex flex-row align-items-center mb-4">
-                      <i class="fas fa-key fa-lg me-3 fa-fw"></i>
-                      <div data-mdb-input-init class="form-outline flex-fill mb-0">
-                        <label class="form-label" for="confirmpassword">Confirm Password</label>
-                        <input type="password" class="form-control" id="confirmpassword" name="confirmpassword" (keyup)="checkPassword($event)" />
-                          <!-- <small class="text-danger" *ngIf="registerForm.get('confirmpassword')?.invalid && registerForm.get('confirmpassword')?.touched">
-                            Confirm Password is required
-                          </small> -->
-                      </div>
-                    </div>
-
-                    <div class="d-flex flex-row align-items-center mb-4">
-                        <i class="fas fa-key fa-lg me-3 fa-fw"></i>
-                        <div data-mdb-input-init class="form-outline flex-fill mb-0">
-                          <label class="form-label" for="role">Role</label>
-                          <select class="form-select" aria-label="Default select example" class="form-control" id="role" name="role" formControlName="role">
-                            <option selected>Select a Role</option>
-                            <option value="1">Admin</option>
-                            <option value="2">Editor</option>
-                            <option value="3">Viewer</option>
-                          </select>
-                            <small class="text-danger" *ngIf="registerForm.get('role')?.invalid && registerForm.get('role')?.touched">
-                              Role is required
-                            </small>
-                        </div>
-                      </div>
-  
-                    <div class="form-check d-flex justify-content-center mb-5">
-                      <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" />
-                      <label class="form-check-label" for="form2Example3">
-                        I agree all statements in <a href="#!">Terms of service</a>
-                      </label>
-                    </div>
-  
-                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                      <button  type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg" [disabled]="registerForm.invalid" (click)="onSubmit()">Register</button>
-                    </div>
-
-                    <div class="form-check d-flex justify-content-center mb-5">
-                      <p class="small fw-bold mt-2 pt-1 mb-0">Already have an account? <a href=""
-                        class="link-danger">LogIn</a></p>
-                    </div>
-                  </form>
-  
-                </div>
-                <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
-  
-                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
-                    class="img-fluid" alt="Sample image">
-  
-                </div>
+<section class="vh-100 position-relative" style="background: url('https://png.pngtree.com/back_origin_pic/04/00/98/e3553ebad986eac305e3a26636fd8a30.jpg') no-repeat center center / cover;">
+  <div class="container h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-10 col-xl-8">
+        <div class="card shadow-lg border-0 rounded-4">
+          <div class="card-body p-5">
+            <div class="row justify-content-center">
+              <div class="col-12 text-center">
+                <p class="h1 fw-bold mb-4">Register</p>
               </div>
             </div>
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+              <div class="row">
+                <!-- First Column: Form Fields -->
+                <div class="col-md-8">
+                  <!-- First Row: Name, NIC, Email, etc. -->
+                  <div class="row">
+                    <div class="col-md-6 mb-2">
+                      <label for="firstName" class="form-label">First Name</label>
+                      <input id="firstName" formControlName="firstName" name="firstName" type="text" class="form-control" />
+                      <small *ngIf="registerForm.get('firstName')?.invalid && registerForm.get('firstName')?.touched"
+                        class="text-danger">
+                        First Name is required.
+                      </small>
+                    </div>
+
+                    <div class="col-md-6 mb-2">
+                      <label for="lastName" class="form-label">Last Name</label>
+                      <input id="lastName" formControlName="lastName" name="lastName" type="text" class="form-control" />
+                    </div>
+
+                    <div class="col-md-6 mb-2">
+                      <label for="nic" class="form-label">NIC</label>
+                      <input id="nic" formControlName="nic" name="nic" type="text" class="form-control" />
+                      <small *ngIf="registerForm.get('nic')?.invalid && registerForm.get('nic')?.touched"
+                        class="text-danger">
+                        NIC is required.
+                      </small>
+                    </div>
+
+                    <div class="col-md-6 mb-2">
+                      <label for="drivingLicenceNo" class="form-label">Driving Licence Number</label>
+                      <input id="drivingLicenceNo" formControlName="drivingLicenceNo" name="drivingLicenceNo" type="text"
+                        class="form-control" />
+                      <small
+                        *ngIf="registerForm.get('drivingLicenceNo')?.invalid && registerForm.get('drivingLicenceNo')?.touched"
+                        class="text-danger">
+                        Driving Licence Number is required.
+                      </small>
+                    </div>
+
+                    <div class="col-md-6 mb-2">
+                      <label for="email" class="form-label">Email</label>
+                      <input id="email" formControlName="email" name="email" type="email" class="form-control" />
+                      <small *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched"
+                        class="text-danger">
+                        <div *ngIf="registerForm.get('email')?.errors?.required">Email is required.</div>
+                        <div *ngIf="registerForm.get('email')?.errors?.email">Enter a valid email.</div>
+                      </small>
+                    </div>
+
+                    <div class="col-md-6 mb-2">
+                      <label for="password" class="form-label">Password</label>
+                      <input id="password" formControlName="password" name="password" type="password"
+                        class="form-control" />
+                      <small *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched"
+                        class="text-danger">
+                        <div *ngIf="registerForm.get('password')?.errors?.required">Password is required.</div>
+                        <div *ngIf="registerForm.get('password')?.errors?.minlength">Password must be at least 6 characters.
+                        </div>
+                      </small>
+                    </div>
+
+                    <div class="col-md-6 mb-2">
+                      <label for="phone" class="form-label">Phone</label>
+                      <input id="phone" formControlName="phone" name="phone" type="text" class="form-control" />
+                      <small *ngIf="registerForm.get('phone')?.invalid && registerForm.get('phone')?.touched"
+                        class="text-danger">
+                        <div *ngIf="registerForm.get('phone')?.errors?.required">Phone number is required.</div>
+                        <div *ngIf="registerForm.get('phone')?.errors?.pattern">Invalid phone number.</div>
+                      </small>
+                    </div>
+
+                    <div class="col-md-6 mb-2">
+                      <label for="role" class="form-label">Role</label>
+                      <select id="role" formControlName="role" name="role" class="form-select">
+                        <option value="Customer">Customer</option>
+                        <option value="Admin">Admin</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <!-- Second Row: Address Details -->
+                  <div formGroupName="address" class="row">
+                    <div class="col-md-6 mb-2">
+                      <label for="addressLine1" class="form-label">Address Line 1</label>
+                      <input id="addressLine1" formControlName="addressLine1" name="addressLine1" type="text"
+                        class="form-control" />
+                      <small
+                        *ngIf="registerForm.get('address.addressLine1')?.invalid && registerForm.get('address.addressLine1')?.touched"
+                        class="text-danger">
+                        Address Line 1 is required.
+                      </small>
+                    </div>
+
+                    <div class="col-md-6 mb-2">
+                      <label for="addressLine2" class="form-label">Address Line 2</label>
+                      <input id="addressLine2" formControlName="addressLine2" name="addressLine2" type="text"
+                        class="form-control" />
+                    </div>
+
+                    <div class="col-md-6 mb-2">
+                      <label for="city" class="form-label">City</label>
+                      <input id="city" formControlName="city" name="city" type="text" class="form-control" />
+                      <small *ngIf="registerForm.get('address.city')?.invalid && registerForm.get('address.city')?.touched"
+                        class="text-danger">
+                        City is required.
+                      </small>
+                    </div>
+
+                    <div class="col-md-6 mb-2">
+                      <label for="district" class="form-label">District</label>
+                      <input id="district" formControlName="district" name="district" type="text" class="form-control" />
+                      <small
+                        *ngIf="registerForm.get('address.district')?.invalid && registerForm.get('address.district')?.touched"
+                        class="text-danger">
+                        District is required.
+                      </small>
+                    </div>
+                  </div>
+
+                  <!-- Terms and Conditions -->
+                  <div class="form-check d-flex justify-content-center mb-4">
+                    <input class="form-check-input me-2" type="checkbox" value="" id="termsCheckbox" />
+                    <label class="form-check-label" for="termsCheckbox">
+                      I agree all statements in <a href="#!">Terms of Service</a>
+                    </label>
+                  </div>
+
+                  <!-- Register Button -->
+                  <div class="d-flex justify-content-center mb-3">
+                    <button type="submit" class="btn btn-primary btn-lg" [disabled]="registerForm.invalid">Register</button>
+                  </div>
+
+                  <!-- Login Link -->
+                  <div class="form-check d-flex justify-content-center mb-3">
+                    <p class="small fw-bold mt-2 pt-1 mb-0">Already have an account? <a class="link-danger"
+                        [routerLink]="['/login']">LogIn</a></p>
+                  </div>
+                </div>
+
+                <!-- Second Column: Car Image -->
+                <div class="col-md-4 d-flex justify-content-center align-items-center">
+                  <img src="https://i0.wp.com/sreditingzone.com/wp-content/uploads/2017/10/car-png-1.png?resize=1220%2C892&ssl=1" 
+                       class="img-fluid" alt="Car Image" />
+                </div>
+              </div>
+            </form>
           </div>
         </div>
       </div>
     </div>
-  </section>
-
+  </div>
+</section>
