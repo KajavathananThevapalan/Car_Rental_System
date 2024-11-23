@@ -1,9 +1,9 @@
 
     <nav class="navbar navbar-dark bg-dark">
         <a class="navbar-brand" href="#">
-            <img src="https://th.bing.com/th/id/OIP.3tt7aXi_1jpH9w4swy-J5QHaHa?rs=1&pid=ImgDetMain" width="40"
+            <img src="https://th.bing.com/th?id=OIP.9P-3eAqg_Q_vJO7nS3QKawHaEK&w=333&h=187&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2" width="60"
                 height="40" class="d-inline-block align-top m-2" alt="">
-            Unicom Tic
+            WayToGo Car Rentals
         </a>
         <form class="d-flex  my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -14,20 +14,20 @@
     </nav>
     <main>
         <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
-            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+            <!-- <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                 <svg class="bi me-2" width="40" height="32">
                     <use xlink:href="#bootstrap" />
                 </svg>
                 <span class="fs-4">Task Management</span>
             </a>
-            <hr>
+            <hr> -->
             <ul class="nav nav-pills flex-column mb-auto">
                 <li class="nav-item">
                     <a  class="nav-link text-white" aria-current="page">
                         <svg class="bi me-2" width="16" height="16">
                           
                         </svg>
-                        Home
+                        Dashboard
                     </a>
                 </li>
                 <li>
@@ -35,7 +35,7 @@
                         <svg class="bi me-2" width="16" height="16">
                             <use xlink:href="#speedometer2" />
                         </svg>
-                        Users
+                        Car Management
                     </a>
                 </li>
                 <li>
@@ -43,7 +43,31 @@
                         <svg class="bi me-2" width="16" height="16">
                             <use xlink:href="#table" />
                         </svg>
-                        Tasks
+                        Customer Management
+                    </a>
+                </li>
+                <li>
+                    <a [routerLink]="['/admin/users']" class="nav-link text-white">
+                        <svg class="bi me-2" width="16" height="16">
+                            <use xlink:href="#speedometer2" />
+                        </svg>
+                        Rental Reservation
+                    </a>
+                </li>
+                <li>
+                    <a [routerLink]="['/admin/users']" class="nav-link text-white">
+                        <svg class="bi me-2" width="16" height="16">
+                            <use xlink:href="#speedometer2" />
+                        </svg>
+                        Rentals
+                    </a>
+                </li>
+                <li>
+                    <a [routerLink]="['/admin/users']" class="nav-link text-white">
+                        <svg class="bi me-2" width="16" height="16">
+                            <use xlink:href="#speedometer2" />
+                        </svg>
+                        Payments
                     </a>
                 </li>
             </ul>

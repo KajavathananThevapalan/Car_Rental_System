@@ -39,15 +39,14 @@
                     </div>
 
                     <div class="col-md-6 mb-2">
-                      <label for="drivingLicenceNo" class="form-label">Driving Licence Number</label>
-                      <input id="drivingLicenceNo" formControlName="drivingLicenceNo" name="drivingLicenceNo" type="text"
-                        class="form-control" />
-                      <small
-                        *ngIf="registerForm.get('drivingLicenceNo')?.invalid && registerForm.get('drivingLicenceNo')?.touched"
-                        class="text-danger">
-                        Driving Licence Number is required.
-                      </small>
+                      <label for="role" class="form-label">Role</label>
+                      <select id="role" formControlName="role" name="role" class="form-select">
+                        <option value="Customer">Customer</option>
+                        <option value="Admin">Admin</option>
+                      </select>
                     </div>
+
+                    
 
                     <div class="col-md-6 mb-2">
                       <label for="email" class="form-label">Email</label>
@@ -56,6 +55,17 @@
                         class="text-danger">
                         <div *ngIf="registerForm.get('email')?.errors?.required">Email is required.</div>
                         <div *ngIf="registerForm.get('email')?.errors?.email">Enter a valid email.</div>
+                      </small>
+                    </div>
+
+
+                    <div class="col-md-6 mb-2">
+                      <label for="phone" class="form-label">Phone</label>
+                      <input id="phone" formControlName="phone" name="phone" type="text" class="form-control" />
+                      <small *ngIf="registerForm.get('phone')?.invalid && registerForm.get('phone')?.touched"
+                        class="text-danger">
+                        <div *ngIf="registerForm.get('phone')?.errors?.required">Phone number is required.</div>
+                        <div *ngIf="registerForm.get('phone')?.errors?.pattern">Invalid phone number.</div>
                       </small>
                     </div>
 
@@ -72,22 +82,44 @@
                     </div>
 
                     <div class="col-md-6 mb-2">
-                      <label for="phone" class="form-label">Phone</label>
-                      <input id="phone" formControlName="phone" name="phone" type="text" class="form-control" />
-                      <small *ngIf="registerForm.get('phone')?.invalid && registerForm.get('phone')?.touched"
-                        class="text-danger">
-                        <div *ngIf="registerForm.get('phone')?.errors?.required">Phone number is required.</div>
-                        <div *ngIf="registerForm.get('phone')?.errors?.pattern">Invalid phone number.</div>
-                      </small>
+                      <label class="form-label" for="confirmpassword">Confirm Password</label>
+                        <input type="password" class="form-control" id="confirmpassword" name="confirmpassword" />
+                          <small class="text-danger" *ngIf="registerForm.get('confirmpassword')?.invalid && registerForm.get('confirmpassword')?.touched">
+                            Confirm Password is required
+                          </small>
                     </div>
 
                     <div class="col-md-6 mb-2">
-                      <label for="role" class="form-label">Role</label>
-                      <select id="role" formControlName="role" name="role" class="form-select">
-                        <option value="Customer">Customer</option>
-                        <option value="Admin">Admin</option>
+                      <label for="imageurl" class="form-label">Image URL</label>
+                      <input id="imageurl" formControlName="imageurl" name="imageurl" type="text" class="form-control" />
+                      <small *ngIf="registerForm.get('imageurl')?.invalid && registerForm.get('imageurl')?.touched" class="text-danger">
+                        Image URL is required.
+                      </small>
+                    </div>
+                
+                    <div class="col-md-6 mb-2">
+                      <label for="imagetype" class="form-label">Image Type</label>
+                      <select id="imagetype" formControlName="imagetype" name="imagetype" class="form-select">
+                        <option value="Profile">Profile</option>
+                        <option value="DrivingLicenseFront">DrivingLicenseFront</option>
+                        <option value="DrivingLicenseBack">DrivingLicenseBack</option>
+                        <option value="IDCardFront">IDCardFront</option>
+                        <option value="IDCardBack">IDCardBack</option>
+                        <option value="Other">Other</option>
                       </select>
                     </div>
+
+                    <div class="col-md-6 mb-2">
+                      <label for="drivingLicenceNo" class="form-label">Driving Licence Number</label>
+                      <input id="drivingLicenceNo" formControlName="drivingLicenceNo" name="drivingLicenceNo" type="text"
+                        class="form-control" />
+                      <small
+                        *ngIf="registerForm.get('drivingLicenceNo')?.invalid && registerForm.get('drivingLicenceNo')?.touched"
+                        class="text-danger">
+                        Driving Licence Number is required.
+                      </small>
+                    </div>
+                    
                   </div>
 
                   <!-- Second Row: Address Details -->
@@ -127,11 +159,19 @@
                         District is required.
                       </small>
                     </div>
+
+                    <div class="col-md-6 mb-2">
+                      <label for="country" class="form-label">Country</label>
+                      <input id="country" formControlName="country" name="country" type="text" class="form-control" />
+                      <small *ngIf="registerForm.get('address.country')?.invalid && registerForm.get('address.country')?.touched" class="text-danger">
+                        Country is required.
+                      </small>
+                    </div>   
                   </div>
 
                   <!-- Terms and Conditions -->
                   <div class="form-check d-flex justify-content-center mb-4">
-                    <input class="form-check-input me-2" type="checkbox" value="" id="termsCheckbox" />
+                    <input class="form-check-input me-2" type="checkbox" id="termsCheckbox" formControlName="terms" />
                     <label class="form-check-label" for="termsCheckbox">
                       I agree all statements in <a href="#!">Terms of Service</a>
                     </label>
@@ -139,7 +179,7 @@
 
                   <!-- Register Button -->
                   <div class="d-flex justify-content-center mb-3">
-                    <button type="submit" class="btn btn-primary btn-lg" [disabled]="registerForm.invalid">Register</button>
+                    <button type="submit" class="btn btn-primary btn-lg">Register</button>
                   </div>
 
                   <!-- Login Link -->

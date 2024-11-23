@@ -40,6 +40,7 @@ export interface IUserRegister{
   phone:string;
   role:'Customer' | 'Admin';
   address: Address;
+  image: UserImages;
 }
 
 export interface Address{
@@ -47,4 +48,10 @@ export interface Address{
   addressLine2:string;
   city:string;
   district: string;
+  country: string
+}
+
+export interface UserImages{
+  imageUrl:string;
+  userImageType:string;
 }
