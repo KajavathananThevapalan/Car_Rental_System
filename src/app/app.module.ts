@@ -14,12 +14,15 @@ import { BlankComponent } from './layouts/blank/blank.component';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule, provideHttpClient } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
-import { RouterModule } from '@angular/router';
+import { RouterLink, RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CarManagementComponent } from './car-management/car-management.component';
 import { ManageBrandsComponent } from './manage-brands/manage-brands.component';
 import { ManageModelsComponent } from './manage-models/manage-models.component';
 import { ManageCarsComponent } from './manage-cars/manage-cars.component';
+import { BrandAddComponent } from './brand-add/brand-add.component';
+import { ModelAddComponent } from './model-add/model-add.component';
+import { CarAddComponent } from './car-add/car-add.component';
 
 
 @NgModule({
@@ -34,7 +37,10 @@ import { ManageCarsComponent } from './manage-cars/manage-cars.component';
     CarManagementComponent,
     ManageBrandsComponent,
     ManageModelsComponent,
-    ManageCarsComponent
+    ManageCarsComponent,
+    BrandAddComponent,
+    ModelAddComponent,
+    CarAddComponent
   ],
   imports: [
     BrowserModule,
@@ -47,6 +53,7 @@ import { ManageCarsComponent } from './manage-cars/manage-cars.component';
     RouterModule,
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
+    RouterLink
   ],
   providers: [
    

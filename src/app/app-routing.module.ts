@@ -10,6 +10,7 @@ import { CarManagementComponent } from './car-management/car-management.componen
 import { ManageBrandsComponent } from './manage-brands/manage-brands.component';
 import { ManageModelsComponent } from './manage-models/manage-models.component';
 import { ManageCarsComponent } from './manage-cars/manage-cars.component';
+import { BrandAddComponent } from './brand-add/brand-add.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,12 @@ const routes: Routes = [
       {
         path:'manage-cars',component:ManageCarsComponent
       },
+      {
+        path:'brand-Add',component:BrandAddComponent
+      },
+      {
+        path :'brand-edit/:brandId',component:BrandAddComponent
+      }
       
     ]
   },

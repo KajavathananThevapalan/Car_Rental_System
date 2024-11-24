@@ -1,0 +1,44 @@
+<div class="container">
+    <form [formGroup]="addBrandForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col">
+        <h1>{{isEditMode == true ? 'Update Brand' : ' Add New Brand'}}</h1>
+        <hr>
+        <div class="mb-3">
+          <label class="form-label" for="title">Name</label>
+          <input class="form-control" type="text" class="form-control" id="name" name="name" required
+            formControlName="name">
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="country">Country</label>
+          <input class="form-control" type="text" class="form-control" id="country" name="country"
+            formControlName="country">
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="foundedYear">Founded Year</label>
+          <input class="form-control" type="text" bsDatepicker class="form-control" id="foundedYear" name="foundedYear"
+            formControlName="foundedYear">
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="logoUrl">Logo URL</label>
+            <input class="form-control" type="text" bsDatepicker class="form-control" id="logoUrl" name="logoUrl"
+              formControlName="logoUrl">
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="website">Website</label>
+          <input class="form-control" type="text"  class="form-control" id="website" name="website"
+              formControlName="website">
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="description">Description</label>
+            <input class="form-control" type="text"  class="form-control" id="description" name="description"
+                formControlName="description">
+        </div>
+
+        <button type="submit" class="btn btn-primary" [disabled]="addBrandForm.invalid">Submit
+        </button>
+      </div>
+      
+    </div>
+  </form>
+  </div>
