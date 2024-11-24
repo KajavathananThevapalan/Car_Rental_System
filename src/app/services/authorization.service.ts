@@ -55,3 +55,7 @@ export interface UserImages{
   imageUrl:string;
   userImageType:string;
 }
+function jwtDecode(token: string) {
+  throw new Error('Function not implemented.');
+}
+

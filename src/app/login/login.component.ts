@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthorizationService } from '../services/authorization.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -10,8 +12,8 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   loginForm !:FormGroup;
   logInData : any;
-
-  constructor(private fb : FormBuilder,private router : Router)
+  
+  constructor(private fb : FormBuilder,private authService : AuthorizationService,private toastr : ToastrService,private router : Router)
   {
     this.loginForm =this.fb.group({
       email:['',[Validators.required]],
@@ -20,14 +22,14 @@ export class LoginComponent {
   }
   
   onLogIn(){
-  //   this.logInData = this.loginForm.value; 
-  //   this.authorizationservice.logInUser(this.logInData).subscribe(data => {
-  //     localStorage.setItem("token",data);
-  //     this.router.navigate(['/admin/tasks'])
-  //   },error => {
-  //     this.toastr.error("err")
-  //   }
-  // )    
+    this.logInData = this.loginForm.value; 
+    this.authService.logInUser(this.logInData).subscribe(data => {
+      localStorage.setItem("token",data);
+      this.router.navigate(['/admin'])
+    },error => {
+      this.toastr.error("err")
+    }
+  )    
   console.log("hi");
   
   }

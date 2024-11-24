@@ -16,6 +16,10 @@ import { HttpClientModule, provideHttpClient } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CarManagementComponent } from './car-management/car-management.component';
+import { ManageBrandsComponent } from './manage-brands/manage-brands.component';
+import { ManageModelsComponent } from './manage-models/manage-models.component';
+import { ManageCarsComponent } from './manage-cars/manage-cars.component';
 
 
 @NgModule({
@@ -26,7 +30,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    BlankComponent
+    BlankComponent,
+    CarManagementComponent,
+    ManageBrandsComponent,
+    ManageModelsComponent,
+    ManageCarsComponent
   ],
   imports: [
     BrowserModule,

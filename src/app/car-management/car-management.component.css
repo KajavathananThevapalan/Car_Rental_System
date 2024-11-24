@@ -1,0 +1,11 @@
+.btn-group {
+    margin-bottom: 20px;
+  }
+  
+  .component-container {
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  

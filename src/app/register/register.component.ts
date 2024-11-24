@@ -52,7 +52,7 @@ export class RegisterComponent{
 
   onSubmit() {
     let regUser = this.registerForm.value;
-    console.log(regUser);
+    // console.log(regUser);
     console.log('Form Valid:', this.registerForm);
     console.log('Form Value:', this.registerForm.value);
       // this.registerForm.value.i = parseInt(this.registerForm.value.role);

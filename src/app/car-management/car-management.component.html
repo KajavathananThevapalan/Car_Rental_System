@@ -1,0 +1,19 @@
+<div class="btn-group" role="group">
+    <button class="btn btn-primary" (click)="showComponent('brands')">Manage Brands</button>
+    <button class="btn btn-secondary" (click)="showComponent('models')">Manage Models</button>
+    <button class="btn btn-success" (click)="showComponent('cars')">Manage Cars</button>
+  </div>
+  
+  <div class="component-container mt-4">
+    <ng-container *ngIf="selectedComponent === 'brands'">
+      <app-manage-brands></app-manage-brands>
+    </ng-container>
+    <ng-container *ngIf="selectedComponent === 'models'">
+      <app-manage-models></app-manage-models>
+    </ng-container>
+    <ng-container *ngIf="selectedComponent === 'cars'">
+      <app-manage-cars></app-manage-cars>
+    </ng-container>
+  </div>
+  <router-outlet></router-outlet>
+  
