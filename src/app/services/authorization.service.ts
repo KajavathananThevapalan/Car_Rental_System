@@ -21,7 +21,7 @@ export class AuthorizationService {
   }
 
   registerUser(user: any) {
-    return this.http.post('http://localhost:5282/api/Users/Register', user);
+    return this.http.post('http://localhost:5282/api/Users/Register', user, { responseType: 'text' });
   }
 
   logInUser(user: any){
@@ -30,31 +30,32 @@ export class AuthorizationService {
 
 }
 
-export interface IUserRegister{
-  firstName:string;
-  lastName:string;
-  nic:string;
-  drivingLicenceNo:string;
-  email:string;
-  password:string;
-  phone:string;
-  role:'Customer' | 'Admin';
+export interface IUserRegister {
+  firstName: string;
+  lastName: string;
+  nic: string;
+  drivingLicenceNo: string;
+  email: string;
+  password: string;
+  phone: string;
+  role: 'Customer' | 'Admin'; // Consistent capitalization
   address: Address;
-  image: UserImages;
+  images: UserImages[]; // Multiple images as array, as you have a FormArray for images
 }
 
-export interface Address{
-  addressLine1:string;
-  addressLine2:string;
-  city:string;
+export interface Address {
+  addressLine1: string;
+  addressLine2: string;
+  city: string;
   district: string;
-  country: string
+  country: string;
 }
 
-export interface UserImages{
-  imageUrl:string;
-  userImageType:string;
+export interface UserImages {
+  imageUrl: string;
+  imageType: string; // Consistent naming with your form field
 }
+
 function jwtDecode(token: string) {
   throw new Error('Function not implemented.');
 }
