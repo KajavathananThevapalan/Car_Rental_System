@@ -1,1 +1,36 @@
-<p>model-add works!</p>
+<div class="container mt-4">
+    <h3>Add Model</h3>
+    <form (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+            <label for="modelName" class="form-label">Model Name</label>
+            <input type="text" id="modelName" class="form-control" [(ngModel)]="modelData.modelName" name="modelName"
+                required />
+        </div>
+
+        <div class="mb-3">
+            <label for="brand" class="form-label">Brand</label>
+            <select id="brand" class="form-select" [(ngModel)]="modelData.brandId" name="brandId" required>
+                <option *ngFor="let brand of brands" [value]="brand.brandId">
+                    {{ brand.name }}
+                </option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="year" class="form-label">Year</label>
+            <input type="number" id="year" class="form-control" [(ngModel)]="modelData.year" name="year" required />
+        </div>
+
+        <div class="mb-3">
+            <label for="fuelType" class="form-label">Fuel Type</label>
+            <select id="fuelType" class="form-select" [(ngModel)]="modelData.fuelType" name="fuelType" required>
+                <option value="Petrol">Petrol</option>
+                <option value="Diesel">Diesel</option>
+                <option value="Electric">Electric</option>
+                <option value="Hybrid">Hybrid</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Add Model</button>
+    </form>
+</div>

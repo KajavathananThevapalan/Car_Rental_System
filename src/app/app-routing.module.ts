@@ -10,6 +10,7 @@ import { ManageCarsComponent } from './component/manage-cars/manage-cars.compone
 import { BrandAddComponent } from './component/brand-add/brand-add.component';
 import { HomeComponent } from './layouts/home/home/home.component';
 import { BlankComponent } from './layouts/blank/blank.component';
+import { ModelComponent } from './component/model-add/model-add.component';
 
 const routes: Routes = [
   {
@@ -21,7 +22,8 @@ const routes: Routes = [
       { path: 'manage-models', component: ManageModelsComponent },
       { path: 'manage-cars', component: ManageCarsComponent },
       { path: 'brand-Add', component: BrandAddComponent },
-      { path: 'brand-edit/:brandId', component: BrandAddComponent }
+      { path: 'brand-edit/:brandId', component: BrandAddComponent },
+      { path: 'models', component: ModelComponent },
     ]
   },
   // {
