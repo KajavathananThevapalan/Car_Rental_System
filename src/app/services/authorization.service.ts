@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { jwtDecode } from "jwt-decode";
+
 
 @Injectable({
   providedIn: 'root'
@@ -8,18 +10,6 @@ import { Observable } from 'rxjs';
 export class AuthorizationService {
 
   constructor(private http: HttpClient) { }
-
-  isLoggedIn() {
-    if (localStorage.getItem("token")) {
-      const token = localStorage.getItem("token");
-      // if(token){
-      //   const decoded = jwtDecode(token);
-      // }
-      return true;
-    } else {
-      return false;
-    }
-  }
 
   // Method to authenticate user
   login(email: string, password: string): Observable<any> {
@@ -37,6 +27,22 @@ export class AuthorizationService {
       headers: { 'Content-Type': 'application/json' },
       responseType: "text"
     });
+  }
+
+  isLoggedIn(){
+    if (localStorage.getItem("authToken")) {
+      const token = localStorage.getItem("authToken");
+      if (token) {
+        const decoded:any = jwtDecode(token);
+        console.log(decoded);
+        
+        localStorage.setItem("name", decoded.FullName)
+        localStorage.setItem("Role", decoded.Roles)
+      }
+      return true;
+    }else{
+      return false;
+    }
   }
 }
 
@@ -65,8 +71,3 @@ export interface UserImages {
   imageUrl: string;
   imageType: string; // Consistent naming with your form field
 }
-
-function jwtDecode(token: string) {
-  throw new Error('Function not implemented.');
-}
-

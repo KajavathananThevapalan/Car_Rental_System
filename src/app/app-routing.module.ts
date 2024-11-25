@@ -11,11 +11,13 @@ import { BrandAddComponent } from './component/brand-add/brand-add.component';
 import { HomeComponent } from './layouts/home/home/home.component';
 import { BlankComponent } from './layouts/blank/blank.component';
 import { ModelComponent } from './component/model-add/model-add.component';
+import { AdminGuard } from './guard/admin.guard';
 
 const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
+    canActivate: [AdminGuard],
     children: [
       { path: 'carmanagement', component: CarManagementComponent },
       { path: 'manage-brands', component: ManageBrandsComponent },

@@ -21,6 +21,7 @@
     "@ng-select/ng-select": "^13.9.1",
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
+    "jwt-decode": "^4.0.0",
     "ngx-bootstrap": "^18.1.3",
     "ngx-toastr": "^19.0.0",
     "node-modules": "^1.0.1",
