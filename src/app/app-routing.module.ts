@@ -32,26 +32,19 @@ const routes: Routes = [
   //   ]
   // },
   {
-    path:'',
-    component:BlankComponent,
-    children:[
-      {
-        path:'register',component:RegisterComponent
-      },
-      {
-        path:'login',
-        component:LoginComponent
-      },
-      {
-        path : '',
-        component : HomeComponent
-      },
+    path: '',
+    component: BlankComponent,
+    children: [
+      { path: 'register', component: RegisterComponent },
+      { path: 'login', component: LoginComponent },
+      { path: '', component: HomeComponent },
       // {
       //   path:'**',
       //   redirectTo: "login",
       //   pathMatch:"full"
       // }
-]}
+    ]
+  }
 ];
 
 @NgModule({

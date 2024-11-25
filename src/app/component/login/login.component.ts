@@ -10,28 +10,24 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  loginForm !:FormGroup;
-  logInData : any;
-  
-  constructor(private fb : FormBuilder,private authService : AuthorizationService,private toastr : ToastrService,private router : Router)
-  {
-    this.loginForm =this.fb.group({
-      email:['',[Validators.required]],
-      password:['',[Validators.required]],
+  loginForm !: FormGroup;
+  logInData: any;
+
+  constructor(private fb: FormBuilder, private authService: AuthorizationService, private toastr: ToastrService, private router: Router) {
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required]],
+      password: ['', [Validators.required]],
     })
   }
-  
-  onLogIn(){
-    this.logInData = this.loginForm.value; 
-    this.authService.logInUser(this.logInData).subscribe(data => {
-      localStorage.setItem("token",data);
-      this.router.navigate(['/admin'])
-    },error => {
-      this.toastr.error("err")
-    }
-  )    
-  console.log("hi");
-  
-  }
 
+  onLogIn() {
+    this.authService.logInUser(this.loginForm.value).subscribe(
+      response => {
+        localStorage.setItem('authToken', response);
+        this.router.navigate(['/admin']);
+      },
+      error => {
+        this.toastr.error("Invalid Email or Password")
+      });
+  }
 }

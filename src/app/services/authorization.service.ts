@@ -1,33 +1,43 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthorizationService {
 
-  constructor(private http : HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  isLoggedIn(){
-    if(localStorage.getItem("token")){
+  isLoggedIn() {
+    if (localStorage.getItem("token")) {
       const token = localStorage.getItem("token");
       // if(token){
       //   const decoded = jwtDecode(token);
       // }
       return true;
-    }else{
+    } else {
       return false;
     }
+  }
+
+  // Method to authenticate user
+  login(email: string, password: string): Observable<any> {
+    const user = { email, password };
+
+    return this.http.post<any>("http://localhost:5282/api/Users/authenticate", user);
   }
 
   registerUser(user: any) {
     return this.http.post('http://localhost:5282/api/Users/Register', user, { responseType: 'text' });
   }
 
-  logInUser(user: any){
-    return this.http.post("http://localhost:5282/api/Users/authenticate" , user,{responseType: "text"})
+  logInUser(user: any): Observable<any> {
+    return this.http.post("http://localhost:5282/api/Users/authenticate", user, {
+      headers: { 'Content-Type': 'application/json' },
+      responseType: "text"
+    });
   }
-
 }
 
 export interface IUserRegister {
