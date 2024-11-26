@@ -21,6 +21,7 @@ import { ManageModelsComponent } from "./component/manage-models/manage-models.c
 import { ModelComponent } from "./component/model-add/model-add.component";
 import { RegisterComponent } from "./component/register/register.component";
 import { HomeComponent } from './layouts/home/home/home.component';
+import { NavbarComponentComponent } from './component/navbar-component/navbar-component.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { HomeComponent } from './layouts/home/home/home.component';
     BrandAddComponent,
     ModelComponent,
     CarAddComponent,
-    HomeComponent
+    HomeComponent,
+    NavbarComponentComponent
   ],
   imports: [
     FormsModule,
