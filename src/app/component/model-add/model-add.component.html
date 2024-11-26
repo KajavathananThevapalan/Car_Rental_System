@@ -1,36 +1,92 @@
-<div class="container mt-4">
-    <h3>Add Model</h3>
-    <form (ngSubmit)="onSubmit()">
+<div class="container">
+    <form [formGroup]="addModelForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col">
+        <h1>{{isEditMode == true ? 'Update Model' : ' Add New Model'}}</h1>
+        <hr>
         <div class="mb-3">
-            <label for="modelName" class="form-label">Model Name</label>
-            <input type="text" id="modelName" class="form-control" [(ngModel)]="modelData.modelName" name="modelName"
-                required />
+          <label class="form-label" for="name">Name</label>
+          <input class="form-control" type="text" class="form-control" id="name" name="name" required
+            formControlName="name">
+        </div>
+        <!-- <div class="mb-3">
+          <label class="form-label" for="brandId">Brand</label>
+          <select formControlName="brandId" name="brandId">
+            <option *ngFor="let user of users" [value]="user.id">
+              {{user.name}}
+            </option>
+          </select>
+        </div> -->
+        <div class="mb-3">
+            <label class="form-label" for="year">Year</label>
+            <input class="form-control" type="number" bsDatepicker class="form-control" id="year" name="year"
+            rquired  formControlName="year">
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="enginetype">Engine Type</label>
+          <select id="engineType" formControlName="engineType" name="engineType">
+            <option value="Petrol">Petrol</option>
+            <option value="Diesel">Diesel</option>
+            <option value="Electric">Electric</option>
+            <option value="Hybrid">Hybrid</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="fuelType">Fuel Type</label>
+          <select id="fuelType" formControlName="fuelType" name="fuelType" required>
+            <option value="Gasoline">Gasoline</option>
+            <option value="Electric">Electric</option>
+            <option value="Hybrid">Hybrid</option>
+            <option value="Diesel">Diesel</option>
+          </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="transmissionType">Transmission Type</label>
+            <select id="transmissionType" formControlName="transmissionType" name="transmissionType">
+                <option value="Manual">Manual</option>
+                <option value="Automatic">Automatic</option>
+              </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="mileage">Mileage</label>
+            <input class="form-control" type="number"  class="form-control" id="mileage" name="mileage"
+              formControlName="mileage">
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="horsepower">Horsepower</label>
+          <input class="form-control" type="number"  class="form-control" id="horsepower" name="horsepower"
+              formControlName="horsepower">
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="doors">Doors</label>
+            <input class="form-control" type="number"  class="form-control" id="doors" name="doors"
+                formControlName="doors">
+        </div>
+          <div class="mb-3">
+            <label class="form-label" for="seats">Seats</label>
+            <input class="form-control" type="number"  class="form-control" id="seats" name="seats"
+                formControlName="seats">
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="fuelEfficiency">Fuel Efficiency</label>
+            <input class="form-control" type="number"  class="form-control" id="fuelEfficiency" name="fuelEfficiency"
+                formControlName="fuelEfficiency">
+        </div>
+          <div class="mb-3">
+            <label class="form-label" for="category">Category</label>
+            <input class="form-control" type="text"  class="form-control" id="category" name="category"
+                formControlName="category">
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="updatedBy">Updated By</label>
+            <input class="form-control" type="text"  class="form-control" id="updatedBy" name="updatedBy"
+                formControlName="description">
         </div>
 
-        <div class="mb-3">
-            <label for="brand" class="form-label">Brand</label>
-            <select id="brand" class="form-select" [(ngModel)]="modelData.brandId" name="brandId" required>
-                <option *ngFor="let brand of brands" [value]="brand.brandId">
-                    {{ brand.name }}
-                </option>
-            </select>
-        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="addModelForm.invalid">Add Model
+        </button>
+      </div>
+      
+    </div>
+  </form>
 
-        <div class="mb-3">
-            <label for="year" class="form-label">Year</label>
-            <input type="number" id="year" class="form-control" [(ngModel)]="modelData.year" name="year" required />
-        </div>
-
-        <div class="mb-3">
-            <label for="fuelType" class="form-label">Fuel Type</label>
-            <select id="fuelType" class="form-select" [(ngModel)]="modelData.fuelType" name="fuelType" required>
-                <option value="Petrol">Petrol</option>
-                <option value="Diesel">Diesel</option>
-                <option value="Electric">Electric</option>
-                <option value="Hybrid">Hybrid</option>
-            </select>
-        </div>
-
-        <button type="submit" class="btn btn-primary">Add Model</button>
-    </form>
-</div>

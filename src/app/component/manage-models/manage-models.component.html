@@ -1,3 +1,54 @@
 <h3>Manage Models</h3>
 <p>Here you can manage car models...</p>
 
+<nav class="navbar navbar-light bg-light">
+    <form class="d-flex">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="searchInput" 
+        name="search">
+      <button type="button" [routerLink]="['/admin/model-Add']" class="btn btn-dark position-absolute top-1 end-0"><i
+          class="bi bi-plus-lg"></i> New Model</button>
+    </form>
+  </nav>
+  <table class="table">
+    <thead>
+      <tr>
+        <td scope="col">ModelId</td>
+        <td scope="col">Name</td>
+        <td scope="col">Year</td>
+        <td scope="col">EngineType</td>
+        <td scope="col">FuelType</td>
+        <td scope="col">TransmissionType</td>
+        <td scope="col">Mileage</td>
+        <td scope="col">Horsepower</td>
+        <td scope="col">Doors</td>
+        <td scope="col">Seats</td>
+        <td scope="col">Fuel Efficiency</td>
+        <td scope="col">Category</td>
+        <td scope="col">UpdatedAt</td>
+        <td scope="col">updatedBy</td>
+        <td scope="col">Actions</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let model of models " >
+        <td>{{model.modelId}}</td>
+        <td>{{model.name}}</td>
+        <td>{{model.year}}</td>
+        <td>{{model.engineType}}</td>
+        <td>{{model.fuelType}}</td>
+        <td>{{model.transmissionType}}</td>
+        <td>{{model.mileage}}</td>
+        <td>{{model.horsepower}}</td>
+        <td>{{model.doors}}</td>
+        <td>{{model.seats}}</td>
+        <td>{{model.fuelEfficiency}}</td>
+        <td>{{model.category}}</td>
+        <td>{{model.updatedAt}}</td>
+        <td>{{model.updatedBy}}</td>
+        <td>
+          <span><button class="btn btn-primary m-2 p-2" ><i class="bi bi-pen" (click)="onEdit(model.modelId)"></i></button></span>
+          <span><button class="btn btn-danger m-2 p-2" (click)="onDelete(model.modelId)"><i class="bi bi-trash3-fill "></i></button></span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
