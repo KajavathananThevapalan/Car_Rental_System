@@ -63,7 +63,9 @@ export interface Brand{
 }
 
 export interface Model {
+  brands: any;
   modelId: number; // Optional for creation, mandatory for update
+  brandId:Brand;
   name: string;
   year: number;
   engineType: EngineType;
