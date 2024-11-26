@@ -1,44 +1,93 @@
-<div class="container">
-    <form [formGroup]="addBrandForm" (ngSubmit)="onSubmit()">
-    <div class="row">
-      <div class="col">
-        <h1>{{isEditMode == true ? 'Update Brand' : ' Add New Brand'}}</h1>
-        <hr>
-        <div class="mb-3">
-          <label class="form-label" for="title">Name</label>
-          <input class="form-control" type="text" class="form-control" id="name" name="name" required
-            formControlName="name">
-        </div>
-        <div class="mb-3">
-          <label class="form-label" for="country">Country</label>
-          <input class="form-control" type="text" class="form-control" id="country" name="country"
-            formControlName="country">
-        </div>
-        <div class="mb-3">
-          <label class="form-label" for="foundedYear">Founded Year</label>
-          <input class="form-control" type="text" bsDatepicker class="form-control" id="foundedYear" name="foundedYear"
-            formControlName="foundedYear">
-        </div>
-        <div class="mb-3">
-            <label class="form-label" for="logoUrl">Logo URL</label>
-            <input class="form-control" type="text" bsDatepicker class="form-control" id="logoUrl" name="logoUrl"
-              formControlName="logoUrl">
-        </div>
-        <div class="mb-3">
-          <label class="form-label" for="website">Website</label>
-          <input class="form-control" type="text"  class="form-control" id="website" name="website"
-              formControlName="website">
-        </div>
-        <div class="mb-3">
-            <label class="form-label" for="description">Description</label>
-            <input class="form-control" type="text"  class="form-control" id="description" name="description"
-                formControlName="description">
-        </div>
-
-        <button type="submit" class="btn btn-primary" [disabled]="addBrandForm.invalid">Submit
-        </button>
-      </div>
-      
+<div class="container mt-5">
+  <div class="card shadow">
+    <div class="card-header bg-primary text-white">
+      <h2 class="mb-0">{{ isEditMode ? 'Update Brand' : 'Add New Brand' }}</h2>
     </div>
-  </form>
+    <div class="card-body">
+      <form [formGroup]="addBrandForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <!-- Name -->
+          <div class="col-md-6 mb-3">
+            <label for="name" class="form-label">Brand Name</label>
+            <input 
+              type="text" 
+              class="form-control" 
+              id="name" 
+              formControlName="name" 
+              placeholder="Enter brand name"
+              required>
+          </div>
+          <!-- Country -->
+          <div class="col-md-6 mb-3">
+            <label for="country" class="form-label">Country</label>
+            <input 
+              type="text" 
+              class="form-control" 
+              id="country" 
+              formControlName="country" 
+              placeholder="Enter country"
+              required>
+          </div>
+        </div>
+        
+        <div class="row">
+          <!-- Founded Year -->
+          <div class="col-md-6 mb-3">
+            <label for="foundedYear" class="form-label">Founded Year</label>
+            <input 
+              type="number" 
+              class="form-control" 
+              id="foundedYear" 
+              formControlName="foundedYear" 
+              placeholder="Enter founding year"
+              required>
+          </div>
+          <!-- Logo URL -->
+          <div class="col-md-6 mb-3">
+            <label for="logoUrl" class="form-label">Logo URL</label>
+            <input 
+              type="text" 
+              class="form-control" 
+              id="logoUrl" 
+              formControlName="logoUrl" 
+              placeholder="Enter logo URL">
+          </div>
+        </div>
+        
+        <div class="row">
+          <!-- Website -->
+          <div class="col-md-6 mb-3">
+            <label for="website" class="form-label">Website</label>
+            <input 
+              type="url" 
+              class="form-control" 
+              id="website" 
+              formControlName="website" 
+              placeholder="Enter website URL">
+          </div>
+          <!-- Description -->
+          <div class="col-md-6 mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea 
+              class="form-control" 
+              id="description" 
+              formControlName="description" 
+              rows="3" 
+              placeholder="Enter brand description"></textarea>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col-12 text-end">
+            <button 
+              type="submit" 
+              class="btn btn-primary px-4" 
+              [disabled]="addBrandForm.invalid">
+              {{ isEditMode ? 'Update' : 'Submit' }}
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
   </div>
+</div>

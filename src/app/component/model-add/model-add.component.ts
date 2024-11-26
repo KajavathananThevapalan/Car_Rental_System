@@ -1,57 +1,114 @@
 import { Component, OnInit } from '@angular/core';
-import { AdminServiceService } from '../../services/admin-service.service';
-import { ModelService } from '../../services/model.service';
-
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { AdminServiceService, Brand } from '../../services/admin-service.service';
 
 @Component({
-  selector: 'app-model-add', 
-  templateUrl: './model-add.component.html', 
-  styleUrl: './model-add.component.css'
+  selector: 'app-model-add',
+  templateUrl: './model-add.component.html',
+  styleUrls: ['./model-add.component.css'],
 })
-export class ModelComponent implements OnInit {
-  brands: any[] = [];
-  modelData = {
-    modelName: '',
-    brandId: '',
-    year: new Date().getFullYear(),
-    fuelType: 'Petrol',
-  };
 
+export class ModelAddComponent implements OnInit {
+
+  modelId: number;
+  // engineTypes = Object.values(EngineType);
+  // fuelTypes = Object.values(FuelType);
+  // transmissionTypes = Object.values(TransmissionType);
+  isEditMode = false;
+  addModelForm: FormGroup;
+
+  brands: Brand[] = [];
+  
   constructor(
-    private modelService: ModelService,
-    private adminServiceService: AdminServiceService
-  ) {}
+    private fb: FormBuilder,private adminService: AdminServiceService,private route: ActivatedRoute,private router: Router,
+    private toastr: ToastrService) 
+    {
+    // Determine if the component is in edit mode
+    const editId = Number(this.route.snapshot.paramMap.get('modelId'));
+    if(editId){
+      this.isEditMode = true;
+    }else{
+      this.isEditMode = false;
+    }
+    this.modelId = editId;
+
+    // Initialize form
+    this.addModelForm = this.fb.group({
+      name: ['', Validators.required],
+      brandId:['',Validators.required],
+      year: [new Date().getFullYear(), [Validators.required, Validators.min(1886)]],
+      engineType: ['', Validators.required],
+      fuelType: ['', Validators.required],
+      transmissionType: ['', Validators.required],
+      mileage: [0, Validators.min(0)],
+      horsepower: [0, Validators.min(0)],
+      doors: [4, Validators.min(1)],
+      seats: [4, Validators.min(1)],
+      fuelEfficiency: [0, Validators.min(0)],
+      category: ['', Validators.required],
+      updatedBy: [''],
+    });
+  }
 
   ngOnInit(): void {
-    this.loadBrands();
-  }
-
-  loadBrands() {
-    this.adminServiceService.getBrands().subscribe(
-      (data) => {
+    this.adminService.getBrands().subscribe(data =>
+      {
         this.brands = data;
-      },
-      (error) => {
-        console.error('Error fetching brands:', error);
-      }
-    );
+      })
+
+    // Fetch data for editing
+    if (this.isEditMode) {
+      this.adminService.getModel(this.modelId).subscribe(data => {
+        console.log(data);
+        this.addModelForm.patchValue({
+          name: data.name,
+          brandId:data.brands.brandId,
+          year: data.year,
+          engineType: data.engineType,
+          fuelType: data.fuelType,
+          transmissionType: data.transmissionType,
+          mileage: data.mileage,
+          horsepower: data.horsepower,
+          doors: data.doors,
+          seats: data.seats,
+          fuelEfficiency: data.fuelEfficiency,
+          category: data.category,
+          updatedBy: data.updatedBy,
+        });
+      },error => {
+        this.toastr.error("Model is not found");
+      });
+    }
   }
 
-  onSubmit() {
-    this.modelService.addModel(this.modelData).subscribe(
-      (response) => {
-        console.log('Model added successfully:', response);
-        // Reset form
-        this.modelData = {
-          modelName: '',
-          brandId: '',
-          year: new Date().getFullYear(),
-          fuelType: 'Petrol',
-        };
-      },
-      (error) => {
-        console.error('Error adding model:', error);
-      }
-    );
+  onSubmit(): void {
+    const modelData = this.addModelForm.value;
+
+    if (this.isEditMode) {
+      // Update model
+      modelData.modelId = this.modelId;
+      this.adminService.updateModel(modelData).subscribe(
+        (response) => {
+          this.toastr.success('Model updated successfully');
+          this.router.navigate(['/admin/manage-models']);
+        },
+        (error) => {
+          this.toastr.error('Error updating model');
+        }
+      );
+    } else {
+      // Create new model
+      this.adminService.createModel(modelData).subscribe(
+        (response) => {
+          this.toastr.success('Model created successfully');
+          this.router.navigate(['/admin/manage-models']);
+        },
+        (error) => {
+          this.toastr.error('Error creating model');
+        }
+      );
+    }
   }
 }

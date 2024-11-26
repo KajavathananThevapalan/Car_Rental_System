@@ -18,7 +18,7 @@ import { LoginComponent } from "./component/login/login.component";
 import { ManageBrandsComponent } from "./component/manage-brands/manage-brands.component";
 import { ManageCarsComponent } from "./component/manage-cars/manage-cars.component";
 import { ManageModelsComponent } from "./component/manage-models/manage-models.component";
-import { ModelComponent } from "./component/model-add/model-add.component";
+import { ModelAddComponent } from "./component/model-add/model-add.component";
 import { RegisterComponent } from "./component/register/register.component";
 import { HomeComponent } from './layouts/home/home/home.component';
 
@@ -36,7 +36,7 @@ import { HomeComponent } from './layouts/home/home/home.component';
     ManageModelsComponent,
     ManageCarsComponent,
     BrandAddComponent,
-    ModelComponent,
+    ModelAddComponent,
     CarAddComponent,
     HomeComponent
   ],
