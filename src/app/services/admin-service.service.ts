@@ -50,6 +50,26 @@ export class AdminServiceService {
     return this.http.put('http://localhost:5282/api/Model/' + model.modelId, model);
   }
 
+  getCars() {
+    return this.http.get<Car[]>('http://localhost:5282/api/Cars');
+  }
+
+  createCar(car: any) {
+    return this.http.post('http://localhost:5282/api/Cars', car);
+  }
+
+  deleteCar(carId: number) {
+    return this.http.delete('http://localhost:5282/api/Cars/' + carId);
+  }
+
+  getCar(carId: number) {
+    return this.http.get<Car>('http://localhost:5282/api/Cars/' + carId);
+  }
+
+  updateCar(car: any) {
+    return this.http.put('http://localhost:5282/api/Cars/' + car.carId, car);
+  }
+
 }
 
 export interface Brand{
@@ -100,7 +120,30 @@ export enum TransmissionType {
   Automatic = 'Automatic',
 }
 
-export interface User{
-  
+export interface Car{
+  carId: number,
+  model: Model,
+  licensePlate: string,
+  color: string,
+  status: Status,
+  pricePerDay: number,
+  currentMileage: number,
+  registrationNumber: string,
+  yearOfManufacture: number,
+  viewCount: number,
+  carImages:CarImages 
+}
+
+export interface CarImages{
+  imageUrl:string,
+  imageType:string
+}
+
+export enum Status
+{
+    Available = 'Available',
+    Reserved = 'Reserved',
+    Rented ='Rented',
+    UnderMaintenance = 'UnderMaintenance'
 }
 

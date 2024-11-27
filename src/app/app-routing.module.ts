@@ -11,9 +11,9 @@ import { AdminComponent } from './layouts/admin/admin.component';
 import { CarManagementComponent } from './component/car-management/car-management.component';
 import { ManageBrandsComponent } from './component/manage-brands/manage-brands.component';
 import { ManageModelsComponent } from './component/manage-models/manage-models.component';
-import { ManageCarsComponent } from './component/manage-cars/manage-cars.component';
 import { BrandAddComponent } from './component/brand-add/brand-add.component';
 import { CarAddComponent } from './component/car-add/car-add.component';
+import { ManageCarsComponent } from './component/manage-cars/manage-cars.component';
 
 const routes: Routes = [
   {
@@ -23,7 +23,7 @@ const routes: Routes = [
       { path:'carmanagement',component:CarManagementComponent },
       { path:'manage-brands',component:ManageBrandsComponent },
       { path:'manage-models',component:ManageModelsComponent },
-      { path:'manage-cars',component:ManageCarsComponent },
+      { path:'manage-cars', component:ManageCarsComponent},
       { path:'brand-Add',component:BrandAddComponent },
       { path :'brand-edit/:brandId',component:BrandAddComponent },
       { path:'model-Add',component:ModelAddComponent },
