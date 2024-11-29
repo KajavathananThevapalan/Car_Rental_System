@@ -48,7 +48,6 @@ export class ModelAddComponent implements OnInit {
       seats: [4, Validators.min(1)],
       fuelEfficiency: [0, Validators.min(0)],
       category: ['', Validators.required],
-      updatedBy: [''],
     });
   }
 
@@ -64,7 +63,7 @@ export class ModelAddComponent implements OnInit {
         console.log(data);
         this.addModelForm.patchValue({
           name: data.name,
-          brandId:data.brands.brandId,
+          brandId:data.brandId,
           year: data.year,
           engineType: data.engineType,
           fuelType: data.fuelType,
@@ -74,8 +73,7 @@ export class ModelAddComponent implements OnInit {
           doors: data.doors,
           seats: data.seats,
           fuelEfficiency: data.fuelEfficiency,
-          category: data.category,
-          updatedBy: data.updatedBy,
+          category: data.category
         });
       },error => {
         this.toastr.error("Model is not found");
@@ -85,30 +83,51 @@ export class ModelAddComponent implements OnInit {
 
   onSubmit(): void {
     const modelData = this.addModelForm.value;
-
+    console.log("Model data being sent:", modelData);
+  
+    // Convert brandId if it's a string
+    modelData.brandId = parseInt(modelData.brandId, 10);
+  
     if (this.isEditMode) {
-      // Update model
+      // If editing an existing model
       modelData.modelId = this.modelId;
       this.adminService.updateModel(modelData).subscribe(
         (response) => {
+          // Log response and check the structure
+          console.log('Update Response:', response);
           this.toastr.success('Model updated successfully');
           this.router.navigate(['/admin/manage-models']);
         },
         (error) => {
+          // Log error details for debugging
+          console.error('Error while updating model:', error);
           this.toastr.error('Error updating model');
         }
       );
     } else {
-      // Create new model
+      // If creating a new model
       this.adminService.createModel(modelData).subscribe(
         (response) => {
-          this.toastr.success('Model created successfully');
-          this.router.navigate(['/admin/manage-models']);
+          // Log response to understand its structure
+          console.log('Create Response:', response);
+          
+          // Check if the response indicates success, adjust logic if necessary
+          if (response) {  // Example: Adjust based on API response structure
+            this.toastr.success('Model created successfully');
+            this.router.navigate(['/admin/manage-models']);
+          } else {
+            // If the response is successful but not the expected structure
+            console.error('Unexpected response structure:', response);
+            this.toastr.error('Error creating model');
+          }
         },
         (error) => {
+          // Log the error details for debugging
+          console.error('Error while creating model:', error);
           this.toastr.error('Error creating model');
         }
       );
     }
   }
+  
 }

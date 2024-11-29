@@ -21,6 +21,8 @@ import { ManageModelsComponent } from "./component/manage-models/manage-models.c
 import { ModelAddComponent } from "./component/model-add/model-add.component";
 import { RegisterComponent } from "./component/register/register.component";
 import { HomeComponent } from './layouts/home/home/home.component';
+import { AddUserComponent } from './component/add-user/add-user.component';
+import { ListUserComponent } from './component/list-user/list-user.component';
 
 
 @NgModule({
@@ -38,7 +40,9 @@ import { HomeComponent } from './layouts/home/home/home.component';
     BrandAddComponent,
     ModelAddComponent,
     CarAddComponent,
-    HomeComponent
+    HomeComponent,
+    AddUserComponent,
+    ListUserComponent
   ],
   imports: [
     FormsModule,

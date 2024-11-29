@@ -78,7 +78,6 @@ export interface Model {
   fuelEfficiency: number;
   category: string;
   updatedAt: Date;
-  updatedBy?: string; // Optional for update tracking
 }
 
 export enum EngineType {
@@ -99,8 +98,3 @@ export enum TransmissionType {
   Manual = 'Manual',
   Automatic = 'Automatic',
 }
-
-export interface User{
-  
-}
-

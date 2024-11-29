@@ -9,36 +9,36 @@ import { Router } from '@angular/router';
   styleUrl: './manage-brands.component.css'
 })
 export class ManageBrandsComponent {
-  constructor(private adminService : AdminServiceService,private toastr : ToastrService,private router : Router){
+  constructor(private adminService: AdminServiceService, private toastr: ToastrService, private router: Router) {
 
   }
-  searchInput='';
-  
-  brands: Brand[]=[];
-  
+  searchInput = '';
+
+  brands: Brand[] = [];
+
 
 
   ngOnInit(): void {
     this.loadBrands();
-    }
+  }
 
-  onDelete(brandId:number){
-    if(confirm("Do you want to delete this brand?")){
-      this.adminService.deleteBrand(brandId).subscribe((data: any) =>{
-      this.toastr.success("success");
+  onDelete(brandId: number) {
+    if (confirm("Do you want to delete this brand?")) {
+      this.adminService.deleteBrand(brandId).subscribe((data: any) => {
+        this.toastr.success("success");
         this.loadBrands();
-    })
+      })
     }
   }
 
-  onEdit(brandId:number){
-    this.router.navigate(['admin/brand-edit/',brandId])
+  onEdit(brandId: number) {
+    this.router.navigate(['admin/brand-edit/', brandId])
   }
 
-  loadBrands(){
-    this.adminService.getBrands().subscribe((data: any) =>{
-      this.brands=data;
-  })
+  loadBrands() {
+    this.adminService.getBrands().subscribe((data: any) => {
+      this.brands = data;
+    })
   }
 
 }

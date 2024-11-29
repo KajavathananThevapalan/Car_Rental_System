@@ -45,29 +45,3 @@ export class AuthorizationService {
     }
   }
 }
-
-export interface IUserRegister {
-  firstName: string;
-  lastName: string;
-  nic: string;
-  drivingLicenceNo: string;
-  email: string;
-  password: string;
-  phone: string;
-  role: 'Customer' | 'Admin'; // Consistent capitalization
-  address: Address;
-  images: UserImages[]; // Multiple images as array, as you have a FormArray for images
-}
-
-export interface Address {
-  addressLine1: string;
-  addressLine2: string;
-  city: string;
-  district: string;
-  country: string;
-}
-
-export interface UserImages {
-  imageUrl: string;
-  imageType: string; // Consistent naming with your form field
-}

@@ -1,81 +1,81 @@
+<nav class="navbar navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">
+        <img src="https://th.bing.com/th?id=OIP.9P-3eAqg_Q_vJO7nS3QKawHaEK&w=333&h=187&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2"
+            width="60" height="40" class="d-inline-block align-top m-2" alt="">
+        WayToGo Car Rentals
+    </a>
+    <form class="d-flex  my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        <button class="btn btn-outline-danger my-2 my-sm-0" type="submit" (click)="OnLogOut()">LogOut</button>
+    </form>
 
-    <nav class="navbar navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">
-            <img src="https://th.bing.com/th?id=OIP.9P-3eAqg_Q_vJO7nS3QKawHaEK&w=333&h=187&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2" width="60"
-                height="40" class="d-inline-block align-top m-2" alt="">
-            WayToGo Car Rentals
-        </a>
-        <form class="d-flex  my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            <button class="btn btn-outline-danger my-2 my-sm-0" type="submit" (click)="OnLogOut()">LogOut</button>
-        </form>
-
-    </nav>
-    <main>
-        <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
-            <!-- <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+</nav>
+<main>
+    <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
+        <!-- <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                 <svg class="bi me-2" width="40" height="32">
                     <use xlink:href="#bootstrap" />
                 </svg>
                 <span class="fs-4">Task Management</span>
             </a>
             <hr> -->
-            <ul class="nav nav-pills flex-column mb-auto">
-                <li class="nav-item">
-                    <a  class="nav-link text-white" aria-current="page">
-                        <svg class="bi me-2" width="16" height="16">
-                          
-                        </svg>
-                        Dashboard
-                    </a>
-                </li>
-                <li>
-                    <a [routerLink]="['/admin/carmanagement']" class="nav-link text-white">
-                        <svg class="bi me-2" width="16" height="16">
-                            <use xlink:href="#speedometer2" />
-                        </svg>
-                        Car Management
-                    </a>
-                </li>
-                <li>
-                    <a [routerLink]="['/admin/tasks']" class="nav-link text-white">
-                        <svg class="bi me-2" width="16" height="16">
-                            <use xlink:href="#table" />
-                        </svg>
-                        Customer Management
-                    </a>
-                </li>
-                <li>
-                    <a [routerLink]="['/admin/users']" class="nav-link text-white">
-                        <svg class="bi me-2" width="16" height="16">
-                            <use xlink:href="#speedometer2" />
-                        </svg>
-                        Rental Reservation
-                    </a>
-                </li>
-                <li>
-                    <a [routerLink]="['/admin/users']" class="nav-link text-white">
-                        <svg class="bi me-2" width="16" height="16">
-                            <use xlink:href="#speedometer2" />
-                        </svg>
-                        Rentals
-                    </a>
-                </li>
-                <li>
-                    <a [routerLink]="['/admin/users']" class="nav-link text-white">
-                        <svg class="bi me-2" width="16" height="16">
-                            <use xlink:href="#speedometer2" />
-                        </svg>
-                        Payments
-                    </a>
-                </li>
-            </ul>
-            <hr>
-        </div>
-        <div class="b-example-divider"></div>
-        <div class="container">
-            <router-outlet></router-outlet>
-        </div>
-        
-    </main>
+        <ul class="nav nav-pills flex-column mb-auto">
+            <li class="nav-item">
+                <a class="nav-link text-white" aria-current="page">
+                    <svg class="bi me-2" width="16" height="16">
+
+                    </svg>
+                    Dashboard
+                </a>
+            </li>
+            <li>
+                <a [routerLink]="['/admin/carmanagement']" class="nav-link text-white">
+                    <svg class="bi me-2" width="16" height="16">
+                        <use xlink:href="#speedometer2" />
+                    </svg>
+                    Car Management
+                </a>
+            </li>
+            <li>
+                <a [routerLink]="['/admin/list-user']" class="nav-link text-white">
+                    <svg class="bi me-2" width="16" height="16">
+                        <use xlink:href="#table" />
+                    </svg>
+                    Customer Management
+                </a>
+            </li>
+            <li>
+                <a [routerLink]="['/admin/users']" class="nav-link text-white">
+                    <svg class="bi me-2" width="16" height="16">
+                        <use xlink:href="#speedometer2" />
+                    </svg>
+                    Rental Reservation
+                </a>
+            </li>
+            <li>
+                <a [routerLink]="['/admin/users']" class="nav-link text-white">
+                    <svg class="bi me-2" width="16" height="16">
+                        <use xlink:href="#speedometer2" />
+                    </svg>
+                    Rentals
+                </a>
+            </li>
+            <li>
+                <a [routerLink]="['/admin/users']" class="nav-link text-white">
+                    <svg class="bi me-2" width="16" height="16">
+                        <use xlink:href="#speedometer2" />
+                    </svg>
+                    Payments
+                </a>
+            </li>
+        </ul>
+        <hr>
+    </div>
+    
+    <div class="b-example-divider"></div>
+    <div class="container">
+        <router-outlet></router-outlet>
+    </div>
+
+</main>

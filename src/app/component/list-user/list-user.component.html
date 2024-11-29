@@ -1,0 +1,37 @@
+<nav class="navbar navbar-light bg-light">
+    <form class="d-flex">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
+            [(ngModel)]="searchInput" name="search">
+        <button type="button" [routerLink]="['/admin/user-Add']" class="btn btn-dark position-absolute top-1 end-0"><i
+                class="bi bi-plus-lg"></i> New user</button>
+    </form>
+</nav>
+<table class="table">
+    <thead>
+        <tr>
+            <td scope="col">userId</td>
+            <td scope="col">Full Name</td>
+            <td scope="col">NIC</td>
+            <td scope="col">Driving Licence NO</td>
+            <td scope="col">Email</td>
+            <td scope="col">Phone</td>
+            <td scope="col">Actions</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of users ">
+            <td>{{user.userId}}</td>
+            <td>{{user.firstName + ' ' + user.lastName}}</td>
+            <td>{{user.nic}}</td>
+            <td>{{user.drivingLicenceNo}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.phone}}</td>
+            <td>
+                <span><button class="btn btn-primary m-2 p-2"><i class="bi bi-pen"
+                            (click)="onEdit(user.userId)"></i></button></span>
+                <span><button class="btn btn-danger m-2 p-2" (click)="onDelete(user.userId)"><i
+                            class="bi bi-trash3-fill "></i></button></span>
+            </td>
+        </tr>
+    </tbody>
+</table>

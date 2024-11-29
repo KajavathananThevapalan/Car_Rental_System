@@ -9,22 +9,13 @@
           <!-- Name -->
           <div class="col-md-4 mb-3">
             <label for="name" class="form-label">Model Name</label>
-            <input 
-              type="text" 
-              class="form-control" 
-              id="name" 
-              formControlName="name" 
-              placeholder="Enter model name" 
+            <input type="text" class="form-control" id="name" formControlName="name" placeholder="Enter model name"
               required>
           </div>
           <!-- Brand -->
           <div class="col-md-4 mb-3">
             <label for="brandId" class="form-label">Brand</label>
-            <select 
-              class="form-select" 
-              id="brandId" 
-              formControlName="brandId" 
-              required>
+            <select class="form-select" id="brandId" formControlName="brandId" required>
               <option value="" disabled selected>Select a brand</option>
               <option *ngFor="let brand of brands" [value]="brand.brandId">
                 {{ brand.name }}
@@ -34,12 +25,7 @@
           <!-- Year -->
           <div class="col-md-4 mb-3">
             <label for="year" class="form-label">Year</label>
-            <input 
-              type="number" 
-              class="form-control" 
-              id="year" 
-              formControlName="year" 
-              placeholder="Enter model year" 
+            <input type="number" class="form-control" id="year" formControlName="year" placeholder="Enter model year"
               required>
           </div>
         </div>
@@ -48,11 +34,7 @@
           <!-- Engine Type -->
           <div class="col-md-4 mb-3">
             <label for="engineType" class="form-label">Engine Type</label>
-            <select 
-              class="form-select" 
-              id="engineType" 
-              formControlName="engineType" 
-              required>
+            <select class="form-select" id="engineType" formControlName="engineType" required>
               <option value="" disabled selected>Select engine type</option>
               <option value="Petrol">Petrol</option>
               <option value="Diesel">Diesel</option>
@@ -63,11 +45,7 @@
           <!-- Fuel Type -->
           <div class="col-md-4 mb-3">
             <label for="fuelType" class="form-label">Fuel Type</label>
-            <select 
-              class="form-select" 
-              id="fuelType" 
-              formControlName="fuelType" 
-              required>
+            <select class="form-select" id="fuelType" formControlName="fuelType" required>
               <option value="" disabled selected>Select fuel type</option>
               <option value="Gasoline">Gasoline</option>
               <option value="Electric">Electric</option>
@@ -78,11 +56,7 @@
           <!-- Transmission Type -->
           <div class="col-md-4 mb-3">
             <label for="transmissionType" class="form-label">Transmission Type</label>
-            <select 
-              class="form-select" 
-              id="transmissionType" 
-              formControlName="transmissionType" 
-              required>
+            <select class="form-select" id="transmissionType" formControlName="transmissionType" required>
               <option value="" disabled selected>Select transmission type</option>
               <option value="Manual">Manual</option>
               <option value="Automatic">Automatic</option>
@@ -94,43 +68,25 @@
           <!-- Mileage -->
           <div class="col-md-3 mb-3">
             <label for="mileage" class="form-label">Mileage</label>
-            <input 
-              type="number" 
-              class="form-control" 
-              id="mileage" 
-              formControlName="mileage" 
-              placeholder="Enter mileage" 
+            <input type="number" class="form-control" id="mileage" formControlName="mileage" placeholder="Enter mileage"
               required>
           </div>
           <!-- Horsepower -->
           <div class="col-md-3 mb-3">
             <label for="horsepower" class="form-label">Horsepower</label>
-            <input 
-              type="number" 
-              class="form-control" 
-              id="horsepower" 
-              formControlName="horsepower" 
+            <input type="number" class="form-control" id="horsepower" formControlName="horsepower"
               placeholder="Enter horsepower">
           </div>
           <!-- Doors -->
           <div class="col-md-3 mb-3">
             <label for="doors" class="form-label">Doors</label>
-            <input 
-              type="number" 
-              class="form-control" 
-              id="doors" 
-              formControlName="doors" 
-              placeholder="Enter number of doors" 
-              required>
+            <input type="number" class="form-control" id="doors" formControlName="doors"
+              placeholder="Enter number of doors" required>
           </div>
           <!-- Seats -->
           <div class="col-md-3 mb-3">
             <label for="seats" class="form-label">Seats</label>
-            <input 
-              type="number" 
-              class="form-control" 
-              id="seats" 
-              formControlName="seats" 
+            <input type="number" class="form-control" id="seats" formControlName="seats"
               placeholder="Enter number of seats">
           </div>
         </div>
@@ -139,25 +95,17 @@
           <!-- Fuel Efficiency -->
           <div class="col-md-4 mb-3">
             <label for="fuelEfficiency" class="form-label">Fuel Efficiency</label>
-            <input 
-              type="number" 
-              class="form-control" 
-              id="fuelEfficiency" 
-              formControlName="fuelEfficiency" 
+            <input type="number" class="form-control" id="fuelEfficiency" formControlName="fuelEfficiency"
               placeholder="Enter fuel efficiency">
           </div>
           <!-- Category -->
           <div class="col-md-4 mb-3">
             <label for="category" class="form-label">Category</label>
-            <input 
-              type="text" 
-              class="form-control" 
-              id="category" 
-              formControlName="category" 
+            <input type="text" class="form-control" id="category" formControlName="category"
               placeholder="Enter category">
           </div>
           <!-- Updated By -->
-          <div class="col-md-4 mb-3">
+          <!-- <div class="col-md-4 mb-3">
             <label for="updatedBy" class="form-label">Updated By</label>
             <input 
               type="text" 
@@ -165,15 +113,12 @@
               id="updatedBy" 
               formControlName="updatedBy" 
               placeholder="Enter updated by">
-          </div>
+          </div> -->
         </div>
 
         <div class="row">
           <div class="col-md-6 text-end">
-            <button 
-              type="submit" 
-              class="btn btn-primary px-4" 
-              [disabled]="addModelForm.invalid">
+            <button type="submit" class="btn btn-primary px-4" [disabled]="addModelForm.invalid">
               {{ isEditMode ? 'Update Model' : 'Add Model' }}
             </button>
           </div>

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthorizationService, IUserRegister } from '../../services/authorization.service';
+import { AuthorizationService } from '../../services/authorization.service';
 import { ToastrService } from 'ngx-toastr';
+import { User } from '../../models/User';
 
 @Component({
   selector: 'app-register',
@@ -13,7 +14,7 @@ export class RegisterComponent {
   isPasswordMatch: boolean = false;
 
   registerForm!: FormGroup;
-  regUsers: IUserRegister[] = [];
+  regUsers: User[] = [];
 
   constructor(
     private fb: FormBuilder, 
