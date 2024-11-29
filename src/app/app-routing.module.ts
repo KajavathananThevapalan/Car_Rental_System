@@ -9,11 +9,11 @@ import { AdminComponent } from './layouts/admin/admin.component';
 import { CarManagementComponent } from './component/car-management/car-management.component';
 import { ManageBrandsComponent } from './component/manage-brands/manage-brands.component';
 import { ManageModelsComponent } from './component/manage-models/manage-models.component';
-import { ManageCarsComponent } from './component/manage-cars/manage-cars.component';
 import { BrandAddComponent } from './component/brand-add/brand-add.component';
 import { CarAddComponent } from './component/car-add/car-add.component';
 import { AddUserComponent } from './component/add-user/add-user.component';
 import { ListUserComponent } from './component/list-user/list-user.component';
+import { ManageCarsComponent } from './component/manage-cars/manage-cars.component';
 
 const routes: Routes = [
   {
