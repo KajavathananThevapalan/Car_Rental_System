@@ -23,11 +23,11 @@ export class UserService {
     return this.http.delete(this.url + '/' + UserId);
   }
 
-  getUser(UserId: number) {
+  getUserById(UserId: number) {
     return this.http.get<User>(this.url + '/' + UserId);
   }
 
-  updateUser(User: any) {
-    return this.http.put(this.url + '/' + User.UserId, User);
+  updateUser(UserId: any, User: any) {
+    return this.http.put(this.url + '/' + UserId, User);
   }
 }

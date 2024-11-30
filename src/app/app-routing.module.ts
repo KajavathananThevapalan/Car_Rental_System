@@ -14,6 +14,8 @@ import { CarAddComponent } from './component/car-add/car-add.component';
 import { AddUserComponent } from './component/add-user/add-user.component';
 import { ListUserComponent } from './component/list-user/list-user.component';
 import { ManageCarsComponent } from './component/manage-cars/manage-cars.component';
+import { UserDetailsComponent } from './component/user-details/user-details.component';
+import { EditUserComponent } from './component/edit-user/edit-user.component';
 
 const routes: Routes = [
   {
@@ -31,7 +33,9 @@ const routes: Routes = [
       { path: 'car-Add', component: CarAddComponent },
       { path: 'car-edit/:brandId', component: CarAddComponent },
       { path: 'add-user', component: AddUserComponent },
-      { path: 'list-user', component: ListUserComponent }
+      { path: 'list-user', component: ListUserComponent },
+      { path: 'user/:id', component: UserDetailsComponent },
+      { path: 'user/edit/:id', component: EditUserComponent },
     ]
   },
   // {

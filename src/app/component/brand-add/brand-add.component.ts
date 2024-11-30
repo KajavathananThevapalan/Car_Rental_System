@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AdminServiceService, Brand } from '../../services/admin-service.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AdminServiceService } from '../../services/admin-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
@@ -16,7 +16,8 @@ export class BrandAddComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private adminService: AdminServiceService, private route: ActivatedRoute, private router: Router, private toastr: ToastrService) {
     const editId = Number(this.route.snapshot.paramMap.get("brandId"));
-
+    console.log(editId);
+    
     if (editId) {
       this.isEditMode = true;
     } else {
@@ -35,8 +36,6 @@ export class BrandAddComponent implements OnInit {
     })
   }
 
-
-
   ngOnInit(): void {
     if (this.isEditMode == true) {
       this.adminService.getBrand(this.brandId).subscribe(data => {
@@ -54,9 +53,6 @@ export class BrandAddComponent implements OnInit {
       });
     }
   }
-
-
-
 
   onSubmit(): void {
     let brand = this.addBrandForm.value;
@@ -92,6 +88,5 @@ export class BrandAddComponent implements OnInit {
         }
       );
     }
-  }
-  
+  }  
 }

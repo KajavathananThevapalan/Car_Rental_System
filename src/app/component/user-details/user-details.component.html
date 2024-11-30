@@ -1,0 +1,26 @@
+<div *ngIf="isLoading" class="loading-spinner">
+    <p>Loading user details...</p>
+</div>
+
+<div *ngIf="!isLoading && user">
+    <h2>User Details</h2>
+
+    <div *ngIf="user">
+        <p><strong>Name:</strong> {{ user.name }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Role:</strong> {{ user.role }}</p>
+        <p><strong>Address:</strong> {{ user.address }}</p>
+        <p><strong>Phone:</strong> {{ user.phone }}</p>
+        <!-- Add more user details as necessary -->
+
+        <!-- Button to go back to the user list -->
+        <button (click)="goBack()">Go Back</button>
+
+        <!-- Edit Button to navigate to the edit form -->
+        <button (click)="editUser(user.userId)">Edit</button>
+    </div>
+</div>
+
+<div *ngIf="!isLoading && !user">
+    <p>User not found.</p>
+</div>
