@@ -12,7 +12,6 @@ import { User } from '../../models/User';
 })
 export class RegisterComponent {
   isPasswordMatch: boolean = false;
-
   registerForm!: FormGroup;
   regUsers: User[] = [];
 
@@ -31,12 +30,8 @@ export class RegisterComponent {
       password: ['', [Validators.required, Validators.minLength(6)]],
       phone: ['', [Validators.required]],
       userRole: ['customer', Validators.required],
-      images: this.fb.array([  // FormArray for images
-        this.fb.group({
-          imageUrl: ['', Validators.required],
-          imageType: ['profile', Validators.required]
-        })
-      ]),
+      drivingLicenseFront: ['', [Validators.required]],  // Add for front image
+      drivingLicenseBack: ['', [Validators.required]],   // Add for back image,
       address: this.fb.group({
         addressLine1: [''],
         addressLine2: [''],
@@ -52,7 +47,7 @@ export class RegisterComponent {
     return (this.registerForm.get('images') as FormArray);
   }
 
-  // Add a new image entry to the FormArray
+  // Add a new image entry to the FormArray (if you want to allow more images)
   addImage() {
     this.images.push(this.fb.group({
       imageUrl: ['', Validators.required],
@@ -68,11 +63,8 @@ export class RegisterComponent {
 
     let regUser = this.registerForm.value;
 
-    // console.log('Form Value:', regUser);
-
     this.authService.registerUser(regUser).subscribe({
       next: (data) => {
-        // console.log('Registration successful:', data);
         this.toastr.success("Registration successful.");
         this.router.navigate(['/login']); // Navigate to login page after successful registration
       },

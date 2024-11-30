@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormBuilder, Validators, AbstractControl, FormArray } from "@angular/forms";
+import { FormGroup, FormBuilder, Validators, AbstractControl } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { UserService } from "../../services/user.service";
@@ -18,10 +18,13 @@ export class EditUserComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute, private userService: UserService, private fb: FormBuilder,
-    private toastr: ToastrService, private router: Router) { }
+    private toastr: ToastrService, private router: Router) {
+
+  }
 
   ngOnInit(): void {
     this.userId = Number(this.route.snapshot.paramMap.get('id'));
+
     this.createForm();
     this.getUserDetails();
   }
@@ -35,12 +38,8 @@ export class EditUserComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       phone: ['', [Validators.required]],
       userRole: ['customer', Validators.required],
-      images: this.fb.array([  // FormArray for images
-        this.fb.group({
-          imageUrl: ['', Validators.required],
-          imageType: ['profile', Validators.required]
-        })
-      ]),
+      drivingLicenseFront: ['', [Validators.required]],  // Add for front image
+      drivingLicenseBack: ['', [Validators.required]],   // Add for back image,
       address: this.fb.group({
         addressLine1: [''],
         addressLine2: [''],
@@ -66,8 +65,8 @@ export class EditUserComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.editUserForm.valid) {      
-      this.userService.updateUser(this.userId,this.editUserForm.value).subscribe(
+    if (this.editUserForm.valid) {
+      this.userService.updateUser(this.userId, this.editUserForm.value).subscribe(
         (data) => {
           this.toastr.success('User details updated successfully');
           this.router.navigate(['/admin/list-user']);
@@ -79,19 +78,6 @@ export class EditUserComponent implements OnInit {
     } else {
       this.toastr.error('Please fill out the form correctly.');
     }
-  }
-
-  // Getter to access the images FormArray
-  get images() {
-    return (this.editUserForm.get('images') as FormArray);
-  }
-
-  // Add a new image entry to the FormArray
-  addImage() {
-    this.images.push(this.fb.group({
-      imageUrl: ['', Validators.required],
-      imageType: ['profile', Validators.required]
-    }));
   }
 
   cancelEdit(): void {

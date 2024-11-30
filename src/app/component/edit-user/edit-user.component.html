@@ -43,37 +43,31 @@
             <input id="phone" formControlName="phone" name="phone" type="text" class="form-control" />
           </div>
 
-          <!-- Image Upload Section -->
-          <div formArrayName="images">
-            <div *ngFor="let image of images.controls; let i = index" [formGroupName]="i">
-              <div class="form-group">
-                <label for="imageUrl">Image URL</label>
-                <input id="imageUrl" formControlName="imageUrl" class="form-control" />
+          <div>
+            <h3>Driving Licence Information</h3>
+            <!-- Driving License Number -->
+            <div class="col-md-6 mb-3">
+              <label for="drivingLicenceNo" class="form-label">Driving Licence Number</label>
+              <input id="drivingLicenceNo" formControlName="drivingLicenceNo" name="drivingLicenceNo" type="text"
+                class="form-control" />
+            </div>
+
+            <!-- Image Upload Section -->
+            <div class="row">
+              <!-- Driving License Front Image -->
+              <div class="col-md-6 mb-3">
+                <label for="drivingLicenseFront" class="form-label">Driving Licence Front Image</label>
+                <input id="drivingLicenseFront" formControlName="drivingLicenseFront" name="drivingLicenseFront" type="text"
+                  class="form-control" />
               </div>
 
-              <div class="form-group">
-                <label for="imageType">Image Type</label>
-                <select id="imageType" formControlName="imageType" class="form-control">
-                  <option value="profile">Profile</option>
-                  <option value="drivingLicenseFront">Driving License Front</option>
-                  <option value="drivingLicenseBack">Driving License Back</option>
-                  <option value="IDCardFront">ID Card Front</option>
-                  <option value="IDCardBack">ID Card Back</option>
-                  <option value="other">Other</option>
-                </select>
+              <!-- Driving License Back Image -->
+              <div class="col-md-6 mb-3">
+                <label for="drivingLicenseBack" class="form-label">Driving Licence Back Image</label>
+                <input id="drivingLicenseBack" formControlName="drivingLicenseBack" name="drivingLicenseBack" type="text"
+                  class="form-control" />
               </div>
             </div>
-          </div>
-
-          <button (click)="addImage()">Add Another Image</button>
-
-
-
-          <!-- Driving License Number -->
-          <div class="col-md-6 mb-3">
-            <label for="drivingLicenceNo" class="form-label">Driving Licence Number</label>
-            <input id="drivingLicenceNo" formControlName="drivingLicenceNo" name="drivingLicenceNo" type="text"
-              class="form-control" />
           </div>
         </div>
       </div>
@@ -110,9 +104,10 @@
         </div>
       </div>
     </div>
+
     <!-- Submit Button -->
     <div class="d-flex justify-content-center mb-3">
-      <button type="submit" class="btn btn-primary btn-lg">Save Changes</button>
+      <button type="submit" class="btn btn-primary btn-lg" [disabled]="editUserForm.invalid">Save Changes</button>
     </div>
   </form>
 </div>
