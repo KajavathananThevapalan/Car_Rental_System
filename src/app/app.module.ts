@@ -26,6 +26,7 @@ import { ListUserComponent } from './component/list-user/list-user.component';
 import { UserDetailsComponent } from './component/user-details/user-details.component';
 import { EditUserComponent } from './component/edit-user/edit-user.component';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
+import { ListCarsComponent } from './component/list-cars/list-cars.component';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { DashboardComponent } from './component/dashboard/dashboard.component';
     ListUserComponent,
     UserDetailsComponent,
     EditUserComponent,
-    DashboardComponent
+    DashboardComponent,
+    ListCarsComponent
   ],
   imports: [
     FormsModule,

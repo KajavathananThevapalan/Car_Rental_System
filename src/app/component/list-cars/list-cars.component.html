@@ -1,0 +1,32 @@
+<div *ngIf="isLoading" class="loading-spinner">
+    <!-- You can use a spinner component or any loading indicator -->
+    <p>Loading users...</p>
+</div>
+
+<div *ngIf="!isLoading && errorMessage" class="error-message">
+    <p>{{ errorMessage }}</p>
+</div>
+
+<div *ngIf="!isLoading && !errorMessage">
+    <h2>Cars List</h2>
+
+    <!-- Check if cars is empty -->
+    <div *ngIf="cars.length === 0" class="no-cars">
+        <p>No cars available at the moment</p>
+    </div>
+
+    <!-- Display cars in card view -->
+    <div *ngIf="cars.length > 0" class="cardBox">
+        <div class="card" *ngFor="let car of cars">
+            <div class="card-image-container">
+                <img [src]="car.carImages && car.carImages.length > 0 ? car.carImages[0].imageUrl : 'default-image-url.jpg'"
+                    alt="Car Image" class="car-image">
+                <div class="car-details">
+                    <h3 class="car-name">{{ car.color }}</h3>
+                    <p class="car-status">{{ car.status }}</p>
+                    <p class="car-view-count">View Count: {{ car.viewCount }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

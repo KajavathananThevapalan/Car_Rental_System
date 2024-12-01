@@ -16,13 +16,15 @@ export class HomeComponent implements OnInit {
     this.isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
   }
 
-   // Toggle login/logout state
-   toggleLoginLogout() {
+  // Toggle login/logout state
+  toggleLoginLogout() {
     if (this.isLoggedIn) {
       // Log the user out
       localStorage.setItem('isLoggedIn', 'false');
-      this.isLoggedIn = false;
-      this.router.navigate(['']);
+      if (confirm('Are you sure you want to logout?')) {
+        this.isLoggedIn = false;
+        this.router.navigate(['']);
+      }
     } else {
       // Navigate to the login page if not logged in
       this.router.navigate(['/login']);

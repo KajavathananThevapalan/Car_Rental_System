@@ -17,6 +17,7 @@ import { ManageCarsComponent } from './component/manage-cars/manage-cars.compone
 import { UserDetailsComponent } from './component/user-details/user-details.component';
 import { EditUserComponent } from './component/edit-user/edit-user.component';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
+import { ListCarsComponent } from './component/list-cars/list-cars.component';
 
 const routes: Routes = [
   {
@@ -47,17 +48,17 @@ const routes: Routes = [
 
   //   ]
   // },
+  { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LoginComponent },
   {
     path: '',
-    component: BlankComponent,
+    component: HomeComponent,
     children: [
-      { path: 'register', component: RegisterComponent },
-      { path: 'login', component: LoginComponent },
-      { path: '', component: HomeComponent },
-      { path: '**', redirectTo: "login", pathMatch: "full" }
+      { path: '', component: ListCarsComponent }
     ]
-  }
-];
+  },
+  { path: '**', redirectTo: "login", pathMatch: "full" }
+]
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

@@ -1,41 +1,41 @@
 <div class="cardBox">
     <!-- Brand Card -->
-    <div class="card">
-        <div>
+    <a [routerLink]="['/admin/manage-brands']">
+        <div class="card">
             <div class="numbers">{{ brands }}</div>
             <div class="cardName">
                 {{ brands === 1 ? 'Brand' : 'Brands' }}
             </div>
         </div>
-    </div>
+    </a>
 
     <!-- Model Card -->
-    <div class="card">
-        <div>
+    <a [routerLink]="['/admin/manage-models']">
+        <div class="card">
             <div class="numbers">{{ models }}</div>
             <div class="cardName">
                 {{ models === 1 ? 'Model' : 'Models' }}
             </div>
         </div>
-    </div>
+    </a>
 
     <!-- Car Card -->
-    <div class="card">
-        <div>
+    <a [routerLink]="['/admin/manage-cars']">
+        <div class="card">
             <div class="numbers">{{ cars }}</div>
             <div class="cardName">
                 {{ cars === 1 ? 'Car' : 'Cars' }}
             </div>
         </div>
-    </div>
+    </a>
 
     <!-- Customer Card -->
-    <div class="card">
-        <div>
+    <a [routerLink]="['/admin/list-user']">
+        <div class="card">
             <div class="numbers">{{ customers }}</div>
             <div class="cardName">
                 {{ customers === 1 ? 'Customer' : 'Customers' }}
             </div>
         </div>
-    </div>
+    </a>
 </div>
