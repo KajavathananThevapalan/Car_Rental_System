@@ -1,0 +1,99 @@
+/* Container for the car details page */
+.car-details-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Car Image */
+.car-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.car-image-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Car Information Section */
+.car-info {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.car-info h2 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.car-info p {
+    font-size: 16px;
+    color: #666;
+}
+
+.car-info strong {
+    color: #333;
+}
+
+/* Car Details Section */
+.car-details-section {
+    background-color: #f1f1f1;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.car-details-section h3 {
+    margin-bottom: 10px;
+}
+
+/* Reviews Section */
+.car-reviews {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.car-reviews h3 {
+    margin-bottom: 10px;
+}
+
+.car-reviews ul {
+    list-style: none;
+    padding: 0;
+}
+
+.car-reviews li {
+    margin-bottom: 10px;
+}
+
+.car-reviews strong {
+    font-weight: bold;
+}
+
+.no-reviews {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    color: #888;
+}
+
+/* car-details.component.css */
+.carousel-inner img {
+    width: 100%;
+    height: 400px; /* Adjust height as per your design */
+    object-fit: cover;
+  }
+  

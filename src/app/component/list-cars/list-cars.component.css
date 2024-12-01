@@ -10,7 +10,7 @@
 .card {
     width: 300px;
     height: 400px;
-    position: relative; /* Needed for absolute positioning of the details */
+    position: relative;
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -41,6 +41,7 @@
     background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
     padding: 15px;
     border-radius: 10px;
+    width: 100%;
 }
 
 /* Individual detail styling */
@@ -63,4 +64,22 @@
 .car-view-count {
     font-size: 14px;
     color: #ddd;
+}
+
+/* View Button Styling */
+.view-button {
+    background-color: #ff5733; /* Button color */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+/* Button hover effect */
+.view-button:hover {
+    background-color: #e04a2c; /* Darker button color on hover */
 }

@@ -85,7 +85,7 @@ export class CarAddComponent implements OnInit {
           registrationNumber: data.registrationNumber,
           yearOfManufacture: data.yearOfManufacture,
           viewCount: data.viewCount,
-          modelId: data.model.modelId,
+          modelId: data.modelId,
           carImages: data.carImages, // Handle images
         });
       }, error => {

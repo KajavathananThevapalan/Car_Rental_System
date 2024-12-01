@@ -42,9 +42,8 @@ export class ListCarsComponent {
     );
   }
 
-  // Method to view car details
-  viewCar(carId: number): void {
-    // console.log('Navigating to car with ID:', carId);
-    this.router.navigate([`/admin/car/${carId}`]); // Ensure the path is correct
+  viewCarDetails(car: any): void {
+    // Navigate to a route that shows more details about the car
+    this.router.navigate(['/car-details', car.carId]); // Example route
   }
 }

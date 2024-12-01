@@ -1,0 +1,47 @@
+<div *ngIf="carDetails" class="car-details-container">
+  
+    <!-- Car Image Section -->
+    <div *ngIf="carDetails && carDetails.carImages?.length" class="carousel-container">
+        <carousel>
+          <ng-container *ngFor="let image of carDetails.carImages">
+            <slide>
+              <img [src]="image.imageUrl" class="d-block w-100" alt="Car Image">
+            </slide>
+          </ng-container>
+        </carousel>
+      </div>
+      
+
+    <!-- Car Information Section -->
+    <div class="car-info">
+        <h2>{{ carDetails.color }} - {{ carDetails.status }}</h2>
+        <p><strong>License Plate:</strong> {{ carDetails.licensePlate }}</p>
+        <p><strong>Registration Number:</strong> {{ carDetails.registrationNumber }}</p>
+        <p><strong>Year of Manufacture:</strong> {{ carDetails.yearOfManufacture }}</p>
+        <p><strong>Tank Capacity:</strong> {{ carDetails.tankCapacity }} L</p>
+        <p><strong>View Count:</strong> {{ carDetails.viewCount }}</p>
+        <p><strong>Current Mileage:</strong> {{ carDetails.currentMileage }} km</p>
+        <p><strong>Price per Day:</strong> ${{ carDetails.pricePerDay | number:'1.2-2' }}</p>
+    </div>
+
+    <!-- Car Details Section -->
+    <div class="car-details-section">
+        <h3>Car Details</h3>
+        <p><strong>Created At:</strong> {{ carDetails.createdAt | date:'medium' }}</p>
+        <p><strong>Updated At:</strong> {{ carDetails.updatedAt | date:'medium' }}</p>
+    </div>
+
+    <!-- Reviews Section (if any) -->
+    <div *ngIf="carDetails.reviews?.length" class="car-reviews">
+        <h3>Reviews</h3>
+        <ul>
+            <li *ngFor="let review of carDetails.reviews">
+                <strong>{{ review.user }}</strong>: {{ review.comment }}
+            </li>
+        </ul>
+    </div>
+
+    <div *ngIf="carDetails.reviews?.length === 0" class="no-reviews">
+        <p>No reviews available.</p>
+    </div>
+</div>

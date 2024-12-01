@@ -19,12 +19,13 @@
     <div *ngIf="cars.length > 0" class="cardBox">
         <div class="card" *ngFor="let car of cars">
             <div class="card-image-container">
-                <img [src]="car.carImages && car.carImages.length > 0 ? car.carImages[0].imageUrl : 'default-image-url.jpg'"
-                    alt="Car Image" class="car-image">
+                <img [src]="car.carImages && car.carImages.length > 0 ? car.carImages[0].imageUrl : 'default-image-url.jpg'" alt="Car Image" class="car-image">
                 <div class="car-details">
                     <h3 class="car-name">{{ car.color }}</h3>
                     <p class="car-status">{{ car.status }}</p>
                     <p class="car-view-count">View Count: {{ car.viewCount }}</p>
+                    <!-- View Button -->
+                    <button class="view-button" (click)="viewCarDetails(car)">View</button>
                 </div>
             </div>
         </div>

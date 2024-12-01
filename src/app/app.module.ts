@@ -27,6 +27,8 @@ import { UserDetailsComponent } from './component/user-details/user-details.comp
 import { EditUserComponent } from './component/edit-user/edit-user.component';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { ListCarsComponent } from './component/list-cars/list-cars.component';
+import { CarDetailsComponent } from './component/car-details/car-details.component';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 
 
 @NgModule({
@@ -50,7 +52,8 @@ import { ListCarsComponent } from './component/list-cars/list-cars.component';
     UserDetailsComponent,
     EditUserComponent,
     DashboardComponent,
-    ListCarsComponent
+    ListCarsComponent,
+    CarDetailsComponent
   ],
   imports: [
     FormsModule,
@@ -65,7 +68,8 @@ import { ListCarsComponent } from './component/list-cars/list-cars.component';
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
     RouterLink,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CarouselModule.forRoot()
   ],
   providers: [
 

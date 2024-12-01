@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { CarDetails } from '../models/CarDetails';
 
 @Injectable({
   providedIn: 'root'
@@ -63,7 +64,7 @@ export class AdminServiceService {
   }
 
   getCar(carId: number) {
-    return this.http.get<Car>('http://localhost:5282/api/Cars/' + carId);
+    return this.http.get<CarDetails>('http://localhost:5282/api/Cars/' + carId);
   }
 
   updateCar(car: any) {

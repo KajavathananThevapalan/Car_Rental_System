@@ -18,6 +18,7 @@ import { UserDetailsComponent } from './component/user-details/user-details.comp
 import { EditUserComponent } from './component/edit-user/edit-user.component';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { ListCarsComponent } from './component/list-cars/list-cars.component';
+import { CarDetailsComponent } from './component/car-details/car-details.component';
 
 const routes: Routes = [
   {
@@ -54,7 +55,8 @@ const routes: Routes = [
     path: '',
     component: HomeComponent,
     children: [
-      { path: '', component: ListCarsComponent }
+      { path: '', component: ListCarsComponent },
+      { path: 'car-details/:id', component: CarDetailsComponent }
     ]
   },
   { path: '**', redirectTo: "login", pathMatch: "full" }
