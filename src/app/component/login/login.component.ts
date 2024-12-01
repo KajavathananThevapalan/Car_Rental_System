@@ -36,7 +36,7 @@ export class LoginComponent {
   
         // Check if the user is an admin and navigate accordingly
         if (decoded.UserRole === 'admin') {
-          this.router.navigate(['/admin']);  // Navigate to admin page
+          this.router.navigate(['/admin/dashboard']);  // Navigate to admin page
         } else {
           this.router.navigate(['']);  // Navigate to the homepage or dashboard
         }

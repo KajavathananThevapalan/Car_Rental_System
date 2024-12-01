@@ -16,12 +16,14 @@ import { ListUserComponent } from './component/list-user/list-user.component';
 import { ManageCarsComponent } from './component/manage-cars/manage-cars.component';
 import { UserDetailsComponent } from './component/user-details/user-details.component';
 import { EditUserComponent } from './component/edit-user/edit-user.component';
+import { DashboardComponent } from './component/dashboard/dashboard.component';
 
 const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
     children: [
+      { path: 'dashboard', component: DashboardComponent },
       { path: 'carmanagement', component: CarManagementComponent },
       { path: 'manage-brands', component: ManageBrandsComponent },
       { path: 'manage-models', component: ManageModelsComponent },

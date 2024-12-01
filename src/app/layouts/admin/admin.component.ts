@@ -7,12 +7,15 @@ import { Router } from '@angular/router';
   styleUrl: './admin.component.css'
 })
 export class AdminComponent {
+  isLoggedIn!: boolean;
   constructor(private router: Router){
 
   }
 
   OnLogOut(){
     localStorage.removeItem("token");
-    this.router.navigate([''])
+    localStorage.setItem('isLoggedIn', 'false');
+    this.isLoggedIn = false;
+    this.router.navigate(['']);
   }
 }
