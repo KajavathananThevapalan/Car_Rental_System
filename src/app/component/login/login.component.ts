@@ -26,10 +26,13 @@ export class LoginComponent {
       response => {
         // Save the token in localStorage
         localStorage.setItem('authToken', response);
+
+        // Set the login state to true after successful login
+          localStorage.setItem('isLoggedIn', 'true');
   
         // Decode the JWT to get the user role
         const decoded: any = jwtDecode(response);
-        console.log(decoded.UserRole);
+        // console.log(decoded.UserRole);
   
         // Check if the user is an admin and navigate accordingly
         if (decoded.UserRole === 'admin') {

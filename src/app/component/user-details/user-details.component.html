@@ -1,31 +1,38 @@
 <div *ngIf="isLoading" class="loading-spinner">
-    <p>Loading user details...</p>
+  <p>Loading user details...</p>
 </div>
 
 <div *ngIf="!isLoading && user">
-    <h2>User Details</h2>
+  <h2>User Details</h2>
 
-    <div *ngIf="user">
-        <!-- Display User Details -->
-        <p><strong>Name:</strong> {{ user.firstName + ' ' + user.lastName }}</p>
-        <p><strong>NIC:</strong> {{ user.nic }}</p>
-        <p><strong>Email:</strong> {{ user.email }}</p>
-        <p><strong>Role:</strong> {{ user.userRole }}</p>
-        <p><strong>Address:</strong> {{ user.address?.addressLine1 }}, {{ user.address?.addressLine2 }}, 
-          {{ user.address?.city }}, {{ user.address?.district }}, {{ user.address?.country }}</p>
-        <p><strong>Phone:</strong> {{ user.phone }}</p>
-      
-        <!-- Add more user details as necessary -->
-      
-        <!-- Button to go back to the user list -->
-        <button (click)="goBack()">Go Back</button>
-      
-        <!-- Edit Button to navigate to the edit form -->
-        <button (click)="editUser(user.userId)">Edit</button>
-      </div>
-      
+  <div *ngIf="user">
+    <!-- Display User Details -->
+    <p><strong>Name:</strong> {{ user.userId }}</p>
+    <p><strong>Name:</strong> {{ user.firstName + ' ' + user.lastName }}</p>
+    <p><strong>NIC:</strong> {{ user.nic }}</p>
+    <p><strong>Driving Licence No:</strong> {{ user.drivingLicenceNo }}</p>
+    <p><strong>Driving Licence Front Image:</strong> {{ user.drivingLicenceFront }}</p>
+    <p><strong>Driving Licence Back Image:</strong> {{ user.drivingLicenceBack }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Role:</strong> {{ user.userRole }}</p>
+    <p><strong>Phone:</strong> {{ user.phone }}</p>
+    <p><strong>Address:</strong> {{ user.address?.addressLine1 }}, {{ user.address?.addressLine2 }},
+      {{ user.address?.city }}, {{ user.address?.district }}, {{ user.address?.country }}</p>
+    <p><strong>Rentals:</strong> {{ user.rentals || "No any Rentals" }}</p>
+    <p><strong>Reservations:</strong> {{ user.reservations || "No any Reservations"  }}</p>
+    <p><strong>Registered On:</strong> {{ user.createdAt }}</p>
+
+    <!-- Add more user details as necessary -->
+
+    <!-- Button to go back to the user list -->
+    <button (click)="goBack()">Go Back</button>
+
+    <!-- Edit Button to navigate to the edit form -->
+    <button (click)="editUser(user.userId)">Edit</button>
+  </div>
+
 </div>
 
 <div *ngIf="!isLoading && !user">
-    <p>User not found.</p>
+  <p>User not found.</p>
 </div>

@@ -20,7 +20,7 @@ export class UserDetailsComponent implements OnInit {
     private router: Router // Inject Router for navigation
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
     this.userId = Number(this.route.snapshot.paramMap.get('id')); // Get the userId from the route    
     this.getUserDetails(); // Fetch user details on initialization
   }
@@ -30,6 +30,7 @@ export class UserDetailsComponent implements OnInit {
     this.userService.getUserById(this.userId).subscribe(
       (data) => {        
         this.user = data;
+        console.log(this.user);
         this.isLoading = false;
       },
       (error) => {

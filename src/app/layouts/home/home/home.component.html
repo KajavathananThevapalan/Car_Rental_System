@@ -19,14 +19,9 @@
 </nav> -->
 <!-- Navbar -->
 <header>
-    <nav class="navbar navbar-expand-lg fixed-top navbar-scroll">
-        <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-expand-sm fixed-top">
+        <div class="container">
             <a class="navbar-brand" href="#!">WayToGo</a>
-            <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
-                data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <i class="fas fa-bars"></i>
-            </button>
             <div class="collapse navbar-collapse " id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
@@ -45,28 +40,34 @@
                         <a class="nav-link" href="#!">Contact us</a>
                     </li>
                 </ul>
-                <ul class="navbar-nav d-flex flex-row">
+
+                <ul class="navbar-nav d-flex flex-row p-3 flex-grow-1">
                     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                    <button class="btn btn-outline-danger my-2 my-sm-0" type="submit"
-                    [routerLink]="['/login']">LogIn</button>
                 </ul>
+
                 <ul class="navbar-nav d-flex flex-row">
-                    <li class="nav-item me-3 me-lg-0">
-                        <a class="nav-link" href="#!">
-                            <i class="fas fa-shopping-cart"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item me-3 me-lg-0">
-                        <a class="nav-link" href="#!">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item me-3 me-lg-0">
-                        <a class="nav-link" href="#!">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                    </li>
+                    <div class="dropdown-center">
+                        <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown"
+                            data-bs-display="static" aria-expanded="false">
+                            <i class="bi bi-person-circle" style="font-size: 30px; cursor: pointer;"></i>
+                        </button>
+                        <div class="dropdown-menu p-4">
+                            <div class="mb-3">
+                                <button class="btn btn-primary ml-auto" (click)="toggleLoginLogout()">
+                                    {{ isLoggedIn ? 'Logout' : 'Login' }}
+                                  </button>
+                                <!-- <label for="exampleDropdownFormEmail2" class="form-label">Email address</label>
+                                <input type="email" class="form-control" id="exampleDropdownFormEmail2"
+                                    placeholder="email@example.com"> -->
+                            </div>
+                            <div class="mb-3">
+                                <button *ngIf="!isLoggedIn" class="btn btn-secondary ml-2" (click)="navigateToRegister()">Register</button>
+                                <!-- <label for="exampleDropdownFormPassword2" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="exampleDropdownFormPassword2"
+                                    placeholder="Password"> -->
+                            </div>
+                        </div>
+                    </div>
                 </ul>
             </div>
         </div>
