@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AdminServiceService, Car } from '../../services/admin-service.service';
+import { AdminServiceService, Car, Model } from '../../services/admin-service.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 
@@ -16,12 +16,18 @@ export class ManageCarsComponent {
   searchInput='';
   
   cars: Car[]=[];
+
   
 
 
   ngOnInit(): void {
     this.loadCars();
     }
+
+  // Helper method to get car image by type (e.g., 'Profile')
+  getCarImageByType(images: any[], type: string) {
+    return images.find(image => image.imageType === type);
+  }
 
   onDelete(carId:number){
     if(confirm("Do you want to delete this model?")){

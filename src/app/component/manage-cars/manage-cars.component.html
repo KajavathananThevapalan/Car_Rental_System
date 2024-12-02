@@ -13,7 +13,7 @@
     <thead>
       <tr>
         <td scope="col">CarId</td>
-        <td scope="col">Model</td>
+        <td scope="col">ModelId</td>
         <td scope="col">Reg No</td>
         <td scope="col">License Plate</td>
         <td scope="col">Image</td>
@@ -29,7 +29,7 @@
     <tbody>
       <tr *ngFor="let car of cars " >
         <td>{{car.carId}}</td>
-        <td>{{car.model.name}}</td>
+        <td>{{car.modelId}}</td>
         <td>{{car.registrationNumber}}</td>
         <td>{{car.licensePlate}}</td>
         <td>
@@ -38,6 +38,7 @@
         </td>
         <td>{{car.color}}</td>
         <td>{{car.status}}</td>
+        <td>{{car.pricePerDay}}</td>
         <td>{{car.currentMileage}}</td>
         <td>{{car.yearOfManufacture}}</td>
         <td>{{car.viewCount}}</td>

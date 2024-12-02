@@ -18,14 +18,11 @@
         <td scope="col">EngineType</td>
         <td scope="col">FuelType</td>
         <td scope="col">TransmissionType</td>
-        <td scope="col">Mileage</td>
         <td scope="col">Horsepower</td>
         <td scope="col">Doors</td>
         <td scope="col">Seats</td>
         <td scope="col">Fuel Efficiency</td>
         <td scope="col">Category</td>
-        <td scope="col">UpdatedAt</td>
-        <td scope="col">updatedBy</td>
         <td scope="col">Actions</td>
       </tr>
     </thead>
@@ -37,13 +34,11 @@
         <td>{{model.engineType}}</td>
         <td>{{model.fuelType}}</td>
         <td>{{model.transmissionType}}</td>
-        <td>{{model.mileage}}</td>
         <td>{{model.horsepower}}</td>
         <td>{{model.doors}}</td>
         <td>{{model.seats}}</td>
         <td>{{model.fuelEfficiency}}</td>
         <td>{{model.category}}</td>
-        <td>{{model.updatedAt}}</td>
         <td>
           <span><button class="btn btn-primary m-2 p-2" ><i class="bi bi-pen" (click)="onEdit(model.modelId)"></i></button></span>
           <span><button class="btn btn-danger m-2 p-2" (click)="onDelete(model.modelId)"><i class="bi bi-trash3-fill "></i></button></span>
