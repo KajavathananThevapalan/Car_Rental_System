@@ -16,7 +16,7 @@ export class BrandAddComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private adminService: AdminServiceService, private route: ActivatedRoute, private router: Router, private toastr: ToastrService) {
     const editId = Number(this.route.snapshot.paramMap.get("brandId"));
-    console.log(editId);
+    // console.log(editId);
     
     if (editId) {
       this.isEditMode = true;
@@ -39,7 +39,7 @@ export class BrandAddComponent implements OnInit {
   ngOnInit(): void {
     if (this.isEditMode == true) {
       this.adminService.getBrand(this.brandId).subscribe(data => {
-        console.log(data);
+        // console.log(data);
         this.addBrandForm.patchValue({
           name: data.name,
           country: data.country,
@@ -80,7 +80,7 @@ export class BrandAddComponent implements OnInit {
         (data) => {
           console.log("Create response:", data);  // 'data' will be plain text
           this.toastr.success('Brand added successfully');  // Display the plain text response
-          this.router.navigate(['/admin/carmanagement']);
+          this.router.navigate(['/admin/manage-brands']);
         },
         (error) => {
           console.error("Error while creating brand:", error);
@@ -88,5 +88,9 @@ export class BrandAddComponent implements OnInit {
         }
       );
     }
-  }  
+  }
+
+  onClose(){
+    this.router.navigate(['/admin/manage-brands']);
+  }
 }

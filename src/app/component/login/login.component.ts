@@ -24,21 +24,16 @@ export class LoginComponent {
   onLogIn() {
     this.authService.logInUser(this.loginForm.value).subscribe(
       response => {
-        // Save the token in localStorage
         localStorage.setItem('authToken', response);
+        localStorage.setItem('isLoggedIn', 'true');
 
-        // Set the login state to true after successful login
-          localStorage.setItem('isLoggedIn', 'true');
-  
-        // Decode the JWT to get the user role
         const decoded: any = jwtDecode(response);
         // console.log(decoded.UserRole);
-  
-        // Check if the user is an admin and navigate accordingly
+
         if (decoded.UserRole === 'admin') {
-          this.router.navigate(['/admin/dashboard']);  // Navigate to admin page
+          this.router.navigate(['/admin/dashboard']);
         } else {
-          this.router.navigate(['']);  // Navigate to the homepage or dashboard
+          this.router.navigate(['']);
         }
       },
       error => {
@@ -46,5 +41,5 @@ export class LoginComponent {
       }
     );
   }
-  
+
 }

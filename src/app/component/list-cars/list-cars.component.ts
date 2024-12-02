@@ -10,13 +10,13 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ListCarsComponent {
 
-  cars: any[] = []; // Array to hold the cars
-  isLoading: boolean = true; // Flag to show loading indicator
+  cars: any[] = [];
+  isLoading: boolean = true;
   errorMessage: string = '';
 
   constructor(
     private adminService: AdminServiceService,
-    private toastr: ToastrService, // Inject Toastr for showing notifications
+    private toastr: ToastrService,
     private router: Router) { }
 
   ngOnInit(): void {
@@ -24,17 +24,17 @@ export class ListCarsComponent {
   }
 
   getCars(): void {
-    this.isLoading = true; // Start loading
+    this.isLoading = true;
     this.adminService.getCars().subscribe(
       (data) => {
-        console.log(data[0].carImages);
+        // console.log(data[0].carImages);
         
-        this.isLoading = false; // Stop loading
-        this.cars = data; // Assign the fetched data to cars
+        this.isLoading = false;
+        this.cars = data;
         // console.log('cars fetched:', this.cars);
       },
       (error) => {
-        this.isLoading = false; // Stop loading
+        this.isLoading = false;
         this.errorMessage = 'Failed to load cars. Please try again later.';
         console.error('Error fetching cars:', error);
         this.toastr.error('Error fetching cars. Please try again.');
@@ -43,7 +43,6 @@ export class ListCarsComponent {
   }
 
   viewCarDetails(car: any): void {
-    // Navigate to a route that shows more details about the car
-    this.router.navigate(['/car-details', car.carId]); // Example route
+    this.router.navigate(['/car-details', car.carId]);
   }
 }

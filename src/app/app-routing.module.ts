@@ -3,10 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { RegisterComponent } from './component/register/register.component';
 import { LoginComponent } from './component/login/login.component';
 import { HomeComponent } from './layouts/home/home/home.component';
-import { BlankComponent } from './layouts/blank/blank.component';
 import { ModelAddComponent } from './component/model-add/model-add.component';
 import { AdminComponent } from './layouts/admin/admin.component';
-import { CarManagementComponent } from './component/car-management/car-management.component';
 import { ManageBrandsComponent } from './component/manage-brands/manage-brands.component';
 import { ManageModelsComponent } from './component/manage-models/manage-models.component';
 import { BrandAddComponent } from './component/brand-add/brand-add.component';
@@ -19,14 +17,15 @@ import { EditUserComponent } from './component/edit-user/edit-user.component';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { ListCarsComponent } from './component/list-cars/list-cars.component';
 import { CarDetailsComponent } from './component/car-details/car-details.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
+    canActivate: [AuthGuard], // Protect admin routes with the AuthGuard
     children: [
       { path: 'dashboard', component: DashboardComponent },
-      { path: 'carmanagement', component: CarManagementComponent },
       { path: 'manage-brands', component: ManageBrandsComponent },
       { path: 'manage-models', component: ManageModelsComponent },
       { path: 'manage-cars', component: ManageCarsComponent },
@@ -35,20 +34,13 @@ const routes: Routes = [
       { path: 'model-Add', component: ModelAddComponent },
       { path: 'model-edit/:modelId', component: ModelAddComponent },
       { path: 'car-Add', component: CarAddComponent },
-      { path: 'car-edit/:brandId', component: CarAddComponent },
+      { path: 'car-edit/:carId', component: CarAddComponent },
       { path: 'add-user', component: AddUserComponent },
       { path: 'list-user', component: ListUserComponent },
       { path: 'user/:id', component: UserDetailsComponent },
       { path: 'user/edit/:id', component: EditUserComponent },
     ]
   },
-  // {
-  //   path:'user',
-  //   component:UserComponent,
-  //   children:[
-
-  //   ]
-  // },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   {
@@ -60,7 +52,8 @@ const routes: Routes = [
     ]
   },
   { path: '**', redirectTo: "login", pathMatch: "full" }
-]
+];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

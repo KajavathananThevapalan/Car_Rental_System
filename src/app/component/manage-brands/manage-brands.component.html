@@ -1,13 +1,25 @@
-<h3>Manage Brands</h3>
-<p>Here you can manage car brands...</p>
 <nav class="navbar navbar-light bg-light">
-    <form class="d-flex">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="searchInput" 
-        name="search">
-      <button type="button" [routerLink]="['/admin/brand-Add']" class="btn btn-dark position-absolute top-1 end-0"><i
-          class="bi bi-plus-lg"></i> New Brand</button>
-    </form>
-  </nav>
+  <ul>
+    <h3>Manage Brands</h3>
+  </ul>
+  <ul class="flex-grow-1">
+    <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+  </ul>
+  <ul>
+    <button type="button" [routerLink]="['/admin/brand-Add']" class="btn btn-dark">
+      <i class="bi bi-plus-lg"></i> New Brand</button>
+  </ul>
+</nav>
+
+<div *ngIf="isLoading" class="loading-spinner">
+  <p>Loading brands...</p>
+</div>
+
+<div *ngIf="!isLoading && errorMessage" class="error-message">
+  <p>{{ errorMessage }}</p>
+</div>
+
+<div *ngIf="!isLoading && !errorMessage">
   <table class="table">
     <thead>
       <tr>
@@ -22,7 +34,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let brand of brands " >
+      <tr *ngFor="let brand of brands ">
         <td>{{brand.brandId}}</td>
         <td>{{brand.name}}</td>
         <td>{{brand.country}}</td>
@@ -31,10 +43,11 @@
         <td>{{brand.website}}</td>
         <td>{{brand.description}}</td>
         <td>
-          <span><button class="btn btn-primary m-2 p-2" ><i class="bi bi-pen" (click)="onEdit(brand.brandId)"></i></button></span>
-          <span><button class="btn btn-danger m-2 p-2" (click)="onDelete(brand.brandId)"><i class="bi bi-trash3-fill "></i></button></span>
+          <span><button class="btn btn-primary m-2 p-2" (click)="onEdit(brand.brandId)"><i
+                class="bi bi-pen"></i></button></span>
+          <span><button class="btn btn-danger m-2 p-2" (click)="onDelete(brand.brandId)"><i
+                class="bi bi-trash3-fill"></i></button></span>
         </td>
       </tr>
     </tbody>
   </table>
-  

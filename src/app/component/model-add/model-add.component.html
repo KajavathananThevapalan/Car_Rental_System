@@ -65,12 +65,6 @@
         </div>
 
         <div class="row">
-          <!-- Mileage -->
-          <div class="col-md-3 mb-3">
-            <label for="mileage" class="form-label">Mileage</label>
-            <input type="number" class="form-control" id="mileage" formControlName="mileage" placeholder="Enter mileage"
-              required>
-          </div>
           <!-- Horsepower -->
           <div class="col-md-3 mb-3">
             <label for="horsepower" class="form-label">Horsepower</label>
@@ -104,22 +98,13 @@
             <input type="text" class="form-control" id="category" formControlName="category"
               placeholder="Enter category">
           </div>
-          <!-- Updated By -->
-          <!-- <div class="col-md-4 mb-3">
-            <label for="updatedBy" class="form-label">Updated By</label>
-            <input 
-              type="text" 
-              class="form-control" 
-              id="updatedBy" 
-              formControlName="updatedBy" 
-              placeholder="Enter updated by">
-          </div> -->
         </div>
 
         <div class="row">
-          <div class="col-md-6 text-end">
+          <div class="col-12 text-end">
+            <button type="button" class="btn btn-primary px-4 m-2" (click)="onClose()">Close</button>
             <button type="submit" class="btn btn-primary px-4" [disabled]="addModelForm.invalid">
-              {{ isEditMode ? 'Update Model' : 'Add Model' }}
+              {{ isEditMode ? 'Update' : 'Submit' }}
             </button>
           </div>
         </div>

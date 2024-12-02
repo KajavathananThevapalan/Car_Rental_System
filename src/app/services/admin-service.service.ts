@@ -52,7 +52,7 @@ export class AdminServiceService {
   }
 
   getCars() {
-    return this.http.get<Car[]>('http://localhost:5282/api/Cars');
+    return this.http.get<CarDetails[]>('http://localhost:5282/api/Cars');
   }
 
   createCar(car: any) {
@@ -92,7 +92,6 @@ export interface Model {
   engineType: EngineType;
   fuelType: FuelType;
   transmissionType: TransmissionType;
-  mileage: number;
   horsepower: number;
   doors: number;
   seats: number;

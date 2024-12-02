@@ -2,6 +2,7 @@ import { CarImage } from "./CarImage";
 
 export interface CarDetails {
     carId: number;
+    name: string;
     licensePlate: string;
     color: string;
     status: string;

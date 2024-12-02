@@ -6,36 +6,37 @@
     <div class="card-body">
       <form [formGroup]="addCarForm" (ngSubmit)="onSubmit()">
         <div class="row">
+          <!-- name -->
+          <div class="col-md-4 mb-3">
+            <label for="name" class="form-label">Car Name</label>
+            <input type="text" class="form-control" id="name" formControlName="name" placeholder="Enter name" required>
+          </div>
+          <!-- Model -->
+          <div class="col-md-4 mb-3">
+            <label for="modelId" class="form-label">Model</label>
+            <select class="form-select" id="modelId" formControlName="modelId" required>
+              <option value="" disabled selected>Select a brand</option>
+              <option *ngFor="let model of models" [value]="model.modelId">
+                {{ model.name }}
+              </option>
+            </select>
+          </div>
           <!-- License Plate -->
           <div class="col-md-4 mb-3">
             <label for="licensePlate" class="form-label">License Plate</label>
-            <input 
-              type="text" 
-              class="form-control" 
-              id="licensePlate" 
-              formControlName="licensePlate" 
-              placeholder="Enter license plate" 
-              required>
+            <input type="text" class="form-control" id="licensePlate" formControlName="licensePlate"
+              placeholder="Enter license plate" required>
           </div>
           <!-- Color -->
           <div class="col-md-4 mb-3">
             <label for="color" class="form-label">Color</label>
-            <input 
-              type="text" 
-              class="form-control" 
-              id="color" 
-              formControlName="color" 
-              placeholder="Enter color" 
+            <input type="text" class="form-control" id="color" formControlName="color" placeholder="Enter color"
               required>
           </div>
           <!-- Status -->
           <div class="col-md-4 mb-3">
             <label for="status" class="form-label">Status</label>
-            <select 
-              class="form-select" 
-              id="status" 
-              formControlName="status" 
-              required>
+            <select class="form-select" id="status" formControlName="status" required>
               <option value="0">Inactive</option>
               <option value="1">Active</option>
             </select>
@@ -46,35 +47,20 @@
           <!-- Price per Day -->
           <div class="col-md-4 mb-3">
             <label for="pricePerDay" class="form-label">Price per Day</label>
-            <input 
-              type="number" 
-              class="form-control" 
-              id="pricePerDay" 
-              formControlName="pricePerDay" 
-              placeholder="Enter price per day" 
-              required min="0.01" step="0.01">
+            <input type="number" class="form-control" id="pricePerDay" formControlName="pricePerDay"
+              placeholder="Enter price per day" required min="0.01" step="0.01">
           </div>
           <!-- Current Mileage -->
           <div class="col-md-4 mb-3">
             <label for="currentMileage" class="form-label">Current Mileage (km)</label>
-            <input 
-              type="number" 
-              class="form-control" 
-              id="currentMileage" 
-              formControlName="currentMileage" 
-              placeholder="Enter mileage" 
-              required min="0">
+            <input type="number" class="form-control" id="currentMileage" formControlName="currentMileage"
+              placeholder="Enter mileage" required min="0">
           </div>
           <!-- Registration Number -->
           <div class="col-md-4 mb-3">
             <label for="registrationNumber" class="form-label">Registration Number</label>
-            <input 
-              type="text" 
-              class="form-control" 
-              id="registrationNumber" 
-              formControlName="registrationNumber" 
-              placeholder="Enter registration number" 
-              required>
+            <input type="text" class="form-control" id="registrationNumber" formControlName="registrationNumber"
+              placeholder="Enter registration number" required>
           </div>
         </div>
 
@@ -82,77 +68,59 @@
           <!-- Year of Manufacture -->
           <div class="col-md-4 mb-3">
             <label for="yearOfManufacture" class="form-label">Year of Manufacture</label>
-            <input 
-              type="number" 
-              class="form-control" 
-              id="yearOfManufacture" 
-              formControlName="yearOfManufacture" 
-              placeholder="Enter year of manufacture" 
-              required min="1900" max="2024">
+            <input type="number" class="form-control" id="yearOfManufacture" formControlName="yearOfManufacture"
+              placeholder="Enter year of manufacture" required min="1900" max="2024">
           </div>
           <!-- Model ID -->
-          <div class="col-md-4 mb-3">
+          <!-- <div class="col-md-4 mb-3">
             <label for="modelId" class="form-label">Model ID</label>
-            <input 
-              type="number" 
-              class="form-control" 
-              id="modelId" 
-              formControlName="modelId" 
-              placeholder="Enter model ID" 
-              required>
-          </div>
+            <input type="number" class="form-control" id="modelId" formControlName="modelId"
+              placeholder="Enter model ID" required>
+          </div> -->
           <!-- View Count -->
           <div class="col-md-4 mb-3">
             <label for="viewCount" class="form-label">View Count</label>
-            <input 
-              type="number" 
-              class="form-control" 
-              id="viewCount" 
-              formControlName="viewCount" 
-              placeholder="Enter view count" 
-              required min="0" value="0" readonly>
+            <input type="number" class="form-control" id="viewCount" formControlName="viewCount"
+              placeholder="Enter view count" required min="0" value="0" readonly>
           </div>
         </div>
 
-        
-          <!-- Image Upload Section -->
-          <div formArrayName="carImages">
-            <div *ngFor="let image of carImage.controls; let i = index" [formGroupName]="i">
-              <div class="row">
-                <div class="col-md-6 mb-3 form-group">
-                  <label for="imageUrl">Image URL</label>
-                  <input id="imageUrl" formControlName="imageUrl" class="form-control" />
-                  <!-- <small *ngIf="image.get('imageUrl')?.invalid && image.get('imageUrl')?.touched" class="text-danger">
+
+        <!-- Image Upload Section -->
+        <div formArrayName="carImages">
+          <div *ngFor="let image of carImage.controls; let i = index" [formGroupName]="i">
+            <div class="row">
+              <div class="col-md-6 mb-3 form-group">
+                <label for="imageUrl">Image URL</label>
+                <input id="imageUrl" formControlName="imageUrl" class="form-control" />
+                <!-- <small *ngIf="image.get('imageUrl')?.invalid && image.get('imageUrl')?.touched" class="text-danger">
                     Image URL is required.
                   </small> -->
-                </div>
-            
-                <div class="col-md-6 mb-3 form-group">
-                  <label for="imageType">Image Type</label>
-                  <select id="imageType" formControlName="imageType" class="form-control">
-                    <option value="Profile">Profile</option>
-                    <option value="Exterior">Exterior</option>
-                    <option value="FrontView">FrontView</option>
-                    <option value="SideView">SideView</option>
-                    <option value="Interior">Interior</option>
-                    <option value="ServiceRecord">ServiceRecord</option>
-                    <option value="Other">Other</option>
-                  </select>
-                </div>
+              </div>
+
+              <div class="col-md-6 mb-3 form-group">
+                <label for="imageType">Image Type</label>
+                <select id="imageType" formControlName="imageType" class="form-control">
+                  <option value="Profile">Profile</option>
+                  <option value="Exterior">Exterior</option>
+                  <option value="FrontView">FrontView</option>
+                  <option value="SideView">SideView</option>
+                  <option value="Interior">Interior</option>
+                  <option value="ServiceRecord">ServiceRecord</option>
+                  <option value="Other">Other</option>
+                </select>
               </div>
             </div>
-          
-          <button (click)="addImage()">Add Another Image</button>
-          
+          </div>
+
+          <button type="button" class="btn btn-success px-4 m-2" (click)="addImage()">Add Another Image</button>
         </div>
 
         <div class="row">
-          <div class="col-md-6 text-end">
-            <button 
-              type="submit" 
-              class="btn btn-primary px-4" 
-              [disabled]="addCarForm.invalid">
-              {{ isEditMode ? 'Update Car' : 'Add Car' }}
+          <div class="col-12 text-end">
+            <button type="button" class="btn btn-primary px-4 m-2" (click)="onClose()">Close</button>
+            <button type="submit" class="btn btn-primary px-4" [disabled]="addCarForm.invalid">
+              {{ isEditMode ? 'Update' : 'Submit' }}
             </button>
           </div>
         </div>

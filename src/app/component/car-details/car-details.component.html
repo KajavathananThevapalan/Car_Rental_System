@@ -9,8 +9,7 @@
             </slide>
           </ng-container>
         </carousel>
-      </div>
-      
+    </div>
 
     <!-- Car Information Section -->
     <div class="car-info">
@@ -22,13 +21,12 @@
         <p><strong>View Count:</strong> {{ carDetails.viewCount }}</p>
         <p><strong>Current Mileage:</strong> {{ carDetails.currentMileage }} km</p>
         <p><strong>Price per Day:</strong> ${{ carDetails.pricePerDay | number:'1.2-2' }}</p>
-    </div>
 
-    <!-- Car Details Section -->
-    <div class="car-details-section">
-        <h3>Car Details</h3>
-        <p><strong>Created At:</strong> {{ carDetails.createdAt | date:'medium' }}</p>
-        <p><strong>Updated At:</strong> {{ carDetails.updatedAt | date:'medium' }}</p>
+        <!-- Book Now and Rent Now Buttons -->
+        <div class="action-buttons">
+            <button (click)="bookNow()" class="btn btn-primary">Book Now</button>
+            <button (click)="rentNow()" class="btn btn-success">Rent Now</button>
+        </div>
     </div>
 
     <!-- Reviews Section (if any) -->

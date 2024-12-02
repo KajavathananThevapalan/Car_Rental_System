@@ -10,38 +10,44 @@ import { Router } from '@angular/router';
 })
 export class ManageModelsComponent {
 
-  constructor(private adminService : AdminServiceService,private toastr : ToastrService,private router : Router){
+  constructor(private adminService: AdminServiceService, private toastr: ToastrService, private router: Router) { }
 
-  }
-  searchInput='';
-  
-  models: Model[]=[];
-  
+  isLoading: boolean = true;
+  errorMessage: string = '';
+  searchInput = '';
 
+  models: Model[] = [];
 
   ngOnInit(): void {
     this.loadModels();
-    }
+  }
 
-  onDelete(modelId:number){
-    if(confirm("Do you want to delete this model?")){
-      this.adminService.deleteModel(modelId).subscribe((data: any) =>{
-      this.toastr.success("success");
+  onDelete(modelId: number) {
+    if (confirm("Do you want to delete this model?")) {
+      this.adminService.deleteModel(modelId).subscribe((data: any) => {
+        this.toastr.success("success");
         this.loadModels();
-    })
+      })
     }
   }
 
-  onEdit(modelId:number){
-    this.router.navigate(['admin/model-edit/',modelId])
+  onEdit(modelId: number) {
+    this.router.navigate(['admin/model-edit/', modelId])
   }
 
-  loadModels(){
-    this.adminService.getModels().subscribe((data: any) =>{
-      this.models=data;
-  })
+  loadModels(): void {
+    this.isLoading = true;
+    this.adminService.getModels().subscribe(
+      (data) => {
+        this.isLoading = false;
+        this.models = data;
+      },
+      (error) => {
+        this.isLoading = false;
+        this.errorMessage = 'Failed to load models. Please try again later.';
+        console.error('Error fetching models:', error);
+        this.toastr.error('Error fetching models. Please try again.');
+      }
+    );
   }
-
 }
-
-

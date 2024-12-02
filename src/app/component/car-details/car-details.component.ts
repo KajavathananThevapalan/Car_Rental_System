@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AdminServiceService } from '../../services/admin-service.service';
 import { CarDetails } from '../../models/CarDetails';
 
@@ -10,11 +10,12 @@ import { CarDetails } from '../../models/CarDetails';
 })
 export class CarDetailsComponent implements OnInit {
   carId!: number;
-  carDetails: CarDetails | null = null;
+  carDetails!: CarDetails;
 
   constructor(
     private route: ActivatedRoute,
-    private carService: AdminServiceService
+    private carService: AdminServiceService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -37,4 +38,16 @@ export class CarDetailsComponent implements OnInit {
       }
     );
   }
+
+  // Define what happens when the user clicks "Book Now"
+  bookNow(): void {
+    this.router.navigate(['/booking', this.carDetails.carId]); // Navigate to a booking page
+  }
+
+  // Define what happens when the user clicks "Rent Now"
+  rentNow(): void {
+    this.router.navigate(['/rent', this.carDetails.carId]); // Navigate to a booking page
+  }
+
+  
 }

@@ -13,31 +13,28 @@ import { AdminServiceService, Brand } from '../../services/admin-service.service
 export class ModelAddComponent implements OnInit {
 
   modelId: number;
-  // engineTypes = Object.values(EngineType);
-  // fuelTypes = Object.values(FuelType);
-  // transmissionTypes = Object.values(TransmissionType);
   isEditMode = false;
   addModelForm: FormGroup;
-
   brands: Brand[] = [];
-  
+
   constructor(
-    private fb: FormBuilder,private adminService: AdminServiceService,private route: ActivatedRoute,private router: Router,
-    private toastr: ToastrService) 
-    {
-    // Determine if the component is in edit mode
+    private fb: FormBuilder, private adminService: AdminServiceService,
+    private route: ActivatedRoute, private router: Router, private toastr: ToastrService) {
+
     const editId = Number(this.route.snapshot.paramMap.get('modelId'));
-    if(editId){
+    console.log(editId);
+
+    if (editId) {
       this.isEditMode = true;
-    }else{
+    } else {
       this.isEditMode = false;
     }
+
     this.modelId = editId;
 
-    // Initialize form
     this.addModelForm = this.fb.group({
       name: ['', Validators.required],
-      brandId:['',Validators.required],
+      brandId: ['', Validators.required],
       year: [new Date().getFullYear(), [Validators.required, Validators.min(1886)]],
       engineType: ['', Validators.required],
       fuelType: ['', Validators.required],
@@ -52,30 +49,27 @@ export class ModelAddComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.adminService.getBrands().subscribe(data =>
-      {
-        this.brands = data;
-      })
+    this.adminService.getBrands().subscribe(data => {
+      this.brands = data;
+    })
 
-    // Fetch data for editing
     if (this.isEditMode) {
       this.adminService.getModel(this.modelId).subscribe(data => {
         console.log(data);
         this.addModelForm.patchValue({
           name: data.name,
-          brandId:data.brandId,
+          brandId: data.brandId,
           year: data.year,
           engineType: data.engineType,
           fuelType: data.fuelType,
           transmissionType: data.transmissionType,
-          mileage: data.mileage,
           horsepower: data.horsepower,
           doors: data.doors,
           seats: data.seats,
           fuelEfficiency: data.fuelEfficiency,
           category: data.category
         });
-      },error => {
+      }, error => {
         this.toastr.error("Model is not found");
       });
     }
@@ -83,51 +77,44 @@ export class ModelAddComponent implements OnInit {
 
   onSubmit(): void {
     const modelData = this.addModelForm.value;
-    console.log("Model data being sent:", modelData);
-  
-    // Convert brandId if it's a string
+    // console.log("Model data being sent:", modelData);
     modelData.brandId = parseInt(modelData.brandId, 10);
-  
+
     if (this.isEditMode) {
-      // If editing an existing model
       modelData.modelId = this.modelId;
       this.adminService.updateModel(modelData).subscribe(
         (response) => {
-          // Log response and check the structure
           console.log('Update Response:', response);
           this.toastr.success('Model updated successfully');
           this.router.navigate(['/admin/manage-models']);
         },
         (error) => {
-          // Log error details for debugging
           console.error('Error while updating model:', error);
           this.toastr.error('Error updating model');
         }
       );
     } else {
-      // If creating a new model
       this.adminService.createModel(modelData).subscribe(
         (response) => {
-          // Log response to understand its structure
-          console.log('Create Response:', response);
-          
-          // Check if the response indicates success, adjust logic if necessary
-          if (response) {  // Example: Adjust based on API response structure
+          // console.log('Create Response:', response);
+
+          if (response) {
             this.toastr.success('Model created successfully');
             this.router.navigate(['/admin/manage-models']);
           } else {
-            // If the response is successful but not the expected structure
             console.error('Unexpected response structure:', response);
             this.toastr.error('Error creating model');
           }
         },
         (error) => {
-          // Log the error details for debugging
           console.error('Error while creating model:', error);
           this.toastr.error('Error creating model');
         }
       );
     }
   }
-  
+
+  onClose() {
+    this.router.navigate(['/admin/manage-models']);
+  }
 }

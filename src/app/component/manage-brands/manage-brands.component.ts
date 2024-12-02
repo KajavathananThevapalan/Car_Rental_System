@@ -9,17 +9,16 @@ import { Router } from '@angular/router';
   styleUrl: './manage-brands.component.css'
 })
 export class ManageBrandsComponent {
-  constructor(private adminService: AdminServiceService, private toastr: ToastrService, private router: Router) {
+  constructor(private adminService: AdminServiceService, private toastr: ToastrService, private router: Router) { }
 
-  }
+  isLoading: boolean = true;
+  errorMessage: string = '';
   searchInput = '';
 
   brands: Brand[] = [];
 
-
-
   ngOnInit(): void {
-    this.loadBrands();
+    this.loadBrands();    
   }
 
   onDelete(brandId: number) {
@@ -35,11 +34,19 @@ export class ManageBrandsComponent {
     this.router.navigate(['admin/brand-edit/', brandId])
   }
 
-  loadBrands() {
-    this.adminService.getBrands().subscribe((data: any) => {
-      this.brands = data;
-    })
+  loadBrands(): void {
+    this.isLoading = true;
+    this.adminService.getBrands().subscribe(
+      (data) => {
+        this.isLoading = false;
+        this.brands = data;
+      },
+      (error) => {
+        this.isLoading = false;
+        this.errorMessage = 'Failed to load brands. Please try again later.';
+        console.error('Error fetching brands:', error);
+        this.toastr.error('Error fetching brands. Please try again.');
+      }
+    );
   }
-
 }
-

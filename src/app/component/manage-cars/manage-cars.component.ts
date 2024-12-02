@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AdminServiceService, Car } from '../../services/admin-service.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { CarDetails } from '../../models/CarDetails';
 
 @Component({
   selector: 'app-manage-cars',
@@ -10,37 +11,43 @@ import { Router } from '@angular/router';
 })
 export class ManageCarsComponent {
 
-  constructor(private adminService : AdminServiceService,private toastr : ToastrService,private router : Router){
+  constructor(private adminService: AdminServiceService, private toastr: ToastrService, private router: Router) { }
 
-  }
-  searchInput='';
-  
-  cars: Car[]=[];
-  
-
+  isLoading: boolean = true;
+  errorMessage: string = '';
+  searchInput = '';
+  cars: CarDetails[] = [];
 
   ngOnInit(): void {
-    this.loadCars();
+    this.getCars();
+  }
+
+  onDelete(carId: number) {
+    if (confirm("Do you want to delete this Car?")) {
+      this.adminService.deleteCar(carId).subscribe((data: any) => {
+        this.toastr.success("success");
+        this.getCars();
+      })
     }
-
-  onDelete(carId:number){
-    if(confirm("Do you want to delete this model?")){
-      this.adminService.deleteModel(carId).subscribe((data: any) =>{
-      this.toastr.success("success");
-        this.loadCars();
-    })
-    }
   }
 
-  onEdit(carId:number){
-    this.router.navigate(['admin/car-edit/',carId])
+  onEdit(carId: number) {
+    this.router.navigate(['admin/car-edit/', carId])
   }
 
-  loadCars(){
-    this.adminService.getCars().subscribe((data: any) =>{
-      this.cars=data;
-  })
+  getCars(): void {
+    this.isLoading = true;
+    this.adminService.getCars().subscribe(
+      (data) => {
+        this.isLoading = false;
+        this.cars = data;
+      },
+      (error) => {
+        this.isLoading = false;
+        this.errorMessage = 'Failed to load cars. Please try again later.';
+        console.error('Error fetching cars:', error);
+        this.toastr.error('Error fetching cars. Please try again.');
+      }
+    );
   }
-
 }
-

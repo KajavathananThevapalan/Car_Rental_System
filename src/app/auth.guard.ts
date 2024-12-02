@@ -8,9 +8,7 @@ import { AuthorizationService } from './services/authorization.service';
 
 export class AuthGuard implements CanActivate{
 
-  constructor(private authService: AuthorizationService,private router: Router){
-
-  }
+  constructor(private authService: AuthorizationService,private router: Router){ }
 
   canActivate(): boolean {
     if (this.authService.isLoggedIn()) {
@@ -20,5 +18,4 @@ export class AuthGuard implements CanActivate{
       return false;
     }
   }
-
 }

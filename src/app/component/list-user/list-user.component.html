@@ -1,14 +1,17 @@
 <nav class="navbar navbar-light bg-light">
-    <form class="d-flex">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
-            [(ngModel)]="searchInput" name="search">
-        <button type="button" [routerLink]="['/register']" class="btn btn-dark position-absolute top-1 end-0"><i
-                class="bi bi-plus-lg"></i> New user</button>
-    </form>
-</nav>
+    <ul>
+      <h3>Manage Users</h3>
+    </ul>
+    <ul class="flex-grow-1">
+      <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+    </ul>
+    <ul>
+      <button type="button" [routerLink]="['/register']" class="btn btn-dark">
+        <i class="bi bi-plus-lg"></i> New user</button>
+    </ul>
+  </nav>
 
 <div *ngIf="isLoading" class="loading-spinner">
-    <!-- You can use a spinner component or any loading indicator -->
     <p>Loading users...</p>
 </div>
 
@@ -17,8 +20,6 @@
 </div>
 
 <div *ngIf="!isLoading && !errorMessage">
-    <h2>User List</h2>
-
     <table class="table">
         <thead>
             <tr>

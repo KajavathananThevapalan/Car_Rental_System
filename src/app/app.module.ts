@@ -10,7 +10,6 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { BrandAddComponent } from "./component/brand-add/brand-add.component";
 import { CarAddComponent } from "./component/car-add/car-add.component";
-import { CarManagementComponent } from "./component/car-management/car-management.component";
 import { AdminComponent } from "./layouts/admin/admin.component";
 import { BlankComponent } from "./layouts/blank/blank.component";
 import { UserComponent } from "./layouts/user/user.component";
@@ -39,7 +38,6 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
     LoginComponent,
     RegisterComponent,
     BlankComponent,
-    CarManagementComponent,
     ManageBrandsComponent,
     ManageModelsComponent,
     ManageCarsComponent,
