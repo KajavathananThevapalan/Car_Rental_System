@@ -121,7 +121,7 @@ export enum TransmissionType {
 
 export interface Car{
   carId: number,
-  model: Model,
+  modelId: number,
   licensePlate: string,
   color: string,
   status: Status,

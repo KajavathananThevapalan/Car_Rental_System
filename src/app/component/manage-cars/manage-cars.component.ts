@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AdminServiceService, Car } from '../../services/admin-service.service';
+import { AdminServiceService, Car, Model } from '../../services/admin-service.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { CarDetails } from '../../models/CarDetails';

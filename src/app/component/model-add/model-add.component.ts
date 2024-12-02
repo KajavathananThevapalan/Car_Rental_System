@@ -39,7 +39,6 @@ export class ModelAddComponent implements OnInit {
       engineType: ['', Validators.required],
       fuelType: ['', Validators.required],
       transmissionType: ['', Validators.required],
-      mileage: [0, Validators.min(0)],
       horsepower: [0, Validators.min(0)],
       doors: [4, Validators.min(1)],
       seats: [4, Validators.min(1)],
