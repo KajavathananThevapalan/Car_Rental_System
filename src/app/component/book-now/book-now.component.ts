@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { CarDetails } from '../../models/CarDetails';
 import { BookingService } from '../../services/booking.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { jwtDecode } from 'jwt-decode';
 

@@ -1,4 +1,4 @@
-export interface Booking {
+export interface Rental {
     rentalId: number;
     rentalStartDate: Date;
     rentalEndDate: Date;
