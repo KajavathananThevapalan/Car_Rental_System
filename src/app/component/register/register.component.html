@@ -41,7 +41,7 @@
                       </small>
                     </div>
 
-                    <div class="col-md-6 mb-3">
+                    <div class="col-md-6 mb-3" *ngIf="userRole === 'admin'">
                       <label for="userRole" class="form-label">Role</label>
                       <select id="userRole" formControlName="userRole" name="userRole" class="form-select">
                         <option value="customer">Customer</option>

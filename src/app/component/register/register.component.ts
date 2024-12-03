@@ -2,8 +2,8 @@ import { Component } from "@angular/core";
 import { FormGroup, FormBuilder, Validators, FormArray } from "@angular/forms";
 import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
-import { User } from "../../models/User";
 import { AuthorizationService } from "../../services/authorization.service";
+import { jwtDecode } from "jwt-decode";
 
 @Component({
   selector: 'app-register',
@@ -11,9 +11,8 @@ import { AuthorizationService } from "../../services/authorization.service";
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  isPasswordMatch: boolean = false;
   registerForm!: FormGroup;
-  regUsers: User[] = [];
+  userRole: string = '';
 
   constructor(
     private fb: FormBuilder, 
@@ -30,8 +29,8 @@ export class RegisterComponent {
       password: ['', [Validators.required, Validators.minLength(6)]],
       phone: ['', [Validators.required]],
       userRole: ['customer', Validators.required],
-      drivingLicenseFront: ['', [Validators.required]],  // Add for front image
-      drivingLicenseBack: ['', [Validators.required]],   // Add for back image,
+      drivingLicenseFront: ['', [Validators.required]],
+      drivingLicenseBack: ['', [Validators.required]],
       address: this.fb.group({
         addressLine1: [''],
         addressLine2: [''],
@@ -42,12 +41,28 @@ export class RegisterComponent {
     });
   }
 
-  // Getter to access the images FormArray
+  ngOnInit(): void {
+    this.checkUserRole();
+  }
+
+  checkUserRole(): void {
+    const authToken = localStorage.getItem('authToken');
+    if (authToken) {
+      try {
+        const decodedToken: any = jwtDecode(authToken);
+        this.userRole = decodedToken?.UserRole;
+        // console.log(decodedToken);
+        
+      } catch (error) {
+        console.error('Error decoding token:', error);
+      }
+    }
+  }
+
   get images() {
     return (this.registerForm.get('images') as FormArray);
   }
 
-  // Add a new image entry to the FormArray (if you want to allow more images)
   addImage() {
     this.images.push(this.fb.group({
       imageUrl: ['', Validators.required],
@@ -66,7 +81,7 @@ export class RegisterComponent {
     this.authService.registerUser(regUser).subscribe({
       next: (data) => {
         this.toastr.success("Registration successful.");
-        this.router.navigate(['/login']); // Navigate to login page after successful registration
+        this.router.navigate(['/login']);
       },
       error: (err) => {
         console.error('Registration error:', err);
