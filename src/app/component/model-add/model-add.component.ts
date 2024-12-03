@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { Brand } from '../../services/admin-service.service';
-import { ModelService } from '../../services/model.service';
-import { BrandService } from '../../services/brand.service';
+import { Component, OnInit } from "@angular/core";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
+import { ToastrService } from "ngx-toastr";
+import { Brand } from "../../services/admin-service.service";
+import { BrandService } from "../../services/brand.service";
+import { ModelService } from "../../services/model.service";
 
 @Component({
   selector: 'app-model-add',

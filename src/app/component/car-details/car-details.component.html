@@ -1,15 +1,23 @@
 <div *ngIf="carDetails" class="car-details-container">
-  
     <!-- Car Image Section -->
-    <!-- <div *ngIf="carDetails && carDetails.carImages?.length" class="carousel-container">
+    <div *ngIf="carDetails" class="carousel-container">
         <carousel>
-          <ng-container *ngFor="let image of carDetails.carImages">
-            <slide>
-              <img [src]="image.imageUrl" class="d-block w-100" alt="Car Image">
-            </slide>
-          </ng-container>
+            <ng-container>
+                <slide>
+                    <img [src]="carDetails.frotView" class="d-block w-100" alt="Car Image">
+                </slide>
+                <slide>
+                    <img [src]="carDetails.backView" class="d-block w-100" alt="Car Image">
+                </slide>
+                <slide>
+                    <img [src]="carDetails.sideView" class="d-block w-100" alt="Car Image">
+                </slide>
+                <slide>
+                    <img [src]="carDetails.interior" class="d-block w-100" alt="Car Image">
+                </slide>
+            </ng-container>
         </carousel>
-    </div> -->
+    </div>
 
     <!-- Car Information Section -->
     <div class="car-info">
@@ -22,14 +30,16 @@
         <p><strong>Current Mileage:</strong> {{ carDetails.currentMileage }} km</p>
         <p><strong>Price per Day:</strong> ${{ carDetails.pricePerDay | number:'1.2-2' }}</p>
 
-        <!-- Book Now and Rent Now Buttons -->
         <div class="action-buttons">
-            <button (click)="bookNow()" class="btn btn-primary">Book Now</button>
-            <button (click)="rentNow()" class="btn btn-success">Rent Now</button>
+            <button (click)="bookNow(carDetails.carId)" class="btn btn-primary">Book Now</button>
+            <button (click)="rentNow(carDetails.carId)" class="btn btn-success">Rent Now</button>
         </div>
     </div>
 
-    <!-- Reviews Section (if any) -->
+    <app-book-now *ngIf="showBookNow" [carDetails]="carDetails"></app-book-now>
+
+    <app-rent-now *ngIf="showRentNow" [carDetails]="carDetails"></app-rent-now>
+
     <div *ngIf="carDetails.reviews?.length" class="car-reviews">
         <h3>Reviews</h3>
         <ul>
@@ -42,4 +52,8 @@
     <div *ngIf="carDetails.reviews?.length === 0" class="no-reviews">
         <p>No reviews available.</p>
     </div>
+</div>
+
+<div>
+    <!-- <router-outlet></router-outlet> -->
 </div>

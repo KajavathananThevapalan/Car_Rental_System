@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AuthorizationService } from '../../services/authorization.service';
-import { ToastrService } from 'ngx-toastr';
-import { jwtDecode } from 'jwt-decode';
+import { Component } from "@angular/core";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
+import { jwtDecode } from "jwt-decode";
+import { ToastrService } from "ngx-toastr";
+import { AuthorizationService } from "../../services/authorization.service";
 
 @Component({
   selector: 'app-login',
@@ -30,7 +30,12 @@ export class LoginComponent {
         const decoded: any = jwtDecode(response);
         // console.log(decoded.UserRole);
 
-        if (decoded.UserRole === 'admin') {
+        const redirectUrl = localStorage.getItem('redirectUrl');
+
+        if (redirectUrl) {
+          this.router.navigateByUrl(redirectUrl);
+          localStorage.removeItem('redirectUrl');
+        } else if (decoded.UserRole === 'admin') {
           this.router.navigate(['/admin/dashboard']);
         } else {
           this.router.navigate(['']);

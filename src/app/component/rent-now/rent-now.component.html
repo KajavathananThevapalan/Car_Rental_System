@@ -1,0 +1,82 @@
+<div class="container mt-5">
+    <h2>Rent Form</h2>
+    <form #rentForm="ngForm" (ngSubmit)="onSubmit(rentForm)" class="needs-validation">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="itemName">Item Name</label>
+            <input
+              type="text"
+              id="itemName"
+              class="form-control"
+              name="itemName"
+              [(ngModel)]="rental.itemName"
+              required
+              placeholder="Enter the item name (e.g., Car, Apartment)"
+            />
+          </div>
+        </div>
+  
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="duration">Rental Duration (in days)</label>
+            <input
+              type="number"
+              id="duration"
+              class="form-control"
+              name="duration"
+              [(ngModel)]="rental.duration"
+              required
+              placeholder="Enter rental duration in days"
+            />
+          </div>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="userName">Your Name</label>
+        <input
+          type="text"
+          id="userName"
+          class="form-control"
+          name="userName"
+          [(ngModel)]="rental.userName"
+          required
+          placeholder="Enter your name"
+        />
+      </div>
+  
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input
+          type="email"
+          id="email"
+          class="form-control"
+          name="email"
+          [(ngModel)]="rental.email"
+          required
+          placeholder="Enter your email"
+        />
+      </div>
+  
+      <div class="form-group">
+        <label for="paymentMethod">Payment Method</label>
+        <select
+          id="paymentMethod"
+          class="form-control"
+          name="paymentMethod"
+          [(ngModel)]="rental.paymentMethod"
+          required
+        >
+          <option value="creditCard">Credit Card</option>
+          <option value="paypal">PayPal</option>
+          <option value="bankTransfer">Bank Transfer</option>
+        </select>
+      </div>
+  
+      <button type="submit" class="btn btn-primary" [disabled]="!rentForm.valid">
+        Submit Rent Request
+      </button>
+    </form>
+  </div>
+  

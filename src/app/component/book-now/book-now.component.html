@@ -1,0 +1,84 @@
+<div class="container mt-5">
+  <h2 class="text-center">{{ isEditMode ? 'Edit' : 'Add' }} Booking</h2>
+  <form [formGroup]="addBookingForm" (ngSubmit)="onSubmit()" class="needs-validation" novalidate>
+    <!-- <div class="row">
+      <div class="col-md-6" *ngIf="carDetails">
+        <div class="form-group">
+          <label for="carId">License Plate</label>
+          <input type="text" id="carId" class="form-control" formControlName="carId" name="carId" readonly>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="userId">Full Name</label>
+          <input type="text" id="userId" class="form-control" formControlName="userId" required>
+          <div *ngIf="addBookingForm.get('userId')?.touched && addBookingForm.get('userId')?.invalid"
+            class="invalid-feedback">
+            Full Name is required.
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="text" id="phone" class="form-control" formControlName="userId" pattern="^\d{10}$" required>
+          <div *ngIf="addBookingForm.get('userId')?.touched && addBookingForm.get('userId')?.invalid"
+            class="invalid-feedback">
+            Please enter a valid 10-digit phone number.
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" class="form-control" formControlName="userId" required>
+          <div *ngIf="addBookingForm.get('email')?.touched && addBookingForm.get('email')?.invalid"
+            class="invalid-feedback">
+            Please enter a valid email address.
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="pickupDate">Pickup Date</label>
+          <input type="date" id="pickupDate" class="form-control" formControlName="pickupDate" required>
+          <div *ngIf="addBookingForm.get('pickupDate')?.touched && addBookingForm.get('pickupDate')?.invalid"
+            class="invalid-feedback">
+            Pickup date is required.
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="dropoffDate">Drop-off Date</label>
+          <input type="date" id="dropoffDate" class="form-control" formControlName="dropoffDate" required>
+          <div *ngIf="addBookingForm.get('dropoffDate')?.touched && addBookingForm.get('dropoffDate')?.invalid"
+            class="invalid-feedback">
+            Drop-off date is required.
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="notes">Additional Notes</label>
+          <textarea id="notes" class="form-control" formControlName="status"></textarea>
+        </div>
+      </div>
+    </div> -->
+
+    <div class="form-group text-center">
+      <button type="submit" class="btn btn-primary" [disabled]="addBookingForm.invalid">Submit</button>
+      <button type="button" class="btn btn-secondary" (click)="onClose()">Close</button>
+    </div>
+  </form>
+</div>

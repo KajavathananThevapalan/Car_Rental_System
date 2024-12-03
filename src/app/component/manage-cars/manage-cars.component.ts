@@ -1,9 +1,8 @@
-import { Component } from '@angular/core';
-import { Car, Model } from '../../services/admin-service.service';
-import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
-import { CarDetails } from '../../models/CarDetails';
-import { CarService } from '../../services/car.service';
+import { Component } from "@angular/core";
+import { Router } from "@angular/router";
+import { ToastrService } from "ngx-toastr";
+import { CarDetails } from "../../models/CarDetails";
+import { CarService } from "../../services/car.service";
 
 @Component({
   selector: 'app-manage-cars',

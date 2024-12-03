@@ -17,8 +17,8 @@ export interface CarDetails {
     reviews: any[];
     reservations: any | null;
     rentals: any | null;
-    frontView: string;
-    BackView: string;
+    frotView: string;
+    backView: string;
     sideView: string;
     interior: string;
     serviceRecords: any | null;

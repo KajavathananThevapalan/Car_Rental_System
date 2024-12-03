@@ -28,6 +28,11 @@ import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { ListCarsComponent } from './component/list-cars/list-cars.component';
 import { CarDetailsComponent } from './component/car-details/car-details.component';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { ListRentalComponent } from './component/list-rental/list-rental.component';
+import { ListReservationComponent } from './component/list-reservation/list-reservation.component';
+import { ListPaymentsComponent } from './component/list-payments/list-payments.component';
+import { BookNowComponent } from './component/book-now/book-now.component';
+import { RentNowComponent } from './component/rent-now/rent-now.component';
 
 
 @NgModule({
@@ -51,7 +56,12 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
     EditUserComponent,
     DashboardComponent,
     ListCarsComponent,
-    CarDetailsComponent
+    CarDetailsComponent,
+    ListRentalComponent,
+    ListReservationComponent,
+    ListPaymentsComponent,
+    BookNowComponent,
+    RentNowComponent
   ],
   imports: [
     FormsModule,

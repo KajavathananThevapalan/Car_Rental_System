@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { CarDetails } from '../../../models/CarDetails';
+import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { CarDetails } from "../../../models/CarDetails";
 
 @Component({
   selector: 'app-home',

@@ -1,8 +1,7 @@
-import { Component } from '@angular/core';
-import { Brand } from '../../services/admin-service.service';
-import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
-import { BrandService } from '../../services/brand.service';
+import { Component } from "@angular/core";
+import { Router } from "@angular/router";
+import { ToastrService } from "ngx-toastr";
+import { BrandService } from "../../services/brand.service";
 
 @Component({
   selector: 'app-manage-brands',

@@ -18,6 +18,8 @@ import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { ListCarsComponent } from './component/list-cars/list-cars.component';
 import { CarDetailsComponent } from './component/car-details/car-details.component';
 import { AuthGuard } from './auth.guard';
+import { BookNowComponent } from './component/book-now/book-now.component';
+import { RentNowComponent } from './component/rent-now/rent-now.component';
 
 const routes: Routes = [
   {
@@ -48,7 +50,14 @@ const routes: Routes = [
     component: HomeComponent,
     children: [
       { path: '', component: ListCarsComponent },
-      { path: 'car-details/:id', component: CarDetailsComponent }
+      {
+        path: 'car-details/:id',
+        component: CarDetailsComponent,
+        children: [
+          { path: 'book-now', component: BookNowComponent },
+          { path: 'rent-now', component: RentNowComponent },
+        ]
+      }
     ]
   },
   { path: '**', redirectTo: "login", pathMatch: "full" }

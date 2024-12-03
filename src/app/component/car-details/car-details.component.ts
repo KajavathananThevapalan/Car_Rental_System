@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AdminServiceService } from '../../services/admin-service.service';
-import { CarDetails } from '../../models/CarDetails';
-import { CarService } from '../../services/car.service';
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
+import { CarDetails } from "../../models/CarDetails";
+import { CarService } from "../../services/car.service";
 
 @Component({
   selector: 'app-car-details',
@@ -12,12 +11,15 @@ import { CarService } from '../../services/car.service';
 export class CarDetailsComponent implements OnInit {
   carId!: number;
   carDetails!: CarDetails;
+  isLoggedIn: boolean = false;
+  showBookNow: boolean = false;
+  showRentNow: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
     private carService: CarService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -31,8 +33,9 @@ export class CarDetailsComponent implements OnInit {
     this.carService.getCar(carId).subscribe(
       (data: CarDetails) => {
         this.carDetails = data;
-        console.log(data);
-        
+        localStorage.setItem('carId', data.carId.toString())
+        console.log(data.carId);
+
       },
       (error: any) => {
         console.error('Error fetching car details', error);
@@ -40,15 +43,29 @@ export class CarDetailsComponent implements OnInit {
     );
   }
 
-  // Define what happens when the user clicks "Book Now"
-  bookNow(): void {
-    this.router.navigate(['/booking', this.carDetails.carId]); // Navigate to a booking page
+  bookNow(carId: number): void {
+    this.showBookNow = true;
+    this.showRentNow = false;
+
+    if (localStorage.getItem('isLoggedIn') === 'true') {
+      this.router.navigate([`/car-details/${carId}/book-now`]);
+    } else {
+      alert('Please log in to book the car.');
+      localStorage.setItem('redirectUrl', `/car-details/${carId}/book-now`);
+      this.router.navigate(['/login']);
+    }
   }
 
-  // Define what happens when the user clicks "Rent Now"
-  rentNow(): void {
-    this.router.navigate(['/rent', this.carDetails.carId]); // Navigate to a booking page
+  rentNow(carId: number): void {
+    this.showRentNow = true;
+    this.showBookNow = false;
+    
+    if (localStorage.getItem('isLoggedIn') === 'true') {
+      this.router.navigate([`/car-details/${carId}/rent-now`]);
+    } else {
+      alert('Please log in to rent the car.');
+      localStorage.setItem('redirectUrl', `/car-details/${carId}/book-now`);
+      this.router.navigate(['/login']);
+    }
   }
-
-  
 }

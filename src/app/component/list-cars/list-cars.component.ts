@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { CarService } from '../../services/car.service';
+import { Component } from "@angular/core";
+import { Router } from "@angular/router";
+import { ToastrService } from "ngx-toastr";
+import { CarDetails } from "../../models/CarDetails";
+import { CarService } from "../../services/car.service";
 
 @Component({
   selector: 'app-list-cars',
@@ -10,7 +11,7 @@ import { CarService } from '../../services/car.service';
 })
 export class ListCarsComponent {
 
-  cars: any[] = [];
+  cars: CarDetails[] = [];
   isLoading: boolean = true;
   errorMessage: string = '';
 

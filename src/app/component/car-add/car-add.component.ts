@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Model } from '../../services/admin-service.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { CarDetails } from '../../models/CarDetails';
-import { CarService } from '../../services/car.service';
-import { ModelService } from '../../services/model.service';
+import { Component, OnInit } from "@angular/core";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
+import { ToastrService } from "ngx-toastr";
+import { CarDetails } from "../../models/CarDetails";
+import { Model } from "../../services/admin-service.service";
+import { CarService } from "../../services/car.service";
+import { ModelService } from "../../services/model.service";
+
 
 @Component({
   selector: 'app-car-add',
@@ -46,7 +47,7 @@ export class CarAddComponent implements OnInit {
       registrationNumber: ['', Validators.required],
       yearOfManufacture: [2024, [Validators.required, Validators.min(1900), Validators.max(new Date().getFullYear())]],
       tankCapacity: ['', [Validators.required]],
-      frontView: ['', [Validators.required]],
+      frotView: ['', [Validators.required]],
       backView: [''],
       sideView: [''],
       interior: ['']
@@ -60,6 +61,8 @@ export class CarAddComponent implements OnInit {
 
     if (this.isEditMode) {
       this.carService.getCar(this.carId).subscribe(data => {
+        console.log(data);
+        
         this.addCarForm.patchValue({
           licensePlate: data.licensePlate,
           color: data.color,
@@ -68,8 +71,8 @@ export class CarAddComponent implements OnInit {
           currentMileage: data.currentMileage,
           registrationNumber: data.registrationNumber,
           yearOfManufacture: data.yearOfManufacture,
-          frontView: data.frontView,
-          backView: data.BackView,
+          frotView: data.frotView,
+          backView: data.backView,
           sideView: data.sideView,
           interior: data.interior,
           viewCount: data.viewCount,
