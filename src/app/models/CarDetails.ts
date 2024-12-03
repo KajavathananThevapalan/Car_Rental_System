@@ -2,7 +2,6 @@ import { CarImage } from "./CarImage";
 
 export interface CarDetails {
     carId: number;
-    name: string;
     licensePlate: string;
     color: string;
     status: string;
@@ -15,9 +14,12 @@ export interface CarDetails {
     createdAt: string;
     updatedAt: string;
     modelId: number;
-    reviews: any[];  // Define the structure of reviews if needed
+    reviews: any[];
     reservations: any | null;
     rentals: any | null;
-    carImages: CarImage[];
+    frontView: string;
+    BackView: string;
+    sideView: string;
+    interior: string;
     serviceRecords: any | null;
   }

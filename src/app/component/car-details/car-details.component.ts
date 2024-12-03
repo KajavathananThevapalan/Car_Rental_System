@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdminServiceService } from '../../services/admin-service.service';
 import { CarDetails } from '../../models/CarDetails';
+import { CarService } from '../../services/car.service';
 
 @Component({
   selector: 'app-car-details',
@@ -14,7 +15,7 @@ export class CarDetailsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private carService: AdminServiceService,
+    private carService: CarService,
     private router: Router
   ) {}
 

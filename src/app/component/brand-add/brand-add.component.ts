@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AdminServiceService } from '../../services/admin-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { BrandService } from '../../services/brand.service';
 
 @Component({
   selector: 'app-brand-add',
@@ -14,7 +14,7 @@ export class BrandAddComponent implements OnInit {
   isEditMode = false;
   addBrandForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private adminService: AdminServiceService, private route: ActivatedRoute, private router: Router, private toastr: ToastrService) {
+  constructor(private fb: FormBuilder, private brandService: BrandService, private route: ActivatedRoute, private router: Router, private toastr: ToastrService) {
     const editId = Number(this.route.snapshot.paramMap.get("brandId"));
     // console.log(editId);
     
@@ -38,7 +38,7 @@ export class BrandAddComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.isEditMode == true) {
-      this.adminService.getBrand(this.brandId).subscribe(data => {
+      this.brandService.getBrand(this.brandId).subscribe(data => {
         // console.log(data);
         this.addBrandForm.patchValue({
           name: data.name,
@@ -63,11 +63,11 @@ export class BrandAddComponent implements OnInit {
       console.log("Updated brand data with brandId:", brand);
   
       // Call the update service with responseType 'text'
-      this.adminService.updateBrand(brand).subscribe(
+      this.brandService.updateBrand(brand).subscribe(
         (data) => {
           console.log("Update response:", data);  // 'data' will be plain text
           this.toastr.success('Brand updated successfully');  // Display the plain text response
-          this.router.navigate(['/admin/carmanagement']);
+          this.router.navigate(['/admin/manage-brands']);
         },
         (error) => {
           console.error("Error while updating brand:", error);
@@ -76,7 +76,7 @@ export class BrandAddComponent implements OnInit {
       );
     } else {
       // Call the create service with responseType 'text'
-      this.adminService.createBrand(brand).subscribe(
+      this.brandService.createBrand(brand).subscribe(
         (data) => {
           console.log("Create response:", data);  // 'data' will be plain text
           this.toastr.success('Brand added successfully');  // Display the plain text response

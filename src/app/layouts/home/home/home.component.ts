@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CarDetails } from '../../../models/CarDetails';
 
 @Component({
   selector: 'app-home',
@@ -8,6 +9,8 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
   isLoggedIn: boolean = false;
+  searchQuery: string = '';
+  cars: CarDetails[] = [];
 
   constructor(private router: Router) { }
 
@@ -29,5 +32,16 @@ export class HomeComponent implements OnInit {
 
   navigateToRegister() {
     this.router.navigate(['/register']);
+  }
+
+  filteredCars() {
+    if (!this.searchQuery) {
+      return this.cars;
+    }
+
+    return this.cars.filter(car =>
+      car.registrationNumber.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+      car.licensePlate.toLowerCase().includes(this.searchQuery.toLowerCase())
+    );
   }
 }

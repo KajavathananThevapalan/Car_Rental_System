@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { AdminServiceService, Brand } from '../../services/admin-service.service';
+import { Brand } from '../../services/admin-service.service';
+import { ModelService } from '../../services/model.service';
+import { BrandService } from '../../services/brand.service';
 
 @Component({
   selector: 'app-model-add',
@@ -18,7 +20,7 @@ export class ModelAddComponent implements OnInit {
   brands: Brand[] = [];
 
   constructor(
-    private fb: FormBuilder, private adminService: AdminServiceService,
+    private fb: FormBuilder, private modelService: ModelService, private brandService: BrandService,
     private route: ActivatedRoute, private router: Router, private toastr: ToastrService) {
 
     const editId = Number(this.route.snapshot.paramMap.get('modelId'));
@@ -39,21 +41,21 @@ export class ModelAddComponent implements OnInit {
       engineType: ['', Validators.required],
       fuelType: ['', Validators.required],
       transmissionType: ['', Validators.required],
-      horsepower: [0, Validators.min(0)],
+      horsepower: ['', Validators.min(0)],
       doors: [4, Validators.min(1)],
       seats: [4, Validators.min(1)],
-      fuelEfficiency: [0, Validators.min(0)],
+      fuelEfficiency: ['', Validators.min(0)],
       category: ['', Validators.required],
     });
   }
 
   ngOnInit(): void {
-    this.adminService.getBrands().subscribe(data => {
+    this.brandService.getBrands().subscribe(data => {
       this.brands = data;
     })
 
     if (this.isEditMode) {
-      this.adminService.getModel(this.modelId).subscribe(data => {
+      this.modelService.getModel(this.modelId).subscribe(data => {
         console.log(data);
         this.addModelForm.patchValue({
           name: data.name,
@@ -81,7 +83,7 @@ export class ModelAddComponent implements OnInit {
 
     if (this.isEditMode) {
       modelData.modelId = this.modelId;
-      this.adminService.updateModel(modelData).subscribe(
+      this.modelService.updateModel(modelData).subscribe(
         (response) => {
           console.log('Update Response:', response);
           this.toastr.success('Model updated successfully');
@@ -93,7 +95,7 @@ export class ModelAddComponent implements OnInit {
         }
       );
     } else {
-      this.adminService.createModel(modelData).subscribe(
+      this.modelService.createModel(modelData).subscribe(
         (response) => {
           // console.log('Create Response:', response);
 

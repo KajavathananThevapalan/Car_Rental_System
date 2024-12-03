@@ -38,7 +38,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let model of models ">
+      <tr *ngFor="let model of filteredModels() ">
         <td>{{model.modelId}}</td>
         <td>{{model.name}}</td>
         <td>{{model.year}}</td>

@@ -34,13 +34,8 @@
           <!-- Engine Type -->
           <div class="col-md-4 mb-3">
             <label for="engineType" class="form-label">Engine Type</label>
-            <select class="form-select" id="engineType" formControlName="engineType" required>
-              <option value="" disabled selected>Select engine type</option>
-              <option value="Petrol">Petrol</option>
-              <option value="Diesel">Diesel</option>
-              <option value="Electric">Electric</option>
-              <option value="Hybrid">Hybrid</option>
-            </select>
+            <input type="text" class="form-control" id="engineType" formControlName="engineType"
+              placeholder="Enter Engine Type" required>
           </div>
           <!-- Fuel Type -->
           <div class="col-md-4 mb-3">
@@ -56,11 +51,8 @@
           <!-- Transmission Type -->
           <div class="col-md-4 mb-3">
             <label for="transmissionType" class="form-label">Transmission Type</label>
-            <select class="form-select" id="transmissionType" formControlName="transmissionType" required>
-              <option value="" disabled selected>Select transmission type</option>
-              <option value="Manual">Manual</option>
-              <option value="Automatic">Automatic</option>
-            </select>
+            <input type="text" class="form-control" id="transmissionType" formControlName="transmissionType"
+              placeholder="Enter Transmission Type" required>
           </div>
         </div>
 
@@ -68,7 +60,7 @@
           <!-- Horsepower -->
           <div class="col-md-4 mb-3">
             <label for="horsepower" class="form-label">Horsepower</label>
-            <input type="number" class="form-control" id="horsepower" formControlName="horsepower"
+            <input type="text" class="form-control" id="horsepower" formControlName="horsepower"
               placeholder="Enter horsepower">
           </div>
           <!-- Doors -->
@@ -89,7 +81,7 @@
           <!-- Fuel Efficiency -->
           <div class="col-md-4 mb-3">
             <label for="fuelEfficiency" class="form-label">Fuel Efficiency</label>
-            <input type="number" class="form-control" id="fuelEfficiency" formControlName="fuelEfficiency"
+            <input type="text" class="form-control" id="fuelEfficiency" formControlName="fuelEfficiency"
               placeholder="Enter fuel efficiency">
           </div>
           <!-- Category -->

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { AdminServiceService, Car, Model } from '../../services/admin-service.service';
+import { Car, Model } from '../../services/admin-service.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { CarDetails } from '../../models/CarDetails';
+import { CarService } from '../../services/car.service';
 
 @Component({
   selector: 'app-manage-cars',
@@ -11,11 +12,11 @@ import { CarDetails } from '../../models/CarDetails';
 })
 export class ManageCarsComponent {
 
-  constructor(private adminService: AdminServiceService, private toastr: ToastrService, private router: Router) { }
+  constructor(private carService: CarService, private toastr: ToastrService, private router: Router) { }
 
   isLoading: boolean = true;
   errorMessage: string = '';
-  searchInput = '';
+  searchQuery: string = '';
   cars: CarDetails[] = [];
 
   ngOnInit(): void {
@@ -24,7 +25,7 @@ export class ManageCarsComponent {
 
   onDelete(carId: number) {
     if (confirm("Do you want to delete this Car?")) {
-      this.adminService.deleteCar(carId).subscribe((data: any) => {
+      this.carService.deleteCar(carId).subscribe((data: any) => {
         this.toastr.success("success");
         this.getCars();
       })
@@ -37,7 +38,7 @@ export class ManageCarsComponent {
 
   getCars(): void {
     this.isLoading = true;
-    this.adminService.getCars().subscribe(
+    this.carService.getCars().subscribe(
       (data) => {
         this.isLoading = false;
         this.cars = data;
@@ -48,6 +49,17 @@ export class ManageCarsComponent {
         console.error('Error fetching cars:', error);
         this.toastr.error('Error fetching cars. Please try again.');
       }
+    );
+  }
+
+  filteredCars() {
+    if (!this.searchQuery) {
+      return this.cars;
+    }
+
+    return this.cars.filter(car =>
+      car.registrationNumber.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+      car.licensePlate.toLowerCase().includes(this.searchQuery.toLowerCase())
     );
   }
 }

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { AdminServiceService, Brand } from '../../services/admin-service.service';
+import { Brand } from '../../services/admin-service.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { BrandService } from '../../services/brand.service';
 
 @Component({
   selector: 'app-manage-brands',
@@ -9,21 +10,20 @@ import { Router } from '@angular/router';
   styleUrl: './manage-brands.component.css'
 })
 export class ManageBrandsComponent {
-  constructor(private adminService: AdminServiceService, private toastr: ToastrService, private router: Router) { }
+  constructor(private brandService: BrandService, private toastr: ToastrService, private router: Router) { }
 
   isLoading: boolean = true;
   errorMessage: string = '';
-  searchInput = '';
-
-  brands: Brand[] = [];
+  brands: any[] = [];
+  searchQuery: string = '';
 
   ngOnInit(): void {
-    this.loadBrands();    
+    this.loadBrands();
   }
 
   onDelete(brandId: number) {
     if (confirm("Do you want to delete this brand?")) {
-      this.adminService.deleteBrand(brandId).subscribe((data: any) => {
+      this.brandService.deleteBrand(brandId).subscribe((data: any) => {
         this.toastr.success("success");
         this.loadBrands();
       })
@@ -36,7 +36,7 @@ export class ManageBrandsComponent {
 
   loadBrands(): void {
     this.isLoading = true;
-    this.adminService.getBrands().subscribe(
+    this.brandService.getBrands().subscribe(
       (data) => {
         this.isLoading = false;
         this.brands = data;
@@ -47,6 +47,19 @@ export class ManageBrandsComponent {
         console.error('Error fetching brands:', error);
         this.toastr.error('Error fetching brands. Please try again.');
       }
+    );
+  }
+
+  filteredBrands() {
+    if (!this.searchQuery) {
+      return this.brands;
+    }
+
+    return this.brands.filter(brand =>
+      brand.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+      brand.country.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+      brand.website.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+      brand.description.toLowerCase().includes(this.searchQuery.toLowerCase())
     );
   }
 }

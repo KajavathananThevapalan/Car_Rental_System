@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { AdminServiceService } from '../../services/admin-service.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { CarService } from '../../services/car.service';
 
 @Component({
   selector: 'app-list-cars',
@@ -15,7 +15,7 @@ export class ListCarsComponent {
   errorMessage: string = '';
 
   constructor(
-    private adminService: AdminServiceService,
+    private carService: CarService,
     private toastr: ToastrService,
     private router: Router) { }
 
@@ -25,7 +25,7 @@ export class ListCarsComponent {
 
   getCars(): void {
     this.isLoading = true;
-    this.adminService.getCars().subscribe(
+    this.carService.getCars().subscribe(
       (data) => {
         // console.log(data[0].carImages);
         

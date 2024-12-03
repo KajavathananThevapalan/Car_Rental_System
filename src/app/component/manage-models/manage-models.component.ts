@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { AdminServiceService, Model } from '../../services/admin-service.service';
+import { Model } from '../../services/admin-service.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { ModelService } from '../../services/model.service';
 
 @Component({
   selector: 'app-manage-models',
@@ -10,11 +11,11 @@ import { Router } from '@angular/router';
 })
 export class ManageModelsComponent {
 
-  constructor(private adminService: AdminServiceService, private toastr: ToastrService, private router: Router) { }
+  constructor(private modelService: ModelService, private toastr: ToastrService, private router: Router) { }
 
   isLoading: boolean = true;
   errorMessage: string = '';
-  searchInput = '';
+  searchQuery: string = '';
 
   models: Model[] = [];
 
@@ -24,7 +25,7 @@ export class ManageModelsComponent {
 
   onDelete(modelId: number) {
     if (confirm("Do you want to delete this model?")) {
-      this.adminService.deleteModel(modelId).subscribe((data: any) => {
+      this.modelService.deleteModel(modelId).subscribe((data: any) => {
         this.toastr.success("success");
         this.loadModels();
       })
@@ -37,7 +38,7 @@ export class ManageModelsComponent {
 
   loadModels(): void {
     this.isLoading = true;
-    this.adminService.getModels().subscribe(
+    this.modelService.getModels().subscribe(
       (data) => {
         this.isLoading = false;
         this.models = data;
@@ -48,6 +49,17 @@ export class ManageModelsComponent {
         console.error('Error fetching models:', error);
         this.toastr.error('Error fetching models. Please try again.');
       }
+    );
+  }
+
+  filteredModels() {
+    if (!this.searchQuery) {
+      return this.models;
+    }
+
+    return this.models.filter(model =>
+      model.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+      model.category.toLowerCase().includes(this.searchQuery.toLowerCase())
     );
   }
 }

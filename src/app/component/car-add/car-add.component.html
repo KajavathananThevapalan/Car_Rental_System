@@ -6,16 +6,11 @@
     <div class="card-body">
       <form [formGroup]="addCarForm" (ngSubmit)="onSubmit()">
         <div class="row">
-          <!-- name -->
-          <div class="col-md-4 mb-3">
-            <label for="name" class="form-label">Car Name</label>
-            <input type="text" class="form-control" id="name" formControlName="name" placeholder="Enter name" required>
-          </div>
           <!-- Model -->
           <div class="col-md-4 mb-3">
             <label for="modelId" class="form-label">Model</label>
             <select class="form-select" id="modelId" formControlName="modelId" required>
-              <option value="" disabled selected>Select a brand</option>
+              <option value="" disabled selected>Select a Model</option>
               <option *ngFor="let model of models" [value]="model.modelId">
                 {{ model.name }}
               </option>
@@ -71,12 +66,7 @@
             <input type="number" class="form-control" id="yearOfManufacture" formControlName="yearOfManufacture"
               placeholder="Enter year of manufacture" required min="1900" max="2024">
           </div>
-          <!-- Model ID -->
-          <!-- <div class="col-md-4 mb-3">
-            <label for="modelId" class="form-label">Model ID</label>
-            <input type="number" class="form-control" id="modelId" formControlName="modelId"
-              placeholder="Enter model ID" required>
-          </div> -->
+
           <!-- View Count -->
           <div class="col-md-4 mb-3">
             <label for="viewCount" class="form-label">View Count</label>
@@ -87,33 +77,29 @@
 
 
         <!-- Image Upload Section -->
-        <div formArrayName="carImages">
-          <div *ngFor="let image of carImage.controls; let i = index" [formGroupName]="i">
-            <div class="row">
-              <div class="col-md-6 mb-3 form-group">
-                <label for="imageUrl">Image URL</label>
-                <input id="imageUrl" formControlName="imageUrl" class="form-control" />
-                <!-- <small *ngIf="image.get('imageUrl')?.invalid && image.get('imageUrl')?.touched" class="text-danger">
-                    Image URL is required.
-                  </small> -->
-              </div>
-
-              <div class="col-md-6 mb-3 form-group">
-                <label for="imageType">Image Type</label>
-                <select id="imageType" formControlName="imageType" class="form-control">
-                  <option value="Profile">Profile</option>
-                  <option value="Exterior">Exterior</option>
-                  <option value="FrontView">FrontView</option>
-                  <option value="SideView">SideView</option>
-                  <option value="Interior">Interior</option>
-                  <option value="ServiceRecord">ServiceRecord</option>
-                  <option value="Other">Other</option>
-                </select>
-              </div>
-            </div>
+        <div class="row">
+          <div class="col-md-6 mb-3 form-group">
+            <label for="imageUrl">Front View</label>
+            <input id="imageUrl" formControlName="frontView" class="form-control" />
           </div>
-
-          <button type="button" class="btn btn-success px-4 m-2" (click)="addImage()">Add Another Image</button>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3 form-group">
+            <label for="imageUrl">Back View</label>
+            <input id="imageUrl" formControlName="backView" class="form-control" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3 form-group">
+            <label for="imageUrl">Side View</label>
+            <input id="imageUrl" formControlName="sideView" class="form-control" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3 form-group">
+            <label for="imageUrl">Interior</label>
+            <input id="imageUrl" formControlName="interior" class="form-control" />
+          </div>
         </div>
 
         <div class="row">

@@ -1,29 +1,32 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AdminServiceService, CarImages, Model } from '../../services/admin-service.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Model } from '../../services/admin-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { CarDetails } from '../../models/CarDetails';
+import { CarService } from '../../services/car.service';
+import { ModelService } from '../../services/model.service';
 
 @Component({
   selector: 'app-car-add',
   templateUrl: './car-add.component.html',
-  styleUrl: './car-add.component.css'
+  styleUrls: ['./car-add.component.css']
 })
 export class CarAddComponent implements OnInit {
 
   carId: number;
   isEditMode = false;
   addCarForm: FormGroup;
-
+  cars!: CarDetails[]; // Assuming you have a Cars list
   models: Model[] = [];
-  carImages: CarImages[] = [];
 
   constructor(
-    private fb: FormBuilder, private adminService: AdminServiceService,
-    private route: ActivatedRoute, private router: Router, private toastr: ToastrService) {
+    private fb: FormBuilder, private carService: CarService,
+    private route: ActivatedRoute, private router: Router, 
+    private toastr: ToastrService, private modelService: ModelService
+  ) {
 
     const editId = Number(this.route.snapshot.paramMap.get('carId'));
-    // console.log(editId);
 
     if (editId) {
       this.isEditMode = true;
@@ -32,48 +35,32 @@ export class CarAddComponent implements OnInit {
     }
     this.carId = editId;
 
+    // Initialize the form
     this.addCarForm = this.fb.group({
-      name: ['', Validators.required],
       licensePlate: ['', Validators.required],
       modelId: ['', Validators.required],
       color: ['', Validators.required],
       status: ['', Validators.required],
-      pricePerDay: [0.01, [Validators.required, Validators.min(0.01)]],
+      pricePerDay: [0, [Validators.required, Validators.min(0.01)]],
       currentMileage: [0, [Validators.required, Validators.min(0)]],
       registrationNumber: ['', Validators.required],
       yearOfManufacture: [2024, [Validators.required, Validators.min(1900), Validators.max(new Date().getFullYear())]],
-      viewCount: [0],
-      carImages: this.fb.array([
-        this.fb.group({
-          imageUrl: ['', Validators.required],
-          imageType: ['', Validators.required]
-        })
-      ]),
+      tankCapacity: ['', [Validators.required]],
+      frontView: ['', [Validators.required]],
+      backView: [''],
+      sideView: [''],
+      interior: ['']
     });
   }
 
-  get carImage() {
-    return (this.addCarForm.get('carImages') as FormArray);
-  }
-
-  addImage() {
-    this.carImage.push(this.fb.group({
-      imageUrl: ['', Validators.required],
-      imageType: ['', Validators.required]
-    }));
-  }
-
   ngOnInit(): void {
-    this.adminService.getModels().subscribe(data => {
+    this.modelService.getModels().subscribe(data => {
       this.models = data;
     });
 
     if (this.isEditMode) {
-      this.adminService.getCar(this.carId).subscribe(data => {
-        // console.log(data)
-
+      this.carService.getCar(this.carId).subscribe(data => {
         this.addCarForm.patchValue({
-          name: data.name,
           licensePlate: data.licensePlate,
           color: data.color,
           status: data.status,
@@ -81,9 +68,13 @@ export class CarAddComponent implements OnInit {
           currentMileage: data.currentMileage,
           registrationNumber: data.registrationNumber,
           yearOfManufacture: data.yearOfManufacture,
+          frontView: data.frontView,
+          backView: data.BackView,
+          sideView: data.sideView,
+          interior: data.interior,
           viewCount: data.viewCount,
+          tankCapacity: data.tankCapacity,
           modelId: data.modelId,
-          carImages: data.carImages
         });
       }, error => {
         this.toastr.error('Car not found');
@@ -92,26 +83,36 @@ export class CarAddComponent implements OnInit {
   }
 
   onSubmit(): void {
+    // Validate form before submitting
+    if (this.addCarForm.invalid) {
+      this.toastr.error('Please fill in all required fields');
+      return;
+    }
+
     const carData = this.addCarForm.value;
+    console.log(carData);
 
     if (this.isEditMode) {
       carData.carId = this.carId;
-      this.adminService.updateCar(carData).subscribe(
+
+      this.carService.updateCar(carData).subscribe(
         (response) => {
           this.toastr.success('Car updated successfully');
           this.router.navigate(['/admin/manage-cars']);
         },
         (error) => {
+          console.error('Error updating car:', error);
           this.toastr.error('Error updating car');
         }
       );
     } else {
-      this.adminService.createCar(carData).subscribe(
+      this.carService.createCar(carData).subscribe(
         (response) => {
           this.toastr.success('Car added successfully');
           this.router.navigate(['/admin/manage-cars']);
         },
         (error) => {
+          console.error('Error adding car:', error);
           this.toastr.error('Error adding car');
         }
       );
