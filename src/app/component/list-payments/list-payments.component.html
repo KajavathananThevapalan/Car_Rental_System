@@ -1,1 +1,50 @@
-<p>list-payments works!</p>
+<nav class="navbar navbar-light bg-light">
+    <ul>
+        <h3>Manage payments</h3>
+    </ul>
+    <ul class="flex-grow-1">
+        <input class="form-control" type="search" [(ngModel)]="searchQuery" placeholder="Search" aria-label="Search">
+    </ul>
+    <!-- <ul>
+        <button type="button" [routerLink]="['/register']" class="btn btn-dark">
+            <i class="bi bi-plus-lg"></i> New payment</button>
+    </ul> -->
+</nav>
+
+<div *ngIf="isLoading" class="loading-spinner">
+    <p>Loading payments...</p>
+</div>
+
+<div *ngIf="!isLoading && errorMessage" class="error-message">
+    <p>{{ errorMessage }}</p>
+</div>
+
+<div *ngIf="!isLoading && !errorMessage">
+    <table class="table">
+        <thead>
+            <tr>
+                <td scope="col">payment Id</td>
+                <td scope="col">Amount</td>
+                <td scope="col">payment Date</td>
+                <td scope="col">payment Method</td>
+                <td scope="col">Status</td>
+                <td scope="col">Actions</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let payment of filterPayments() ">
+                <td>{{payment.paymentId}}</td>
+                <td>{{payment.amount}}</td>
+                <td>{{payment.paymentDate}}</td>
+                <td>{{payment.paymentMethod}}</td>
+                <td>{{payment.status}}</td>
+                <td>
+                    <span><button class="btn btn-primary m-2 p-2"><i class="bi bi-eye-fill"
+                                (click)="PayNow(payment.paymentId)"></i></button></span>
+                    <span><button class="btn btn-danger m-2 p-2" (click)="editPayment(payment.paymentId)"><i
+                                class="bi bi-trash3-fill "></i></button></span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

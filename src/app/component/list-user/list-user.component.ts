@@ -10,8 +10,8 @@ import { UserService } from "../../services/user.service";
 })
 
 export class ListUserComponent implements OnInit {
-  searchInput = '';
-
+  
+  searchQuery: string = '';
   users: any[] = [];
   isLoading: boolean = true;
   errorMessage: string = '';
@@ -61,5 +61,16 @@ export class ListUserComponent implements OnInit {
         }
       );
     }
+  }
+
+  filteredUsers() {
+    if (!this.searchQuery) {
+      return this.users;
+    }
+
+    return this.users.filter(user =>
+      user.firstName.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+      user.nic.toLowerCase().includes(this.searchQuery.toLowerCase())
+    );
   }
 }

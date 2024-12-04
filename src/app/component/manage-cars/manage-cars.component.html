@@ -3,7 +3,7 @@
     <h3>Manage Cars</h3>
   </ul>
   <ul class="flex-grow-1">
-    <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+    <input class="form-control" type="search" [(ngModel)]="searchQuery" placeholder="Search" aria-label="Search">
   </ul>
   <ul>
     <button type="button" [routerLink]="['/admin/car-Add']" class="btn btn-dark">

@@ -20,12 +20,15 @@ import { CarDetailsComponent } from './component/car-details/car-details.compone
 import { AuthGuard } from './auth.guard';
 import { BookNowComponent } from './component/book-now/book-now.component';
 import { RentNowComponent } from './component/rent-now/rent-now.component';
+import { ListRentalComponent } from './component/list-rental/list-rental.component';
+import { ListReservationComponent } from './component/list-reservation/list-reservation.component';
+import { ListPaymentsComponent } from './component/list-payments/list-payments.component';
 
 const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
-    canActivate: [AuthGuard], // Protect admin routes with the AuthGuard
+    canActivate: [AuthGuard],
     children: [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'manage-brands', component: ManageBrandsComponent },
@@ -41,6 +44,9 @@ const routes: Routes = [
       { path: 'list-user', component: ListUserComponent },
       { path: 'user/:id', component: UserDetailsComponent },
       { path: 'user/edit/:id', component: EditUserComponent },
+      { path: 'list-rentals', component: ListRentalComponent },
+      { path: 'list-reservations', component: ListReservationComponent },
+      { path: 'list-payments', component: ListPaymentsComponent },
     ]
   },
   { path: 'register', component: RegisterComponent },

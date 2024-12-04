@@ -1,1 +1,50 @@
-<p>list-reservation works!</p>
+<nav class="navbar navbar-light bg-light">
+    <ul>
+        <h3>Manage Reservations</h3>
+    </ul>
+    <ul class="flex-grow-1">
+        <input class="form-control" type="search" [(ngModel)]="searchQuery" placeholder="Search" aria-label="Search">
+    </ul>
+    <ul>
+        <!-- <button type="button" [routerLink]="['/register']" class="btn btn-dark">
+        <i class="bi bi-plus-lg"></i> New Reservation</button> -->
+    </ul>
+</nav>
+
+<div *ngIf="isLoading" class="loading-spinner">
+    <p>Loading Reservations...</p>
+</div>
+
+<div *ngIf="!isLoading && errorMessage" class="error-message">
+    <p>{{ errorMessage }}</p>
+</div>
+
+<div *ngIf="!isLoading && !errorMessage">
+    <table class="table">
+        <thead>
+            <tr>
+                <td scope="col">reservation Id</td>
+                <td scope="col">Status</td>
+                <td scope="col">Reservation Date</td>
+                <td scope="col">End Date</td>
+                <td scope="col">User ID</td>
+                <td scope="col">Car ID</td>
+                <td scope="col">Actions</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let reservation of reservations ">
+                <td>{{reservation.reservationId}}</td>
+                <td>{{reservation.status}}</td>
+                <td>{{reservation.reservationDate}}</td>
+                <td>{{reservation.endDate}}</td>
+                <td>{{reservation.userId}}</td>
+                <td>{{reservation.carId}}</td>
+                <td>
+                    <span><button class="btn btn-success" (click)="AcceptReservation(reservation.reservationId)"><i class="bi bi-check-lg"></i></button></span>
+                    <span><button class="btn btn-danger m-2" (click)="DeclineReservation(reservation.reservationId)"><i class="bi bi-x-circle-fill"></i></button></span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

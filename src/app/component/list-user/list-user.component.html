@@ -3,7 +3,7 @@
       <h3>Manage Users</h3>
     </ul>
     <ul class="flex-grow-1">
-      <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+      <input class="form-control" type="search" [(ngModel)]="searchQuery" placeholder="Search" aria-label="Search">
     </ul>
     <ul>
       <button type="button" [routerLink]="['/register']" class="btn btn-dark">
@@ -33,7 +33,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let user of users ">
+            <tr *ngFor="let user of filteredUsers() ">
                 <td>{{user.userId}}</td>
                 <td>{{user.firstName + ' ' + user.lastName}}</td>
                 <td>{{user.nic}}</td>
