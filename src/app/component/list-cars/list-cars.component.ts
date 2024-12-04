@@ -28,7 +28,7 @@ export class ListCarsComponent {
     this.isLoading = true;
     this.carService.getCars().subscribe(
       (data) => {
-        // console.log(data[0].carImages);
+        console.log(data);
         
         this.isLoading = false;
         this.cars = data;

@@ -80,3 +80,33 @@
     background-color: #0056b3;
   }
   
+  /* Rentals Section */
+.rentals-section {
+    margin-top: 30px;
+  }
+  
+  .rentals-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .rentals-table th, .rentals-table td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+  }
+  
+  .rentals-table th {
+    background-color: #f4f4f4;
+  }
+  
+  .rentals-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .no-rentals {
+    margin-top: 20px;
+    font-size: 16px;
+    color: #777;
+  }
+  

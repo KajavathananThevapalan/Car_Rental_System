@@ -26,6 +26,10 @@ export class RentalService {
     return this.http.get<Rental>('http://localhost:5282/api/Rentals/' + rentalId);
   }
 
+  getRentalsByUser(rentalId: number) {
+    return this.http.get<Rental>('http://localhost:5282/api/Rentals/user/' + rentalId);
+  }
+
   updateRental(rental: any) {
     return this.http.put('http://localhost:5282/api/Rentals/' + rental.rentalId, rental);
   }

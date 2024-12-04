@@ -8,11 +8,13 @@
 
 <div *ngIf="!isLoading && !errorMessage" class="user-profile">
     <div class="profile-card">
+        <!-- User Profile Header -->
         <div class="profile-header">
             <h2>User Profile</h2>
             <img *ngIf="user.avatar" [src]="user.avatar" alt="User Avatar" class="user-avatar" />
         </div>
 
+        <!-- User Profile Details -->
         <div class="profile-details">
             <div class="profile-item">
                 <strong>Name:</strong>
@@ -36,8 +38,39 @@
             </div>
         </div>
 
+        <!-- Edit Profile Button -->
         <div class="profile-actions">
             <button (click)="editProfile()" class="btn btn-primary">Edit Profile</button>
+        </div>
+
+        <!-- Rentals Section -->
+        <div *ngIf="rentals.length > 0" class="rentals-section">
+            <h3>User Rentals</h3>
+            <table class="rentals-table">
+                <thead>
+                    <tr>
+                        <th>Rented Date</th>
+                        <th>Rental Start Date</th>
+                        <th>Rental End Date</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let rental of rentals">
+                        <td>{{ rental.createdAt }}</td>
+                        <td>{{ rental.rentalStartDate }}</td>
+                        <td>{{ rental.rentalEndDate }}</td>
+                        <td>{{ rental.totalAmount | date }}</td>
+                        <td>{{ rental.rentalStatus }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- No Rentals Message -->
+        <div *ngIf="rentals.length === 0" class="no-rentals">
+            <p>No rentals found.</p>
         </div>
     </div>
 </div>

@@ -21,8 +21,10 @@
             <div class="card-image-container">
                 <img [src]="car.frotView ? car.frotView : 'default-image-url.jpg'" alt="Car Image" class="car-image">
                 <div class="car-details">
-                    <h3 class="car-name">{{ car.color }}</h3>
                     <p class="car-status">{{ car.status }}</p>
+                    <h3 class="car-name">{{ car.color }}</h3>
+                    <p class="car-status">{{ car.yearOfManufacture }}</p>
+                    <p class="car-status">{{ car.pricePerDay }}</p>
                     <p class="car-view-count">View Count: {{ car.viewCount }}</p>
                     <!-- View Button -->
                     <button class="view-button" (click)="viewCarDetails(car)">View</button>
