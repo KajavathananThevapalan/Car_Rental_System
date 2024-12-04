@@ -1,0 +1,43 @@
+<div *ngIf="isLoading" class="loading">
+    <p>Loading...</p>
+</div>
+
+<div *ngIf="errorMessage" class="error-message">
+    <p>{{ errorMessage }}</p>
+</div>
+
+<div *ngIf="!isLoading && !errorMessage" class="user-profile">
+    <div class="profile-card">
+        <div class="profile-header">
+            <h2>User Profile</h2>
+            <img *ngIf="user.avatar" [src]="user.avatar" alt="User Avatar" class="user-avatar" />
+        </div>
+
+        <div class="profile-details">
+            <div class="profile-item">
+                <strong>Name:</strong>
+                <span>{{ user.firstName + ' ' + user.lastName || 'N/A' }}</span>
+            </div>
+            <div class="profile-item">
+                <strong>Email:</strong>
+                <span>{{ user.email || 'N/A' }}</span>
+            </div>
+            <div class="profile-item">
+                <strong>Phone:</strong>
+                <span>{{ user.phone || 'N/A' }}</span>
+            </div>
+            <div class="profile-item">
+                <strong>Address:</strong>
+                <span>{{ user.address.addressLine1 + ', ' + user.address.addressLine2 + ', ' + user.address.city + ', ' + user.address.district || 'N/A' }}</span>
+            </div>
+            <div class="profile-item">
+                <strong>Role:</strong>
+                <span>{{ user.userRole || 'N/A' }}</span>
+            </div>
+        </div>
+
+        <div class="profile-actions">
+            <button (click)="editProfile()" class="btn btn-primary">Edit Profile</button>
+        </div>
+    </div>
+</div>

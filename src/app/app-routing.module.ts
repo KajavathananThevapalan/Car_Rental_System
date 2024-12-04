@@ -23,6 +23,7 @@ import { RentNowComponent } from './component/rent-now/rent-now.component';
 import { ListRentalComponent } from './component/list-rental/list-rental.component';
 import { ListReservationComponent } from './component/list-reservation/list-reservation.component';
 import { ListPaymentsComponent } from './component/list-payments/list-payments.component';
+import { UserProfileComponent } from './component/user-profile/user-profile.component';
 
 const routes: Routes = [
   {
@@ -51,6 +52,7 @@ const routes: Routes = [
   },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'profile', component: UserProfileComponent },
   {
     path: '',
     component: HomeComponent,

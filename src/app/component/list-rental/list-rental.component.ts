@@ -62,14 +62,18 @@ export class ListRentalComponent {
     }
   }
 
+  payRental(rentalId: number): void {
+
+  }
+
   filteredRentals() {
     if (!this.searchQuery) {
       return this.rentals;
     }
 
     return this.rentals.filter(rental =>
-      rental.firstName.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-      rental.nic.toLowerCase().includes(this.searchQuery.toLowerCase())
+      rental.carId.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+      rental.userId.toLowerCase().includes(this.searchQuery.toLowerCase())
     );
   }
 }

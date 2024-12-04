@@ -30,6 +30,10 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  goToProfile(){
+    this.router.navigate(['/profile'])
+  }
+
   navigateToRegister() {
     this.router.navigate(['/register']);
   }

@@ -33,6 +33,7 @@ import { ListReservationComponent } from './component/list-reservation/list-rese
 import { ListPaymentsComponent } from './component/list-payments/list-payments.component';
 import { BookNowComponent } from './component/book-now/book-now.component';
 import { RentNowComponent } from './component/rent-now/rent-now.component';
+import { UserProfileComponent } from './component/user-profile/user-profile.component';
 
 
 @NgModule({
@@ -61,7 +62,8 @@ import { RentNowComponent } from './component/rent-now/rent-now.component';
     ListReservationComponent,
     ListPaymentsComponent,
     BookNowComponent,
-    RentNowComponent
+    RentNowComponent,
+    UserProfileComponent
   ],
   imports: [
     FormsModule,

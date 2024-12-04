@@ -5,10 +5,10 @@
     <ul class="flex-grow-1">
       <input class="form-control" type="search" [(ngModel)]="searchQuery" placeholder="Search" aria-label="Search">
     </ul>
-    <ul>
+    <!-- <ul>
       <button type="button" [routerLink]="['/register']" class="btn btn-dark">
         <i class="bi bi-plus-lg"></i> New Rental</button>
-    </ul>
+    </ul> -->
   </nav>
 
 <div *ngIf="isLoading" class="loading-spinner">
@@ -45,6 +45,8 @@
                 <td>
                     <span><button class="btn btn-primary m-2 p-2"><i class="bi bi-eye-fill"
                                 (click)="viewRental(rental.rentalId)"></i></button></span>
+                    <span><button class="btn btn-primary m-2 p-2"><i class="bi bi-credit-card"
+                                (click)="payRental(rental.rentalId)"></i></button></span>
                     <span><button class="btn btn-danger m-2 p-2" (click)="deleteRental(rental.rentalId)"><i
                                 class="bi bi-trash3-fill "></i></button></span>
                 </td>
