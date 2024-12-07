@@ -17,20 +17,19 @@ export class UserDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private userService: UserService,
     private toastr: ToastrService,
-    private router: Router // Inject Router for navigation
+    private router: Router
   ) {}
 
   ngOnInit(): void {    
-    this.userId = Number(this.route.snapshot.paramMap.get('id')); // Get the userId from the route    
-    this.getUserDetails(); // Fetch user details on initialization
+    this.userId = Number(this.route.snapshot.paramMap.get('id'));
+    this.getUserDetails();
   }
 
-  // Fetch user details by userId
   getUserDetails(): void {
     this.userService.getUserById(this.userId).subscribe(
       (data) => {        
         this.user = data;
-        console.log(this.user);
+        // console.log(this.user);
         this.isLoading = false;
       },
       (error) => {
@@ -41,13 +40,11 @@ export class UserDetailsComponent implements OnInit {
     );
   }
 
-  // Go back to the previous page or a specific route (e.g., user list)
   goBack(): void {
-    this.router.navigate(['/admin/list-user']); // You can change this to your desired route
+    this.router.navigate(['/admin/list-user']);
   }
 
-   // Navigate to the Edit User page
    editUser(userId: number): void {
-    this.router.navigate([`/admin/user/edit/${userId}`]); // Navigate to the edit page with userId
+    this.router.navigate([`/admin/user/edit/${userId}`]);
   }
 }

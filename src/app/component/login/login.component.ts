@@ -24,11 +24,15 @@ export class LoginComponent {
   onLogIn() {
     this.authService.logInUser(this.loginForm.value).subscribe(
       response => {
+        // console.log(response);
+        
         localStorage.setItem('authToken', response);
         localStorage.setItem('isLoggedIn', 'true');
 
         const decoded: any = jwtDecode(response);
-        // console.log(decoded.UserRole);
+        localStorage.setItem('UserId', decoded.Id);
+
+        console.log(decoded.Id);
 
         const redirectUrl = localStorage.getItem('redirectUrl');
 

@@ -1,5 +1,4 @@
 import { Address } from "./Address";
-import { UserImages } from "./UserImage";
 
 export interface User {
   userId: number;
@@ -10,7 +9,9 @@ export interface User {
   email: string;
   password: string;
   phone: string;
-  role: 'Customer' | 'Admin'; // Consistent capitalization
+  role: 'Customer' | 'Admin';
   address: Address;
-  images: UserImages[]; // Multiple images as array, as you have a FormArray for images
+  profileImage: string;
+  dirvingLicenceFront:string;
+  dirvingLicenceBack:string;
 }

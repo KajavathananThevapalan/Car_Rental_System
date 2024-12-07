@@ -31,6 +31,7 @@ export class RegisterComponent {
       userRole: ['customer', Validators.required],
       drivingLicenseFront: ['', [Validators.required]],
       drivingLicenseBack: ['', [Validators.required]],
+      profileImage: [''],
       address: this.fb.group({
         addressLine1: [''],
         addressLine2: [''],
@@ -61,13 +62,6 @@ export class RegisterComponent {
 
   get images() {
     return (this.registerForm.get('images') as FormArray);
-  }
-
-  addImage() {
-    this.images.push(this.fb.group({
-      imageUrl: ['', Validators.required],
-      imageType: ['profile', Validators.required]
-    }));
   }
 
   onSubmit() {

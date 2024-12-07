@@ -29,19 +29,19 @@ export class AuthorizationService {
     });
   }
 
-  isLoggedIn(){
+  isLoggedIn() {
     if (localStorage.getItem("authToken")) {
       const token = localStorage.getItem("authToken");
       if (token) {
-        const decoded:any = jwtDecode(token);
+        const decoded: any = jwtDecode(token);
         // console.log(decoded);
-        
-        localStorage.setItem("name", decoded.FirstName)
-        localStorage.setItem("Role", decoded.UserRole)
-        localStorage.setItem("UserId", decoded.Id)
+
+        // localStorage.setItem("name", decoded.FirstName)
+        // localStorage.setItem("Role", decoded.UserRole)
+        // localStorage.setItem("UserId", decoded.Id)
       }
       return true;
-    }else{
+    } else {
       return false;
     }
   }
