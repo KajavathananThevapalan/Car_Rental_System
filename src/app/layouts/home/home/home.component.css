@@ -1,0 +1,9 @@
+main {
+    /* background-image: url('https://th.bing.com/th/id/R.5506c15b19318a936c69161a86883a51?rik=Ns6JtFrm%2bUEdSw&riu=http%3a%2f%2fpictures.dealer.com%2fh%2fhondaofclearlake3%2f1503%2f3fb09c83fb9bdd667316c77814064aa5x.jpg&ehk=SHRWIZzHT%2f6MQcXEyrsfF%2f0tyNyLSlzibB8BdbYDOrY%3d&risl=&pid=ImgRaw&r=0');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    width: 100%; */
+    padding-top: 30px;
+    background-color: azure;
+}

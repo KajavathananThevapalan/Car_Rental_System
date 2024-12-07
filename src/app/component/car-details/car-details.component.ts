@@ -23,7 +23,7 @@ export class CarDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this.carId = +params['id'];  // Get carId from the URL
+      this.carId = +params['carId'];  // Get carId from the URL
       this.getCarDetails(this.carId);
     });
   }

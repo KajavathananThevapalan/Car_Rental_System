@@ -11,9 +11,6 @@
                         <a class="nav-link" href="#!">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#!">Cars</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="#!">Services</a>
                     </li>
                     <li class="nav-item">
@@ -22,52 +19,27 @@
                 </ul>
 
                 <ul class="navbar-nav d-flex flex-row p-3 flex-grow-1">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <input class="form-control mr-sm-2" type="search" [(ngModel)]="searchQuery" placeholder="Search" aria-label="Search">
                 </ul>
 
                 <ul class="navbar-nav d-flex flex-row">
-                    <div class="dropdown-center">
-                        <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown"
-                            data-bs-display="static" aria-expanded="false">
-                            <i class="bi bi-person-circle" style="font-size: 30px; cursor: pointer;"></i>
-                        </button>
-                        <div class="dropdown-menu p-4">
-                            <div class="mb-3">
-                                <button class="btn btn-primary ml-auto" (click)="toggleLoginLogout()">
-                                    {{ isLoggedIn ? 'Logout' : 'Login' }}
-                                </button>
-                            </div>
-                            <div class="mb-3" *ngIf="isLoggedIn">
-                                <button class="btn btn-primary ml-auto" (click)="goToProfile()"> Profile </button>
-                            </div>
-                            <div class="mb-3">
-                                <button *ngIf="!isLoggedIn" class="btn btn-secondary ml-2"
-                                    (click)="navigateToRegister()">Register</button>
-                            </div>
-                        </div>
+                    <div *ngIf="!isLoggedIn">
+                        <button type="button" class="btn btn-info m-2" [routerLink]="['/login']">Login</button>
+                        <button type="button" class="btn btn-warning" [routerLink]="['/register']">Register</button>
+                    </div>
+
+                    <div *ngIf="isLoggedIn">
+                        <button type="button" class="btn" [routerLink]="['/profile']">{{ 'Hi! ' + name }}</button>
+                        <button type="button" class="btn btn-secondary m-2" (click)="toggleLoginLogout()">Logout</button>
                     </div>
                 </ul>
             </div>
         </div>
     </nav>
-    <!-- Navbar -->
-
-    <!--Section: Design Block-->
-    <!-- <section>
-        <div id="intro" class="bg-image" style="
-          background-image: url('https://th.bing.com/th/id/R.5506c15b19318a936c69161a86883a51?rik=Ns6JtFrm%2bUEdSw&riu=http%3a%2f%2fpictures.dealer.com%2fh%2fhondaofclearlake3%2f1503%2f3fb09c83fb9bdd667316c77814064aa5x.jpg&ehk=SHRWIZzHT%2f6MQcXEyrsfF%2f0tyNyLSlzibB8BdbYDOrY%3d&risl=&pid=ImgRaw&r=0');
-          background-size: cover;
-          background-position: center;
-          height: 100vh; 
-          width: 100%; 
-        ">
-        </div>
-    </section> -->
-    <!--Section: Design Block-->
 </header>
 
 <main>
     <div class="container my-5 py-5">
-        <router-outlet></router-outlet>
+        <app-list-cars [searchQuery]="searchQuery"></app-list-cars>
     </div>
 </main>

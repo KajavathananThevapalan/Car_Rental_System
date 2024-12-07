@@ -22,7 +22,9 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-    this. getUserDetails();
+    if (this.isLoggedIn){
+      this. getUserDetails();
+    }
   }
 
   getUserDetails(): void {

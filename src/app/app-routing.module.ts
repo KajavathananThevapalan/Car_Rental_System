@@ -24,6 +24,7 @@ import { ListRentalComponent } from './component/list-rental/list-rental.compone
 import { ListReservationComponent } from './component/list-reservation/list-reservation.component';
 import { ListPaymentsComponent } from './component/list-payments/list-payments.component';
 import { UserProfileComponent } from './component/user-profile/user-profile.component';
+import { SidebarComponent } from './component/sidebar/sidebar.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,7 @@ const routes: Routes = [
     component: AdminComponent,
     canActivate: [AuthGuard],
     children: [
+      { path: 'sidebar', component: SidebarComponent },
       { path: 'dashboard', component: DashboardComponent },
       { path: 'manage-brands', component: ManageBrandsComponent },
       { path: 'manage-models', component: ManageModelsComponent },
@@ -53,19 +55,13 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'profile', component: UserProfileComponent },
+  { path: '', component: HomeComponent },
   {
-    path: '',
-    component: HomeComponent,
+    path: 'car-details/:carId',
+    component: CarDetailsComponent,
     children: [
-      { path: '', component: ListCarsComponent },
-      {
-        path: 'car-details/:id',
-        component: CarDetailsComponent,
-        children: [
-          { path: 'book-now', component: BookNowComponent },
-          { path: 'rent-now', component: RentNowComponent },
-        ]
-      }
+      { path: 'book-now', component: BookNowComponent },
+      { path: 'rent-now', component: RentNowComponent },
     ]
   },
   { path: '**', redirectTo: "login", pathMatch: "full" }

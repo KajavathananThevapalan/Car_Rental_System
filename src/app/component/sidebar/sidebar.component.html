@@ -1,0 +1,50 @@
+<div class="d-flex p-3 text-white bg-dark" style="width: 280px; height: 100vh;">
+        <ul class="nav flex-column">
+            <li>
+                <a [routerLink]="['/admin/dashboard']" class="nav-link text-white" aria-current="page">
+                    Dashboard
+                </a>
+            </li>
+            <li>
+                <details [attr.open]="isOpen ? true : null" (click)="toggleSubtitle()">
+                    <summary class="nav-link text-white">Car Management</summary>
+                    <p>
+                        <a [routerLink]="['/admin/manage-brands']" class="nav-link text-white">
+                            Manage Brands
+                        </a>
+                    </p>
+                    <p>
+                        <a [routerLink]="['/admin/manage-models']" class="nav-link text-white">
+                            Manage Models
+                        </a>
+                    </p>
+                    <p>
+                        <a [routerLink]="['/admin/manage-cars']" class="nav-link text-white">
+                            Manage Cars
+                        </a>
+                    </p>
+                </details>
+            </li>
+            <li>
+                <a [routerLink]="['/admin/list-user']" class="nav-link text-white">
+                    Customer Management
+                </a>
+            </li>
+            <li>
+                <a [routerLink]="['/admin/list-reservations']" class="nav-link text-white">
+                    Reservations
+                </a>
+            </li>
+            <li>
+                <a [routerLink]="['/admin/list-rentals']" class="nav-link text-white">
+                    Rentals
+                </a>
+            </li>
+            <li>
+                <a [routerLink]="['/admin/list-payments']" class="nav-link text-white">
+                    Payments
+                </a>
+            </li>
+        </ul>
+        <hr>
+    </div>

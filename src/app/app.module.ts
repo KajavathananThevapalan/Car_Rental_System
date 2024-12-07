@@ -34,6 +34,8 @@ import { ListPaymentsComponent } from './component/list-payments/list-payments.c
 import { BookNowComponent } from './component/book-now/book-now.component';
 import { RentNowComponent } from './component/rent-now/rent-now.component';
 import { UserProfileComponent } from './component/user-profile/user-profile.component';
+import { SidebarComponent } from './component/sidebar/sidebar.component';
+import { NavbarComponent } from './component/navbar/navbar.component';
 
 
 @NgModule({
@@ -63,7 +65,9 @@ import { UserProfileComponent } from './component/user-profile/user-profile.comp
     ListPaymentsComponent,
     BookNowComponent,
     RentNowComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    SidebarComponent,
+    NavbarComponent
   ],
   imports: [
     FormsModule,

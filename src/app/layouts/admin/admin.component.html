@@ -1,78 +1,8 @@
-<nav class="navbar navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">
-        <img src="https://th.bing.com/th?id=OIP.9P-3eAqg_Q_vJO7nS3QKawHaEK&w=333&h=187&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2"
-            width="60" height="40" class="d-inline-block align-top m-2" alt="">
-        WayToGo Car Rentals
-    </a>
-    <div class="d-flex">
-        <div class="dropdown-center">
-            <button type="button" class="btn dropdown-toggle bg-danger" data-bs-toggle="dropdown" data-bs-display="static"
-                aria-expanded="false">
-                <i class="bi bi-person-circle" style="font-size: 30px; cursor: pointer;"></i>
-            </button>
-            <div class="dropdown-menu p-4">
-                <div class="mb-3">
-                    <button class="btn btn-primary ml-auto" (click)="OnLogOut()"> Logout </button>
-                </div>
-            </div>
-        </div>
-    </div>
+<app-navbar></app-navbar>
 
-</nav>
 <main class="d-flex">
-    <div class="d-flex p-3 text-white bg-dark" style="width: 280px; height: 100vh;">
-        <ul class="nav flex-column">
-            <li>
-                <a [routerLink]="['/admin/dashboard']" class="nav-link text-white" aria-current="page">
-                    Dashboard
-                </a>
-            </li>
-            <li>
-                <details [attr.open]="isOpen ? true : null" (click)="toggleSubtitle()">
-                    <summary class="nav-link text-white">Car Management</summary>
-                    <p>
-                        <a [routerLink]="['/admin/manage-brands']" class="nav-link text-white">
-                            Manage Brands
-                        </a>
-                    </p>
-                    <p>
-                        <a [routerLink]="['/admin/manage-models']" class="nav-link text-white">
-                            Manage Models
-                        </a>
-                    </p>
-                    <p>
-                        <a [routerLink]="['/admin/manage-cars']" class="nav-link text-white">
-                            Manage Cars
-                        </a>
-                    </p>
-                </details>
-            </li>
-            <li>
-                <a [routerLink]="['/admin/list-user']" class="nav-link text-white">
-                    Customer Management
-                </a>
-            </li>
-            <li>
-                <a [routerLink]="['/admin/list-reservations']" class="nav-link text-white">
-                    Reservations
-                </a>
-            </li>
-            <li>
-                <a [routerLink]="['/admin/list-rentals']" class="nav-link text-white">
-                    Rentals
-                </a>
-            </li>
-            <li>
-                <a [routerLink]="['/admin/list-payments']" class="nav-link text-white">
-                    Payments
-                </a>
-            </li>
-        </ul>
-        <hr>
-    </div>
-
+    <app-sidebar></app-sidebar>
     <div class="container">
         <router-outlet></router-outlet>
     </div>
-
 </main>

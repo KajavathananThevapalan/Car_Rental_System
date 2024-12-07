@@ -7,19 +7,5 @@ import { Router } from '@angular/router';
   styleUrl: './admin.component.css'
 })
 export class AdminComponent {
-  constructor(private router: Router) { }
 
-  isLoggedIn!: boolean;
-  isOpen: boolean = false;
-
-  toggleSubtitle() {
-    this.isOpen = !this.isOpen;
-  }
-
-  OnLogOut() {
-    localStorage.removeItem('authToken');
-    localStorage.setItem('isLoggedIn', 'false');
-    this.isLoggedIn = false;
-    this.router.navigate(['/']);
-  }  
 }

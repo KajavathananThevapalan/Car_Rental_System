@@ -1,5 +1,4 @@
 <div *ngIf="isLoading" class="loading-spinner">
-    <!-- You can use a spinner component or any loading indicator -->
     <p>Loading cars...</p>
 </div>
 
@@ -8,28 +7,31 @@
 </div>
 
 <div *ngIf="!isLoading && !errorMessage">
-    <h2>Cars List</h2>
-
-    <!-- Check if cars is empty -->
     <div *ngIf="cars.length === 0" class="no-cars">
         <p>No cars available at the moment</p>
     </div>
 
-    <!-- Display cars in card view -->
-    <div *ngIf="cars.length > 0" class="cardBox">
-        <div class="card" *ngFor="let car of cars">
-            <div class="card-image-container">
-                <img [src]="car.frotView ? car.frotView : 'default-image-url.jpg'" alt="Car Image" class="car-image">
-                <div class="car-details">
-                    <p class="car-status">{{ car.status }}</p>
-                    <h3 class="car-name">{{ car.color }}</h3>
-                    <p class="car-status">{{ car.yearOfManufacture }}</p>
-                    <p class="car-status">{{ car.pricePerDay }}</p>
-                    <p class="car-view-count">View Count: {{ car.viewCount }}</p>
-                    <!-- View Button -->
+    <div *ngIf="filteredCars.length === 0 && cars.length > 0" class="no-cars">
+        <p>No cars match your search criteria.</p>
+    </div>
+
+    <div *ngIf="filteredCars.length > 0" class="cardBox">
+        <div *ngFor="let car of filteredCars">
+            <div class="card" style="width: 18rem;">
+                <img [src]="car.frotView ? car.frotView : 'default-image-url.jpg'" class="card-img-top car-image"
+                    alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{ car.status }}</h5>
+                    <div class="d-flex justify-content-between">
+                        <p class="card-text">{{ car.color }}</p>
+                        <p class="card-text">{{ car.yearOfManufacture }}</p>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <p class="card-text">{{ car.pricePerDay | currency }}</p>
+                        <p class="card-text">View Count: {{ car.viewCount }}</p>
+                    </div>
                     <button class="view-button" (click)="viewCarDetails(car)">View</button>
                 </div>
             </div>
         </div>
     </div>
-</div>
