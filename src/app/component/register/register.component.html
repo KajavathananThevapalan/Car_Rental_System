@@ -69,6 +69,7 @@
                       </small>
                     </div>
 
+                    <!-- Password Field -->
                     <div class="col-md-6 mb-3">
                       <label for="password" class="form-label">Password</label>
                       <input id="password" formControlName="password" name="password" type="password"
@@ -81,15 +82,23 @@
                       </small>
                     </div>
 
+                    <!-- Confirm Password Field -->
                     <div class="col-md-6 mb-3">
                       <label for="confirmpassword" class="form-label">Confirm Password</label>
-                      <input type="password" id="confirmpassword" class="form-control" />
+                      <input type="password" id="confirmpassword" formControlName="confirmpassword"
+                        class="form-control" />
                       <small
                         *ngIf="registerForm.get('confirmpassword')?.invalid && registerForm.get('confirmpassword')?.touched"
                         class="text-danger">
                         Confirm Password is required.
                       </small>
+                      <small
+                        *ngIf="registerForm.errors?.passwordsDoNotMatch && registerForm.get('confirmpassword')?.touched"
+                        class="text-danger">
+                        Passwords do not match.
+                      </small>
                     </div>
+
                   </div>
 
                   <div class="col-md-6 mb-3">
@@ -170,22 +179,22 @@
                 </div>
 
                 <!-- Image Upload Section -->
-            <div class="row">
-              <!-- Driving License Front Image -->
-              <div class="col-md-6 mb-3">
-                <label for="drivingLicenseFront" class="form-label">Driving Licence Front Image URL</label>
-                <input id="drivingLicenseFront" formControlName="drivingLicenseFront" name="drivingLicenseFront" type="text"
-                  class="form-control" />
-              </div>
+                <div class="row">
+                  <!-- Driving License Front Image -->
+                  <div class="col-md-6 mb-3">
+                    <label for="drivingLicenseFront" class="form-label">Driving Licence Front Image URL</label>
+                    <input id="drivingLicenseFront" formControlName="drivingLicenseFront" name="drivingLicenseFront"
+                      type="text" class="form-control" />
+                  </div>
 
-              <!-- Driving License Back Image -->
-              <div class="col-md-6 mb-3">
-                <label for="drivingLicenseBack" class="form-label">Driving Licence Back Image URL</label>
-                <input id="drivingLicenseBack" formControlName="drivingLicenseBack" name="drivingLicenseBack" type="text"
-                  class="form-control" />
-              </div>
-            </div>
-                
+                  <!-- Driving License Back Image -->
+                  <div class="col-md-6 mb-3">
+                    <label for="drivingLicenseBack" class="form-label">Driving Licence Back Image URL</label>
+                    <input id="drivingLicenseBack" formControlName="drivingLicenseBack" name="drivingLicenseBack"
+                      type="text" class="form-control" />
+                  </div>
+                </div>
+
               </div>
 
               <!-- Terms and Conditions -->
