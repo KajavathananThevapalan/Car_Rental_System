@@ -1,25 +1,19 @@
-<div *ngIf="isLoading" class="loading-spinner">
-    <p>Loading cars...</p>
-</div>
-
-<div *ngIf="!isLoading && errorMessage" class="error-message">
-    <p>{{ errorMessage }}</p>
-</div>
-
 <div *ngIf="!isLoading && !errorMessage">
+    <!-- No Cars Available -->
     <div *ngIf="cars.length === 0" class="no-cars">
         <p>No cars available at the moment</p>
     </div>
 
+    <!-- No Cars Match Search Criteria -->
     <div *ngIf="filteredCars.length === 0 && cars.length > 0" class="no-cars">
         <p>No cars match your search criteria.</p>
     </div>
 
-    <div *ngIf="filteredCars.length > 0" class="cardBox">
-        <div *ngFor="let car of filteredCars">
+    <!-- Display Paginated Cars -->
+    <div *ngIf="paginatedCars.length > 0" class="cardBox">
+        <div *ngFor="let car of paginatedCars">
             <div class="card" style="width: 18rem;">
-                <img [src]="car.frotView ? car.frotView : 'default-image-url.jpg'" class="card-img-top car-image"
-                    alt="...">
+                <img [src]="car.frotView ? car.frotView : 'default-image-url.jpg'" class="card-img-top car-image" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">{{ car.status }}</h5>
                     <div class="d-flex justify-content-between">
@@ -35,3 +29,12 @@
             </div>
         </div>
     </div>
+
+    <div class="pagination">
+        <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1"><img
+            src="https://img.icons8.com/ios-filled/50/000000/long-arrow-left.png" alt=""></button>
+        <span>Page {{ currentPage }} of {{ totalPages() }}</span>
+        <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages()"><img
+            src="https://img.icons8.com/ios-filled/50/000000/long-arrow-right.png" alt=""></button>
+      </div>
+</div>

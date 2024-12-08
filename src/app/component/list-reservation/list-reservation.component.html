@@ -1,50 +1,59 @@
 <nav class="navbar navbar-light bg-light">
     <ul>
-        <h3>Manage Reservations</h3>
+      <h3>Manage Reservations</h3>
     </ul>
     <ul class="flex-grow-1">
-        <input class="form-control" type="search" [(ngModel)]="searchQuery" placeholder="Search" aria-label="Search">
+      <input class="form-control" type="search" [(ngModel)]="searchQuery" placeholder="Search" aria-label="Search" (input)="filterReservations()">
     </ul>
-    <ul>
-        <!-- <button type="button" [routerLink]="['/register']" class="btn btn-dark">
-        <i class="bi bi-plus-lg"></i> New Reservation</button> -->
-    </ul>
-</nav>
-
-<div *ngIf="isLoading" class="loading-spinner">
+  </nav>
+  
+  <div *ngIf="isLoading" class="loading-spinner">
     <p>Loading Reservations...</p>
-</div>
-
-<div *ngIf="!isLoading && errorMessage" class="error-message">
+  </div>
+  
+  <div *ngIf="!isLoading && errorMessage" class="error-message">
     <p>{{ errorMessage }}</p>
-</div>
-
-<div *ngIf="!isLoading && !errorMessage">
+  </div>
+  
+  <div *ngIf="!isLoading && !errorMessage">
     <table class="table">
-        <thead>
-            <tr>
-                <td scope="col">reservation Id</td>
-                <td scope="col">Status</td>
-                <td scope="col">Reservation Date</td>
-                <td scope="col">End Date</td>
-                <td scope="col">User ID</td>
-                <td scope="col">Car ID</td>
-                <td scope="col">Actions</td>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let reservation of reservations ">
-                <td>{{reservation.reservationId}}</td>
-                <td>{{reservation.status}}</td>
-                <td>{{reservation.reservationDate}}</td>
-                <td>{{reservation.endDate}}</td>
-                <td>{{reservation.userId}}</td>
-                <td>{{reservation.carId}}</td>
-                <td>
-                    <span><button class="btn btn-success" (click)="AcceptReservation(reservation.reservationId)"><i class="bi bi-check-lg"></i></button></span>
-                    <span><button class="btn btn-danger m-2" (click)="DeclineReservation(reservation.reservationId)"><i class="bi bi-x-circle-fill"></i></button></span>
-                </td>
-            </tr>
-        </tbody>
+      <thead>
+        <tr>
+          <th scope="col">Reservation Id</th>
+          <th scope="col">Status</th>
+          <th scope="col">Reservation Date</th>
+          <th scope="col">End Date</th>
+          <th scope="col">User ID</th>
+          <th scope="col">Car ID</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let reservation of paginatedReservations">
+          <td>{{ reservation.reservationId }}</td>
+          <td>{{ reservation.status }}</td>
+          <td>{{ reservation.reservationDate }}</td>
+          <td>{{ reservation.endDate }}</td>
+          <td>{{ reservation.userId }}</td>
+          <td>{{ reservation.carId }}</td>
+          <td>
+            <button class="btn btn-success" (click)="AcceptReservation(reservation.reservationId)">
+              <i class="bi bi-check-lg"></i> Accept
+            </button>
+            <button class="btn btn-danger m-2" (click)="DeclineReservation(reservation.reservationId)">
+              <i class="bi bi-x-circle-fill"></i> Decline
+            </button>
+          </td>
+        </tr>
+      </tbody>
     </table>
-</div>
+  
+    <div class="pagination">
+        <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1"><img
+            src="https://img.icons8.com/ios-filled/50/000000/long-arrow-left.png" alt=""></button>
+        <span>Page {{ currentPage }} of {{ totalPages() }}</span>
+        <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages()"><img
+            src="https://img.icons8.com/ios-filled/50/000000/long-arrow-right.png" alt=""></button>
+      </div>
+  </div>
+  

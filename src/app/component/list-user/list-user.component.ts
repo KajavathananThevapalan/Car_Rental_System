@@ -1,20 +1,23 @@
-import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
-import { ToastrService } from "ngx-toastr";
-import { UserService } from "../../services/user.service";
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-list-user',
   templateUrl: './list-user.component.html',
-  styleUrl: './list-user.component.css'
+  styleUrls: ['./list-user.component.css']
 })
-
 export class ListUserComponent implements OnInit {
-  
+
   searchQuery: string = '';
   users: any[] = [];
   isLoading: boolean = true;
   errorMessage: string = '';
+  currentPage: number = 1;
+  itemsPerPage: number = 5;
+  totalItems: number = 0;
+  paginatedUsers: any[] = [];
 
   constructor(
     private userService: UserService,
@@ -32,7 +35,8 @@ export class ListUserComponent implements OnInit {
       (data) => {
         this.isLoading = false;
         this.users = data;
-        // console.log('Users fetched:', this.users);
+        this.totalItems = this.users.length;
+        this.filterUsers();
       },
       (error) => {
         this.isLoading = false;
@@ -43,8 +47,36 @@ export class ListUserComponent implements OnInit {
     );
   }
 
+  filterUsers(): void {
+    let filteredUsers = this.users;
+    if (this.searchQuery) {
+      filteredUsers = this.users.filter(user =>
+        user.firstName.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+        user.nic.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+    }
+
+    this.paginateUsers(filteredUsers);
+  }
+
+  paginateUsers(filteredUsers: any[]): void {
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    const end = start + this.itemsPerPage;
+    this.paginatedUsers = filteredUsers.slice(start, end);
+  }
+
+  changePage(page: number): void {
+    if (page >= 1 && page <= this.totalPages()) {
+      this.currentPage = page;
+      this.filterUsers();
+    }
+  }
+
+  totalPages(): number {
+    return Math.ceil(this.users.length / this.itemsPerPage);
+  }
+
   viewUser(userId: number): void {
-    // console.log('Navigating to user with ID:', userId);
     this.router.navigate([`/admin/user/${userId}`]);
   }
 
@@ -61,16 +93,5 @@ export class ListUserComponent implements OnInit {
         }
       );
     }
-  }
-
-  filteredUsers() {
-    if (!this.searchQuery) {
-      return this.users;
-    }
-
-    return this.users.filter(user =>
-      user.firstName.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-      user.nic.toLowerCase().includes(this.searchQuery.toLowerCase())
-    );
   }
 }

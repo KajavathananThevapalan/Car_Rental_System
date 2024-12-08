@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { BrandService } from "../../services/brand.service";
@@ -6,31 +6,27 @@ import { BrandService } from "../../services/brand.service";
 @Component({
   selector: 'app-manage-brands',
   templateUrl: './manage-brands.component.html',
-  styleUrl: './manage-brands.component.css'
+  styleUrls: ['./manage-brands.component.css']
 })
-export class ManageBrandsComponent {
-  constructor(private brandService: BrandService, private toastr: ToastrService, private router: Router) { }
-
+export class ManageBrandsComponent implements OnInit {
+  
   isLoading: boolean = true;
   errorMessage: string = '';
   brands: any[] = [];
   searchQuery: string = '';
+  currentPage: number = 1;
+  itemsPerPage: number = 5;
+  totalItems: number = 0;
+  paginatedBrands: any[] = [];
+
+  constructor(
+    private brandService: BrandService,
+    private toastr: ToastrService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.loadBrands();
-  }
-
-  onDelete(brandId: number) {
-    if (confirm("Do you want to delete this brand?")) {
-      this.brandService.deleteBrand(brandId).subscribe((data: any) => {
-        this.toastr.success("success");
-        this.loadBrands();
-      })
-    }
-  }
-
-  onEdit(brandId: number) {
-    this.router.navigate(['admin/brand-edit/', brandId])
   }
 
   loadBrands(): void {
@@ -39,6 +35,8 @@ export class ManageBrandsComponent {
       (data) => {
         this.isLoading = false;
         this.brands = data;
+        this.totalItems = this.brands.length;
+        this.filterBrands();
       },
       (error) => {
         this.isLoading = false;
@@ -49,16 +47,47 @@ export class ManageBrandsComponent {
     );
   }
 
-  filteredBrands() {
-    if (!this.searchQuery) {
-      return this.brands;
+  filterBrands(): void {
+    let filteredBrands = this.brands;
+    if (this.searchQuery) {
+      filteredBrands = this.brands.filter(brand =>
+        brand.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+        brand.country.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+        brand.website.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+        brand.description.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
     }
 
-    return this.brands.filter(brand =>
-      brand.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-      brand.country.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-      brand.website.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-      brand.description.toLowerCase().includes(this.searchQuery.toLowerCase())
-    );
+    this.paginateBrands(filteredBrands);
+  }
+
+  paginateBrands(filteredBrands: any[]): void {
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    const end = start + this.itemsPerPage;
+    this.paginatedBrands = filteredBrands.slice(start, end);
+  }
+
+  changePage(page: number): void {
+    if (page >= 1 && page <= this.totalPages()) {
+      this.currentPage = page;
+      this.filterBrands();
+    }
+  }
+
+  totalPages(): number {
+    return Math.ceil(this.brands.length / this.itemsPerPage);
+  }
+
+  onDelete(brandId: number): void {
+    if (confirm("Do you want to delete this brand?")) {
+      this.brandService.deleteBrand(brandId).subscribe((data: any) => {
+        this.toastr.success("Brand deleted successfully");
+        this.loadBrands();
+      })
+    }
+  }
+
+  onEdit(brandId: number): void {
+    this.router.navigate(['admin/brand-edit/', brandId]);
   }
 }

@@ -3,50 +3,61 @@
       <h3>Manage Users</h3>
     </ul>
     <ul class="flex-grow-1">
-      <input class="form-control" type="search" [(ngModel)]="searchQuery" placeholder="Search" aria-label="Search">
+      <input class="form-control" type="search" [(ngModel)]="searchQuery" placeholder="Search" aria-label="Search" (input)="filterUsers()">
     </ul>
     <ul>
       <button type="button" [routerLink]="['/register']" class="btn btn-dark">
-        <i class="bi bi-plus-lg"></i> New user</button>
+        <i class="bi bi-plus-lg"></i> New User</button>
     </ul>
   </nav>
-
-<div *ngIf="isLoading" class="loading-spinner">
+  
+  <div *ngIf="isLoading" class="loading-spinner">
     <p>Loading users...</p>
-</div>
-
-<div *ngIf="!isLoading && errorMessage" class="error-message">
+  </div>
+  
+  <div *ngIf="!isLoading && errorMessage" class="error-message">
     <p>{{ errorMessage }}</p>
-</div>
-
-<div *ngIf="!isLoading && !errorMessage">
+  </div>
+  
+  <div *ngIf="!isLoading && !errorMessage">
     <table class="table">
-        <thead>
-            <tr>
-                <td scope="col">userId</td>
-                <td scope="col">Full Name</td>
-                <td scope="col">NIC</td>
-                <td scope="col">Driving Licence NO</td>
-                <td scope="col">Email</td>
-                <td scope="col">Phone</td>
-                <td scope="col">Actions</td>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let user of filteredUsers() ">
-                <td>{{user.userId}}</td>
-                <td>{{user.firstName + ' ' + user.lastName}}</td>
-                <td>{{user.nic}}</td>
-                <td>{{user.drivingLicenceNo}}</td>
-                <td>{{user.email}}</td>
-                <td>{{user.phone}}</td>
-                <td>
-                    <span><button class="btn btn-primary m-2 p-2"><i class="bi bi-eye-fill"
-                                (click)="viewUser(user.userId)"></i></button></span>
-                    <span><button class="btn btn-danger m-2 p-2" (click)="deleteUser(user.userId)"><i
-                                class="bi bi-trash3-fill "></i></button></span>
-                </td>
-            </tr>
-        </tbody>
+      <thead>
+        <tr>
+          <th scope="col">User ID</th>
+          <th scope="col">Full Name</th>
+          <th scope="col">NIC</th>
+          <th scope="col">Driving Licence NO</th>
+          <th scope="col">Email</th>
+          <th scope="col">Phone</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of paginatedUsers">
+          <td>{{ user.userId }}</td>
+          <td>{{ user.firstName + ' ' + user.lastName }}</td>
+          <td>{{ user.nic }}</td>
+          <td>{{ user.drivingLicenceNo }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.phone }}</td>
+          <td>
+            <button class="btn btn-primary m-2 p-2" (click)="viewUser(user.userId)">
+              <i class="bi bi-eye-fill"></i> View
+            </button>
+            <button class="btn btn-danger m-2 p-2" (click)="deleteUser(user.userId)">
+              <i class="bi bi-trash3-fill"></i> Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
     </table>
-</div>
+  
+    <div class="pagination">
+        <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1"><img
+            src="https://img.icons8.com/ios-filled/50/000000/long-arrow-left.png" alt=""></button>
+        <span>Page {{ currentPage }} of {{ totalPages() }}</span>
+        <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages()"><img
+            src="https://img.icons8.com/ios-filled/50/000000/long-arrow-right.png" alt=""></button>
+      </div>
+  </div>
+  

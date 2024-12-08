@@ -6,7 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-list-rental',
   templateUrl: './list-rental.component.html',
-  styleUrl: './list-rental.component.css'
+  styleUrls: ['./list-rental.component.css']
 })
 export class ListRentalComponent {
 
@@ -14,6 +14,11 @@ export class ListRentalComponent {
   rentals: any[] = [];
   isLoading: boolean = true;
   errorMessage: string = '';
+
+  currentPage: number = 1;
+  itemsPerPage: number = 5;
+  totalItems: number = 0;
+  paginatedRentals: any[] = [];
 
   constructor(
     private rentalService: RentalService,
@@ -31,7 +36,8 @@ export class ListRentalComponent {
       (data) => {
         this.isLoading = false;
         this.rentals = data;
-        console.log('rentals fetched:', this.rentals);
+        this.totalItems = this.rentals.length;
+        this.filterRentals();
       },
       (error) => {
         this.isLoading = false;
@@ -42,8 +48,36 @@ export class ListRentalComponent {
     );
   }
 
+  filterRentals(): void {
+    let filteredRentals = this.rentals;
+    if (this.searchQuery) {
+      filteredRentals = this.rentals.filter(rental =>
+        rental.carId.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+        rental.userId.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+    }
+
+    this.paginateRentals(filteredRentals);
+  }
+
+  paginateRentals(filteredRentals: any[]): void {
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    const end = start + this.itemsPerPage;
+    this.paginatedRentals = filteredRentals.slice(start, end);
+  }
+
+  changePage(page: number): void {
+    if (page >= 1 && page <= this.totalPages()) {
+      this.currentPage = page;
+      this.filterRentals();
+    }
+  }
+
+  totalPages(): number {
+    return Math.ceil(this.rentals.length / this.itemsPerPage);
+  }
+
   viewRental(rentalId: number): void {
-    // console.log('Navigating to rental with ID:', rentalId);
     this.router.navigate([`/admin/rental/${rentalId}`]);
   }
 
@@ -51,7 +85,7 @@ export class ListRentalComponent {
     if (confirm('Are you sure you want to delete this rental?')) {
       this.rentalService.deleteRental(rentalId).subscribe(
         () => {
-          this.toastr.success('rental deleted successfully');
+          this.toastr.success('Rental deleted successfully');
           this.getRentals();
         },
         (error) => {
@@ -63,17 +97,5 @@ export class ListRentalComponent {
   }
 
   payRental(rentalId: number): void {
-
-  }
-
-  filteredRentals() {
-    if (!this.searchQuery) {
-      return this.rentals;
-    }
-
-    return this.rentals.filter(rental =>
-      rental.carId.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-      rental.userId.toLowerCase().includes(this.searchQuery.toLowerCase())
-    );
   }
 }

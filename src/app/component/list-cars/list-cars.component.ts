@@ -16,7 +16,10 @@ export class ListCarsComponent implements OnChanges {
   isLoading: boolean = true;
   errorMessage: string = '';
   filteredCars: CarDetails[] = [];
-
+  paginatedCars: CarDetails[] = [];
+  currentPage: number = 1;
+  itemsPerPage: number = 6;
+  
   constructor(
     private carService: CarService,
     private toastr: ToastrService,
@@ -39,7 +42,7 @@ export class ListCarsComponent implements OnChanges {
       (data) => {
         this.isLoading = false;
         this.cars = data;
-        this.filteredCars = this.cars;
+        this.filterCars();
       },
       (error) => {
         this.isLoading = false;
@@ -52,11 +55,10 @@ export class ListCarsComponent implements OnChanges {
 
   viewCarDetails(car: any): void {
     console.log(car.carId);
-    
     this.router.navigate(['/car-details', car.carId]);
   }
 
-  filterCars() {
+  filterCars(): void {
     if (!this.searchQuery) {
       this.filteredCars = this.cars;
     } else {
@@ -65,5 +67,26 @@ export class ListCarsComponent implements OnChanges {
         car.pricePerDay.toString().includes(this.searchQuery)
       );
     }
+
+    this.currentPage = 1;
+
+    this.paginateCars();
+  }
+
+  paginateCars(): void {
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    const end = start + this.itemsPerPage;
+    this.paginatedCars = this.filteredCars.slice(start, end);
+  }
+
+  changePage(page: number): void {
+    if (page >= 1 && page <= this.totalPages()) {
+      this.currentPage = page;
+      this.paginateCars();
+    }
+  }
+
+  totalPages(): number {
+    return Math.ceil(this.filteredCars.length / this.itemsPerPage);
   }
 }

@@ -6,7 +6,7 @@ import { ReservationService } from '../../services/reservation.service';
 @Component({
   selector: 'app-list-reservation',
   templateUrl: './list-reservation.component.html',
-  styleUrl: './list-reservation.component.css'
+  styleUrls: ['./list-reservation.component.css']
 })
 export class ListReservationComponent {
 
@@ -14,6 +14,10 @@ export class ListReservationComponent {
   reservations: any[] = [];
   isLoading: boolean = true;
   errorMessage: string = '';
+  currentPage: number = 1;
+  itemsPerPage: number = 5;
+  totalItems: number = 0;
+  paginatedReservations: any[] = [];
 
   constructor(
     private reservationService: ReservationService,
@@ -31,7 +35,8 @@ export class ListReservationComponent {
       (data) => {
         this.isLoading = false;
         this.reservations = data;
-        console.log('reservations fetched:', this.reservations);
+        this.totalItems = this.reservations.length;
+        this.filterReservations();
       },
       (error) => {
         this.isLoading = false;
@@ -42,15 +47,44 @@ export class ListReservationComponent {
     );
   }
 
+  filterReservations(): void {
+    let filteredReservations = this.reservations;
+    if (this.searchQuery) {
+      filteredReservations = this.reservations.filter(reservation =>
+        reservation.firstName.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+        reservation.nic.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+    }
+
+    this.paginateReservations(filteredReservations);
+  }
+
+  paginateReservations(filteredReservations: any[]): void {
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    const end = start + this.itemsPerPage;
+    this.paginatedReservations = filteredReservations.slice(start, end);
+  }
+
+  changePage(page: number): void {
+    if (page >= 1 && page <= this.totalPages()) {
+      this.currentPage = page;
+      this.filterReservations();
+    }
+  }
+
+  totalPages(): number {
+    return Math.ceil(this.reservations.length / this.itemsPerPage);
+  }
+
   AcceptReservation(reservationId: number): void {
     if (confirm('Are you sure you want to accept this reservation?')) {
       this.reservationService.updateReservationStatus(reservationId, 'Accepted').subscribe(
         () => {
-          this.toastr.info('reservation Accepted');
+          this.toastr.info('Reservation Accepted');
           this.getReservations();
         },
         (error) => {
-          this.toastr.error('Error accept reservation. Please try again.');
+          this.toastr.error('Error accepting reservation. Please try again.');
           console.error('Error while accepting reservation:', error);
         }
       );
@@ -61,25 +95,14 @@ export class ListReservationComponent {
     if (confirm('Are you sure you want to decline this reservation?')) {
       this.reservationService.updateReservationStatus(reservationId, 'Declined').subscribe(
         () => {
-          this.toastr.info('reservation declined');
+          this.toastr.info('Reservation declined');
           this.getReservations();
         },
         (error) => {
-          this.toastr.error('Error decline reservation. Please try again.');
+          this.toastr.error('Error declining reservation. Please try again.');
           console.error('Error while declining reservation:', error);
         }
       );
     }
-  }
-
-  filteRedreservations() {
-    if (!this.searchQuery) {
-      return this.reservations;
-    }
-
-    return this.reservations.filter(reservation =>
-      reservation.firstName.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-      reservation.nic.toLowerCase().includes(this.searchQuery.toLowerCase())
-    );
   }
 }

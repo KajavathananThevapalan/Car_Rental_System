@@ -3,12 +3,8 @@
         <h3>Manage payments</h3>
     </ul>
     <ul class="flex-grow-1">
-        <input class="form-control" type="search" [(ngModel)]="searchQuery" placeholder="Search" aria-label="Search">
+        <input class="form-control" type="search" [(ngModel)]="searchQuery" placeholder="Search" aria-label="Search" (input)="filterPayments()">
     </ul>
-    <!-- <ul>
-        <button type="button" [routerLink]="['/register']" class="btn btn-dark">
-            <i class="bi bi-plus-lg"></i> New payment</button>
-    </ul> -->
 </nav>
 
 <div *ngIf="isLoading" class="loading-spinner">
@@ -23,28 +19,34 @@
     <table class="table">
         <thead>
             <tr>
-                <td scope="col">payment Id</td>
-                <td scope="col">Amount</td>
-                <td scope="col">payment Date</td>
-                <td scope="col">payment Method</td>
-                <td scope="col">Status</td>
-                <td scope="col">Actions</td>
+                <th scope="col">Payment ID</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Payment Date</th>
+                <th scope="col">Payment Method</th>
+                <th scope="col">Status</th>
+                <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let payment of filterPayments() ">
+            <tr *ngFor="let payment of paginatedPayments">
                 <td>{{payment.paymentId}}</td>
                 <td>{{payment.amount}}</td>
                 <td>{{payment.paymentDate}}</td>
                 <td>{{payment.paymentMethod}}</td>
                 <td>{{payment.status}}</td>
                 <td>
-                    <span><button class="btn btn-primary m-2 p-2"><i class="bi bi-eye-fill"
-                                (click)="PayNow(payment.paymentId)"></i></button></span>
-                    <span><button class="btn btn-danger m-2 p-2" (click)="editPayment(payment.paymentId)"><i
-                                class="bi bi-trash3-fill "></i></button></span>
+                    <span><button class="btn btn-primary m-2 p-2"><i class="bi bi-eye-fill" (click)="PayNow(payment.paymentId)"></i></button></span>
+                    <span><button class="btn btn-danger m-2 p-2" (click)="editPayment(payment.paymentId)"><i class="bi bi-trash3-fill"></i></button></span>
                 </td>
             </tr>
         </tbody>
     </table>
+
+    <div class="pagination">
+        <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1"><img
+            src="https://img.icons8.com/ios-filled/50/000000/long-arrow-left.png" alt=""></button>
+        <span>Page {{ currentPage }} of {{ totalPages() }}</span>
+        <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages()"><img
+            src="https://img.icons8.com/ios-filled/50/000000/long-arrow-right.png" alt=""></button>
+      </div>
 </div>

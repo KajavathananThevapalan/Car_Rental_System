@@ -11,15 +11,18 @@ import { CarService } from "../../services/car.service";
 export class CarDetailsComponent implements OnInit {
   carId!: number;
   carDetails!: CarDetails;
-  isLoggedIn: boolean = false;
+  largeImage: string = ''; // The large image
   showBookNow: boolean = false;
   showRentNow: boolean = false;
+
+  // Hold the thumbnails and large image list
+  carImages: string[] = [];
 
   constructor(
     private route: ActivatedRoute,
     private carService: CarService,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -28,14 +31,12 @@ export class CarDetailsComponent implements OnInit {
     });
   }
 
-  // Fetch car details using the CarService
   getCarDetails(carId: number): void {
     this.carService.getCar(carId).subscribe(
       (data: CarDetails) => {
         this.carDetails = data;
-        localStorage.setItem('carId', data.carId.toString())
-        console.log(data.carId);
-
+        this.largeImage = data.frotView; // Default large image is the front view
+        this.carImages = [data.backView, data.sideView, data.interior]; // Other images as thumbnails
       },
       (error: any) => {
         console.error('Error fetching car details', error);
@@ -43,29 +44,26 @@ export class CarDetailsComponent implements OnInit {
     );
   }
 
+  changeImage(image: string): void {
+    // Swap large image with the clicked thumbnail
+    const previousLargeImage = this.largeImage;
+    this.largeImage = image;
+
+    // Add the previous large image to the thumbnails list (if it's not already there)
+    if (!this.carImages.includes(previousLargeImage)) {
+      this.carImages.push(previousLargeImage);
+    }
+  }
+
   bookNow(carId: number): void {
     this.showBookNow = true;
     this.showRentNow = false;
-
-    if (localStorage.getItem('isLoggedIn') === 'true') {
-      this.router.navigate([`/car-details/${carId}/book-now`]);
-    } else {
-      alert('Please log in to book the car.');
-      localStorage.setItem('redirectUrl', `/car-details/${carId}/book-now`);
-      this.router.navigate(['/login']);
-    }
+    this.router.navigate([`/car-details/${carId}/book-now`]);
   }
 
   rentNow(carId: number): void {
     this.showRentNow = true;
     this.showBookNow = false;
-    
-    if (localStorage.getItem('isLoggedIn') === 'true') {
-      this.router.navigate([`/car-details/${carId}/rent-now`]);
-    } else {
-      alert('Please log in to rent the car.');
-      localStorage.setItem('redirectUrl', `/car-details/${carId}/book-now`);
-      this.router.navigate(['/login']);
-    }
+    this.router.navigate([`/car-details/${carId}/rent-now`]);
   }
 }
