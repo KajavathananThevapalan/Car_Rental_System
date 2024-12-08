@@ -31,7 +31,6 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { ListRentalComponent } from './component/list-rental/list-rental.component';
 import { ListReservationComponent } from './component/list-reservation/list-reservation.component';
 import { ListPaymentsComponent } from './component/list-payments/list-payments.component';
-import { BookNowComponent } from './component/book-now/book-now.component';
 import { RentNowComponent } from './component/rent-now/rent-now.component';
 import { UserProfileComponent } from './component/user-profile/user-profile.component';
 import { SidebarComponent } from './component/sidebar/sidebar.component';
@@ -63,7 +62,6 @@ import { NavbarComponent } from './component/navbar/navbar.component';
     ListRentalComponent,
     ListReservationComponent,
     ListPaymentsComponent,
-    BookNowComponent,
     RentNowComponent,
     UserProfileComponent,
     SidebarComponent,

@@ -35,7 +35,7 @@ export class RentNowComponent implements OnInit {
       userId: ['', [Validators.required]],
       pickupDate: ['', [Validators.required]],
       dropoffDate: ['', [Validators.required]],
-      rentalStatus: ['pending'],
+      rentalStatus: ['Pending'],
       totalAmount: [0],
     });
   }
@@ -48,7 +48,6 @@ export class RentNowComponent implements OnInit {
     this.calculateAmount(this.carId);
   }
 
-  // Fetch car price and set the pricePerDay
   calculateAmount(carId: number) {
     this.carService.getCar(carId).subscribe((data) => {
       this.amount = data.pricePerDay;
@@ -56,7 +55,6 @@ export class RentNowComponent implements OnInit {
     });
   }
 
-  // Calculate total amount based on pickup and dropoff dates
   calculateTotalAmount() {
     const pickupDate = this.addRentalForm.get('pickupDate')?.value;
     const dropoffDate = this.addRentalForm.get('dropoffDate')?.value;
@@ -67,17 +65,15 @@ export class RentNowComponent implements OnInit {
 
       const timeDifference = end.getTime() - start.getTime();
 
-      // Calculate the difference in days
       const daysDifference = timeDifference / (1000 * 3600 * 24);
 
       if (daysDifference < 0) {
         this.toastr.error('Dropoff date cannot be earlier than pickup date.');
-        this.addRentalForm.get('totalAmount')?.setValue(0); // Reset totalAmount to 0
+        this.addRentalForm.get('totalAmount')?.setValue(0);
       } else {
-        // Calculate the total amount
         const totalAmount = daysDifference * this.amount;
-        this.addRentalForm.get('totalAmount')?.setValue(totalAmount); // Update the form control with calculated amount
-        this.totalAmount = totalAmount; // Update the component's totalAmount variable
+        this.addRentalForm.get('totalAmount')?.setValue(totalAmount);
+        this.totalAmount = totalAmount;
       }
     }
   }
@@ -112,12 +108,12 @@ export class RentNowComponent implements OnInit {
     this.rentalService.createRental(rental).subscribe(
       (data) => {
         console.log('Create response:', data);
-        this.toastr.success('Rental added successfully');
+        this.toastr.info('Your request successful');
         this.router.navigate(['']);
       },
       (error) => {
-        console.error('Error while creating rental:', error);
-        this.toastr.error('Error adding rental. Please try again.');
+        console.error('Error while request booking:', error);
+        this.toastr.error('Error adding booking. Please try again.');
       }
     );
   }

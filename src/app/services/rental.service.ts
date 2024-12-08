@@ -33,4 +33,10 @@ export class RentalService {
   updateRental(rental: any) {
     return this.http.put('http://localhost:5282/api/Rentals/' + rental.rentalId, rental);
   }
+
+  updateRentalStatus(rentalId: number, rentalStatus: string) {
+    const url = `http://localhost:5282/api/Rentals/${rentalId}/status`;
+    const body = { rentalStatus };
+    return this.http.put(url, body);
+  }
 }

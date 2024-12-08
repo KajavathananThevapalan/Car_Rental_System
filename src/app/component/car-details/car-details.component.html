@@ -1,19 +1,15 @@
 <div *ngIf="carDetails" class="car-details-container">
-  <!-- Car Image Section -->
   <div class="image-gallery">
-    <!-- Large Image Display -->
     <div class="large-image-container">
       <img [src]="largeImage" alt="Large Car View" class="large-image">
     </div>
 
-    <!-- Thumbnails for Other Views (with the current large image as a thumbnail) -->
     <div class="image-thumbnails">
       <img *ngFor="let image of carImages" [src]="image" alt="Car Image" class="thumbnail-image" (click)="changeImage(image)">
       <img [src]="largeImage" alt="Current Large Image" class="thumbnail-image thumbnail-large" (click)="changeImage(largeImage)">
     </div>
   </div>
 
-  <!-- Car Information Section -->
   <div class="car-info">
     <h2>{{ carDetails.color }} - {{ carDetails.status }}</h2>
     <p><strong>License Plate:</strong> {{ carDetails.licensePlate }}</p>
@@ -26,15 +22,11 @@
 
     <div class="action-buttons">
       <button (click)="bookNow(carDetails.carId)" class="btn btn-primary">Book Now</button>
-      <button (click)="rentNow(carDetails.carId)" class="btn btn-success">Rent Now</button>
     </div>
   </div>
 
-  <!-- Other Components -->
-  <app-book-now *ngIf="showBookNow" [carDetails]="carDetails"></app-book-now>
   <app-rent-now *ngIf="showRentNow" [carDetails]="carDetails"></app-rent-now>
 
-  <!-- Car Reviews Section -->
   <div *ngIf="carDetails.reviews?.length" class="car-reviews">
     <h3>Reviews</h3>
     <ul>

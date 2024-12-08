@@ -96,6 +96,48 @@ export class ListRentalComponent {
     }
   }
 
+  acceptRental(rentalId: number): void {
+    if (confirm('Are you sure you want to accept this rental?')) {
+      this.rentalService.updateRentalStatus(rentalId, 'Booked').subscribe(
+        () => {
+          this.toastr.info('Booking successfully');
+          this.getRentals();
+        },
+        (error) => {
+          this.toastr.error('Error accepting rental. Please try again.');
+          console.error('Error while accepting rental:', error);
+        }
+      );
+    }
+  }
+
+  declineRental(rentalId: number): void {
+    if (confirm('Are you sure you want to decline this rental?')) {
+      this.rentalService.updateRentalStatus(rentalId, 'Declined').subscribe(
+        () => {
+          this.toastr.info('Booking declined');
+          this.getRentals();
+        },
+        (error) => {
+          this.toastr.error('Error declining rental. Please try again.');
+          console.error('Error while declining rental:', error);
+        }
+      );
+    }
+  }
+
   payRental(rentalId: number): void {
+    if (confirm('Are you sure you want to Pay this rental?')) {
+      this.rentalService.updateRentalStatus(rentalId, 'Rented').subscribe(
+        () => {
+          this.toastr.info('Rented successfully');
+          this.getRentals();
+        },
+        (error) => {
+          this.toastr.error('Error Pay rental. Please try again.');
+          console.error('Error while Paying rental:', error);
+        }
+      );
+    }
   }
 }

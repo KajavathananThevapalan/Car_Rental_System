@@ -15,10 +15,8 @@ import { ManageCarsComponent } from './component/manage-cars/manage-cars.compone
 import { UserDetailsComponent } from './component/user-details/user-details.component';
 import { EditUserComponent } from './component/edit-user/edit-user.component';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
-import { ListCarsComponent } from './component/list-cars/list-cars.component';
 import { CarDetailsComponent } from './component/car-details/car-details.component';
 import { AuthGuard } from './auth.guard';
-import { BookNowComponent } from './component/book-now/book-now.component';
 import { RentNowComponent } from './component/rent-now/rent-now.component';
 import { ListRentalComponent } from './component/list-rental/list-rental.component';
 import { ListReservationComponent } from './component/list-reservation/list-reservation.component';
@@ -60,7 +58,6 @@ const routes: Routes = [
     path: 'car-details/:carId',
     component: CarDetailsComponent,
     children: [
-      { path: 'book-now', component: BookNowComponent },
       { path: 'rent-now', component: RentNowComponent },
     ]
   },
