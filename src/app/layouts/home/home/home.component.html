@@ -1,42 +1,111 @@
 <header>
-    <nav class="navbar navbar-expand-lg navbar-expand-sm fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="#!">WayToGo</a>
-            <div class="collapse navbar-collapse " id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#!">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#!">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#!">Services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#!">Contact us</a>
-                    </li>
-                </ul>
-
-                <ul class="navbar-nav d-flex flex-row p-3 flex-grow-1">
-                    <input class="form-control mr-sm-2" type="search" [(ngModel)]="searchQuery" placeholder="Search" aria-label="Search">
-                </ul>
-
-                <ul class="navbar-nav d-flex flex-row">
-                    <div *ngIf="!isLoggedIn">
-                        <button type="button" class="btn btn-info m-2" [routerLink]="['/login']">Login</button>
-                        <button type="button" class="btn btn-warning" [routerLink]="['/register']">Register</button>
-                    </div>
-
-                    <div *ngIf="isLoggedIn">
-                        <button type="button" class="btn" [routerLink]="['/profile']">{{ 'Hi! ' + name }}</button>
-                        <button type="button" class="btn btn-secondary m-2" (click)="toggleLoginLogout()">Logout</button>
-                    </div>
-                </ul>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="#!">WayToGo</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#home">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#services">Services</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contact">Contact Us</a>
+            </li>
+          </ul>
+          <form class="d-flex">
+            <input
+              class="form-control me-2"
+              type="search"
+              [(ngModel)]="searchQuery"
+              placeholder="Search"
+              aria-label="Search"
+            />
+          </form>
+          <div>
+            <div *ngIf="!isLoggedIn">
+              <button type="button" class="btn btn-info m-2" [routerLink]="['/login']">Login</button>
+              <button type="button" class="btn btn-warning" [routerLink]="['/register']">Register</button>
             </div>
+            <div *ngIf="isLoggedIn">
+              <button type="button" class="btn btn-success" [routerLink]="['/profile']">Hi, {{ name }}</button>
+              <button type="button" class="btn btn-secondary m-2" (click)="toggleLoginLogout()">Logout</button>
+            </div>
+          </div>
         </div>
+      </div>
     </nav>
-</header>
+  </header>
+  
+  <section id="home">
+    <div class="hero-section">
+      <div class="hero-content">
+        <p class="trusted">🚗 100% Trusted car rental platform in Sri Lanka</p>
+        <h1>
+          Find Your Best <br />
+          <span class="highlight">Dream Car for Rental</span>
+        </h1>
+        <p class="description">
+          Experience the ultimate in comfort, performance, and sophistication with
+          our luxury car rentals. From sleek sedans and stylish coupes to spacious
+          SUVs and elegant convertibles, we offer a range of premium vehicles to
+          suit your preferences and lifestyle.
+        </p>
+        <button class="view-cars-btn">View all Cars →</button>
+      </div>
+      <div class="hero-image">
+        <img
+          src="https://th.bing.com/th/id/R.095bb4a6cc306a537d3d9a60e34fd220?rik=nYGmWmypJSPLUg&riu=http%3a%2f%2f3.bp.blogspot.com%2f-hw58JcwlBPI%2fUQPIqBpC4VI%2fAAAAAAAAAA0%2fz6Fk2qtyRxI%2fw1200-h630-p-k-no-nu%2fam2.jpg&ehk=JHJ%2bnXQnaerKIvOXe0MptQ1TN22TPZtpcEx9JMh25%2bE%3d&risl=&pid=ImgRaw&r=0"
+          alt="Luxury Car"
+        />
+      </div>
+    </div>
+
+    <div class="container">
+        <div class="facts-header">
+          <h2>Facts By The Numbers</h2>
+        </div>
+        <div class="facts-cards">
+          <div class="facts-card">
+            <div class="icon"><i class="fa-solid fa-user"></i></div>
+            <h3>16K+</h3>
+            <p>Happy Customers</p>
+          </div>
+          <div class="facts-card">
+            <div class="icon"><i class="fa-solid fa-car"></i></div>
+            <h3>2,547+</h3>
+            <p>Total Cars</p>
+          </div>
+          <div class="facts-card">
+            <div class="icon"><i class="fa-solid fa-book"></i></div>
+            <h3>625K+</h3>
+            <p>Total Rents</p>
+          </div>
+          <div class="facts-card">
+            <div class="icon"><i class="fa-solid fa-star"></i></div>
+            <h3>200K+</h3>
+            <p>Reviews</p>
+          </div>
+        </div>
+      </div>
+  </section>
+  
+  
 
 <main>
     <div class="container my-5 py-5">

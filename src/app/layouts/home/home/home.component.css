@@ -1,9 +1,179 @@
-main {
-    /* background-image: url('https://th.bing.com/th/id/R.5506c15b19318a936c69161a86883a51?rik=Ns6JtFrm%2bUEdSw&riu=http%3a%2f%2fpictures.dealer.com%2fh%2fhondaofclearlake3%2f1503%2f3fb09c83fb9bdd667316c77814064aa5x.jpg&ehk=SHRWIZzHT%2f6MQcXEyrsfF%2f0tyNyLSlzibB8BdbYDOrY%3d&risl=&pid=ImgRaw&r=0');
-    background-size: cover;
-    background-position: center;
-    height: 100vh;
-    width: 100%; */
-    padding-top: 30px;
-    background-color: azure;
-}
+/* Navbar Styling */
+.navbar {
+    background-color: #ffffff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 15px 20px;
+  }
+  
+  .navbar .navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .navbar .nav-link {
+    color: #333333;
+    margin-right: 15px;
+    font-weight: 500;
+  }
+  
+  .navbar .nav-link:hover {
+    color: #f7941d;
+  }
+  
+  .navbar-buttons .btn {
+    margin-left: 10px;
+    font-weight: 600;
+  }
+  
+  /* Hero Section */
+  #home {
+    margin-top: 50px; /* Adjust for fixed navbar height */
+  }
+  
+  .hero-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 80px 20px;
+    background: linear-gradient(to right, #ffffff, #ffedcc);
+  }
+  
+  .hero-content {
+    flex: 1;
+    max-width: 600px;
+    margin-right: 20px;
+  }
+  
+  .trusted {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #f7941d;
+    margin-bottom: 10px;
+  }
+  
+  .hero-content h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333333;
+  }
+  
+  .hero-content .highlight {
+    color: #f7941d;
+  }
+  
+  .description {
+    margin: 20px 0;
+    font-size: 1.1rem;
+    color: #666666;
+  }
+  
+  .view-cars-btn {
+    background-color: #333333;
+    color: #ffffff;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+  }
+  
+  .hero-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .hero-image img {
+    max-width: 90%;
+    height: auto;
+    border-radius: 10px;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .hero-section {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .hero-content {
+      margin-right: 0;
+      margin-bottom: 20px;
+    }
+  
+    .hero-image {
+      justify-content: center;
+    }
+  
+    .navbar .navbar-buttons {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  /* Facts Section */
+.facts-section {
+    background-color: #1d1d1d;
+    color: #fff;
+    padding: 50px 20px;
+    text-align: center;
+  }
+  
+  .facts-header h2 {
+    font-size: 2rem;
+    margin-top: 30px;
+    margin-bottom:50px;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .facts-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .facts-card {
+    background-color: #2b2b2b;
+    border-radius: 20px;
+    padding: 30px 20px;
+    width: 220px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .facts-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  }
+  
+  .facts-card .icon {
+    font-size: 2.5rem;
+    color: #f7941d;
+    margin-bottom: 10px;
+  }
+  
+  .facts-card h3 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .facts-card p {
+    font-size: 1.2rem;
+    color: #ccc;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .facts-cards {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .facts-card {
+      width: 90%;
+    }
+  }
+  
+  
