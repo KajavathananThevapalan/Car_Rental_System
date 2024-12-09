@@ -26,7 +26,7 @@ export class ListPaymentsComponent {
   ) { }
 
   ngOnInit(): void {
-    this.getPayments();
+    this.getPayments();    
   }
 
   getPayments(): void {
@@ -75,20 +75,31 @@ export class ListPaymentsComponent {
     );
   }
 
-  editPayment(paymentId: number): void {
-    this.router.navigate(['/edit-payment', paymentId]);
+  deletePayment(paymentId: number): void {
+    if (confirm('Are you sure you want to delete this Payment?')) {
+      this.paymentService.deletePayment(paymentId).subscribe(
+        () => {
+          this.toastr.success('Payment deleted successfully');
+          this.getPayments();
+        },
+        (error) => {
+          this.toastr.error('Error deleting Payment. Please try again.');
+          console.error('Error while deleting Payment:', error);
+        }
+      );
+    }
   }
 
   PayNow(paymentId: number): void {
-    this.paymentService.createPayment(paymentId).subscribe(
-      (response) => {
-        this.toastr.success('Payment processed successfully!');
-        this.getPayments();
-      },
-      (error) => {
-        this.toastr.error('Payment failed. Please try again.');
-        console.error('Error processing payment:', error);
-      }
-    );
+    // this.paymentService.createPayment(paymentId).subscribe(
+    //   (response) => {
+    //     this.toastr.success('Payment processed successfully!');
+    //     this.getPayments();
+    //   },
+    //   (error) => {
+    //     this.toastr.error('Payment failed. Please try again.');
+    //     console.error('Error processing payment:', error);
+    //   }
+    // );
   }
 }

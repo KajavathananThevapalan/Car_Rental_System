@@ -2,7 +2,7 @@ export interface Rental {
     rentalId: number;
     rentalStartDate: Date;
     rentalEndDate: Date;
-    amount: number;
+    totalAmount: number;
     status: string;
     carId: number;
     userId: number;

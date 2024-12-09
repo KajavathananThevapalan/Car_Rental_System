@@ -36,6 +36,8 @@ export class ListRentalComponent {
       (data) => {
         this.isLoading = false;
         this.rentals = data;
+        console.log(data);
+        
         this.totalItems = this.rentals.length;
         this.filterRentals();
       },
@@ -128,14 +130,30 @@ export class ListRentalComponent {
 
   payRental(rentalId: number): void {
     if (confirm('Are you sure you want to Pay this rental?')) {
+      this.router.navigate(['/admin/payment', rentalId]);
       this.rentalService.updateRentalStatus(rentalId, 'Rented').subscribe(
         () => {
-          this.toastr.info('Rented successfully');
+          // this.toastr.info('Rented successfully');
           this.getRentals();
         },
         (error) => {
           this.toastr.error('Error Pay rental. Please try again.');
           console.error('Error while Paying rental:', error);
+        }
+      );
+    }
+  }
+
+  Return(rentalId: number){
+    if (confirm('Are you sure you want to retun this rental?')) {
+      this.rentalService.updateRentalStatus(rentalId, 'Returned').subscribe(
+        () => {
+          this.toastr.success('Returned Successfully');
+          this.getRentals();
+        },
+        (error) => {
+          this.toastr.error('Error Return Car. Please try again.');
+          console.error('Error while Returning rental:', error);
         }
       );
     }

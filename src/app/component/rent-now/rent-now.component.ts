@@ -103,20 +103,29 @@ export class RentNowComponent implements OnInit {
 
   onSubmit(): void {
     const rental = this.addRentalForm.value;
-    console.log('Form data being sent:', rental);
-
+  
+    // Check the values of pickupDate and dropoffDate
+    console.log('Rental data before submission:', rental);
+  
+    // Optionally, format the dates if required (e.g., converting to ISO 8601 format)
+    rental.pickupDate = new Date(rental.pickupDate).toISOString();
+    rental.dropoffDate = new Date(rental.dropoffDate).toISOString();
+  
+    console.log('Rental data after formatting dates:', rental);
+  
     this.rentalService.createRental(rental).subscribe(
       (data) => {
         console.log('Create response:', data);
-        this.toastr.info('Your request successful');
+        this.toastr.info('Your request was successful');
         this.router.navigate(['']);
       },
       (error) => {
-        console.error('Error while request booking:', error);
+        console.error('Error while booking rental:', error);
         this.toastr.error('Error adding booking. Please try again.');
       }
     );
   }
+  
 
   onClose(): void {
     this.router.navigate(['']);

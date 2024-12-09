@@ -48,7 +48,7 @@
                             <i class="bi bi-x-circle-fill"></i>
                         </button>
                     </div>
-                    
+
                     <div *ngIf="rental.rentalStatus === 'Booked'">
                         <button class="btn btn-primary m-2 p-2" (click)="payRental(rental.rentalId)">
                             <i class="bi bi-credit-card"></i>
@@ -57,7 +57,14 @@
                             <i class="bi bi-trash3-fill"></i>
                         </button>
                     </div>
-                    
+                    <div *ngIf="rental.rentalStatus === 'Rented'">
+                        <button class="btn btn-primary m-2 p-2" (click)="Return(rental.rentalId)">
+                            <i class="bi bi-arrow-left"></i>
+                        </button>
+                        <button class="btn btn-danger m-2 p-2" (click)="deleteRental(rental.rentalId)">
+                            <i class="bi bi-trash3-fill"></i>
+                        </button>
+                    </div>
                 </td>
             </tr>
         </tbody>
@@ -65,9 +72,9 @@
 
     <div class="pagination">
         <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1"><img
-            src="https://img.icons8.com/ios-filled/50/000000/long-arrow-left.png" alt=""></button>
+                src="https://img.icons8.com/ios-filled/50/000000/long-arrow-left.png" alt=""></button>
         <span>Page {{ currentPage }} of {{ totalPages() }}</span>
         <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages()"><img
-            src="https://img.icons8.com/ios-filled/50/000000/long-arrow-right.png" alt=""></button>
+                src="https://img.icons8.com/ios-filled/50/000000/long-arrow-right.png" alt=""></button>
     </div>
 </div>

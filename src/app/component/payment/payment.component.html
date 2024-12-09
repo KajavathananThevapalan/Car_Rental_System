@@ -1,0 +1,23 @@
+<div class="payment-container">
+    <h3>Payment for Rental</h3>
+  
+    <form (ngSubmit)="submitPayment()">
+      <div class="form-group">
+        <label for="amount">Amount</label>
+        <input type="number" id="amount" class="form-control" [(ngModel)]="payment.amount" name="amount" required />
+      </div>
+      
+      <div class="form-group">
+        <label for="paymentMethod">Payment Method</label>
+        <select id="paymentMethod" class="form-control" [(ngModel)]="payment.paymentMethod" name="method" required>
+          <option value="Cash">Cash</option>
+          <option value="Credit Card">Credit Card</option>
+          <option value="PayPal">PayPal</option>
+          <option value="Bank Transfer">Bank Transfer</option>
+        </select>
+      </div>
+  
+      <button type="submit" class="btn btn-primary mt-3">Submit Payment</button>
+    </form>
+  </div>
+  

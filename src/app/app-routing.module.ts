@@ -23,6 +23,7 @@ import { ListReservationComponent } from './component/list-reservation/list-rese
 import { ListPaymentsComponent } from './component/list-payments/list-payments.component';
 import { UserProfileComponent } from './component/user-profile/user-profile.component';
 import { SidebarComponent } from './component/sidebar/sidebar.component';
+import { PaymentComponent } from './component/payment/payment.component';
 
 const routes: Routes = [
   {
@@ -30,6 +31,7 @@ const routes: Routes = [
     component: AdminComponent,
     canActivate: [AuthGuard],
     children: [
+      { path: 'payment/:rentalId', component: PaymentComponent },
       { path: 'sidebar', component: SidebarComponent },
       { path: 'dashboard', component: DashboardComponent },
       { path: 'manage-brands', component: ManageBrandsComponent },

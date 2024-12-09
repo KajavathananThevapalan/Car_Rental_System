@@ -28,15 +28,15 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let payment of paginatedPayments">
+            <tr *ngFor="let payment of payments">
                 <td>{{payment.paymentId}}</td>
                 <td>{{payment.amount}}</td>
-                <td>{{payment.paymentDate}}</td>
+                <td>{{payment.paymentDate | date}}</td>
                 <td>{{payment.paymentMethod}}</td>
-                <td>{{payment.status}}</td>
+                <td>{{payment.paymentStatus}}</td>
                 <td>
-                    <span><button class="btn btn-primary m-2 p-2"><i class="bi bi-eye-fill" (click)="PayNow(payment.paymentId)"></i></button></span>
-                    <span><button class="btn btn-danger m-2 p-2" (click)="editPayment(payment.paymentId)"><i class="bi bi-trash3-fill"></i></button></span>
+                    <!-- <span><button class="btn btn-primary m-2 p-2"><i class="bi bi-eye-fill" (click)="PayNow(payment.paymentId)"></i></button></span> -->
+                    <span><button class="btn btn-danger m-2 p-2" (click)="deletePayment(payment.paymentId)"><i class="bi bi-trash3-fill"></i></button></span>
                 </td>
             </tr>
         </tbody>
