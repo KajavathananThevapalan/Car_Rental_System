@@ -3,6 +3,7 @@ import { UserService } from '../../services/user.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { RentalService } from '../../services/rental.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-user-profile',
@@ -20,7 +21,8 @@ export class UserProfileComponent implements OnInit {
     private userService: UserService,
     private toastr: ToastrService,
     private router: Router,
-    private rentalService : RentalService
+    private rentalService : RentalService,
+    private http: HttpClient
   ) { }
 
   ngOnInit(): void {

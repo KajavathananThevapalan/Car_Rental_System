@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ReservationService } from '../../services/reservation.service';
+import { NotificationService } from '../../services/notification.service';
+import { User } from '../../models/User';
 
 @Component({
   selector: 'app-list-reservation',
@@ -18,9 +20,11 @@ export class ListReservationComponent {
   itemsPerPage: number = 5;
   totalItems: number = 0;
   paginatedReservations: any[] = [];
+  user!: User[];
 
   constructor(
     private reservationService: ReservationService,
+    private notificationService: NotificationService,
     private toastr: ToastrService,
     private router: Router
   ) { }
@@ -105,4 +109,49 @@ export class ListReservationComponent {
       );
     }
   }
+
+// AcceptReservation(reservationId: number, user: any): void {
+//   if (confirm('Are you sure you want to accept this reservation?')) {
+//     this.reservationService.updateReservationStatus(reservationId, 'Accepted').subscribe(
+//       () => {
+//         this.toastr.info('Reservation Accepted');
+//         this.notificationService.AddNotification(
+//           user.id,
+//           'Your request has been accepted. Now you can take your order.',
+//           'accept',
+//           user.email
+//         );
+//         this.getReservations();
+//       },
+//       (error) => {
+//         this.toastr.error('Error accepting reservation. Please try again.');
+//         console.error('Error while accepting reservation:', error);
+//       }
+//     );
+//   }
+// }
+
+// DeclineReservation(reservationId: number, user: any): void {
+//   if (confirm('Are you sure you want to decline this reservation?')) {
+//     this.reservationService.updateReservationStatus(reservationId, 'Declined').subscribe(
+//       () => {
+//         this.toastr.info('Reservation declined');
+//         this.notificationService.AddNotification(
+//           user.id,
+//           'Your request has been rejected. Try next time.',
+//           'reject',
+//           user.email
+//         );
+//         this.getReservations();
+//       },
+//       (error) => {
+//         this.toastr.error('Error declining reservation. Please try again.');
+//         console.error('Error while declining reservation:', error);
+//       }
+//     );
+//   }
+// }
+
 }
+
+
