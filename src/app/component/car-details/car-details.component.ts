@@ -1,7 +1,7 @@
-import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
-import { CarDetails } from "../../models/CarDetails";
-import { CarService } from "../../services/car.service";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { CarDetails } from '../../models/CarDetails';
+import { CarService } from '../../services/car.service';
 
 @Component({
   selector: 'app-car-details',
@@ -12,13 +12,13 @@ export class CarDetailsComponent implements OnInit {
   carId!: number;
   carDetails!: CarDetails;
   largeImage: string = '';
-  showRentNow: boolean = false;
   carImages: string[] = [];
-
+  isSidePanelOpen = false;
+  newReview = { user: '', comment: '' };
+  
   constructor(
     private route: ActivatedRoute,
-    private carService: CarService,
-    private router: Router
+    private carService: CarService
   ) {}
 
   ngOnInit(): void {
@@ -29,17 +29,17 @@ export class CarDetailsComponent implements OnInit {
   }
 
   getCarDetails(carId: number): void {
-    this.carService.getCar(carId).subscribe(
-      (data: CarDetails) => {
-        this.carDetails = data;
-        this.largeImage = data.frotView;
-        this.carImages = [data.backView, data.sideView, data.interior];
-      },
-      (error: any) => {
-        console.error('Error fetching car details', error);
+        this.carService.getCar(carId).subscribe(
+          (data: CarDetails) => {
+            this.carDetails = data;
+            this.largeImage = data.frotView;
+            this.carImages = [data.backView, data.sideView, data.interior];
+          },
+          (error: any) => {
+            console.error('Error fetching car details', error);
+          }
+        );
       }
-    );
-  }
 
   changeImage(image: string): void {
     const previousLargeImage = this.largeImage;
@@ -50,8 +50,27 @@ export class CarDetailsComponent implements OnInit {
     }
   }
 
-  bookNow(carId: number): void {
-    this.showRentNow = true;
-    this.router.navigate([`/car-details/${carId}/rent-now`]);
+  openBookCarPanel(): void {
+    this.isSidePanelOpen = true; // Open the side panel
+  }
+
+  closeSidePanel(): void {
+    this.isSidePanelOpen = false; // Close the side panel
+  }
+
+  submitReview(): void {
+    if (this.newReview.user && this.newReview.comment) {
+      const newReview = { 
+        user: this.newReview.user,
+        comment: this.newReview.comment
+      };
+
+      // Add the new review to the car's reviews
+      this.carDetails.reviews.push(newReview);
+
+      // Reset the form fields
+      this.newReview.user = '';
+      this.newReview.comment = '';
+    }
   }
 }

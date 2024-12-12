@@ -1,20 +1,208 @@
-/* Basic styling for Rent Form */
-.container {
-    max-width: 600px;
+/* General Styles */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f7fc;
+  margin: 0;
+  padding: 0;
+}
+
+h2, h3 {
+  color: #333;
+  font-weight: 600;
+}
+
+.car-details-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+/* Car Image Gallery */
+.image-gallery {
+  flex: 1;
+  max-width: 45%;
+}
+
+.large-image-container {
+  margin-bottom: 20px;
+}
+
+.large-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.image-thumbnails {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.thumbnail-image {
+  width: 60px;
+  height: 60px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.thumbnail-image:hover {
+  transform: scale(1.1);
+}
+
+.thumbnail-large {
+  border: 2px solid #007bff;
+}
+
+/* Car Info Section */
+.car-info {
+  flex: 1;
+  max-width: 45%;
+}
+
+.car-info p {
+  margin: 10px 0;
+  font-size: 1.1em;
+}
+
+.action-buttons {
+  margin-top: 20px;
+}
+
+.btn {
+  padding: 12px 30px;
+  font-size: 1.2em;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.car-reviews {
+  margin-top: 40px;
+}
+
+.no-reviews {
+  margin-top: 20px;
+  font-size: 1.2em;
+  color: #777;
+}
+
+/* Book Car Side Panel */
+.book-car-side-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 300px;
+  height: 100%;
+  background-color: #fff;
+  box-shadow: -4px 0 6px rgba(0, 0, 0, 0.15);
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+  padding: 20px;
+  z-index: 1000;
+}
+
+.book-car-side-panel.open {
+  transform: translateX(0);
+}
+
+.side-panel-content {
+  max-width: 280px;
+  margin-top: 20px;
+}
+
+.panel-header {
+  font-size: 1.5em;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  font-weight: 600;
+  color: #555;
+}
+
+.form-control {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 1em;
+  width: 100%;
+}
+
+.invalid-feedback {
+  font-size: 0.9em;
+  color: red;
+}
+
+.mt-2 {
+  margin-top: 10px;
+}
+
+/* Button Styles */
+.btn-secondary {
+  background-color: #6c757d;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* View Button Styling */
+.view-button {
+  width: 100%;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+  transition: background-color 0.3s;
+}
+
+/* Button hover effect */
+.view-button:hover {
+  background-color: #f7941d;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .car-details-container {
+    flex-direction: column;
   }
-  
-  h2 {
-    text-align: center;
+
+  .image-gallery {
+    max-width: 100%;
     margin-bottom: 20px;
   }
-  
-  form {
-    background-color: #f8f9fa;
-    padding: 20px;
-    border-radius: 5px;
+
+  .car-info {
+    max-width: 100%;
   }
-  
-  button {
-    width: 100%;
-  }
-  
+}

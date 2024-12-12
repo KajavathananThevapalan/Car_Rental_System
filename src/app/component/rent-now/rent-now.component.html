@@ -1,43 +1,36 @@
-<div class="container mt-5">
-  <h2 class="text-center">Book your Car</h2>
-  <form [formGroup]="addRentalForm" (ngSubmit)="onSubmit()" class="needs-validation" novalidate>
-
-    <!-- Pickup Date Field -->
-    <div class="row">
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="pickupDate">Pickup Date</label>
-          <input type="date" id="pickupDate" class="form-control" formControlName="pickupDate" required (change)="calculateTotalAmount()">
-          <div *ngIf="addRentalForm.get('pickupDate')?.touched && addRentalForm.get('pickupDate')?.invalid"
-            class="invalid-feedback">
-            Pickup date is required.
-          </div>
+<!-- Book Car Side Dropdown -->
+<div class="book-car-side-panel" [ngClass]="{'open': isBookCarOpen}">
+  <div class="side-panel-content">
+    <h3 class="panel-header">Book a Car</h3>
+    
+    <form [formGroup]="addRentalForm" (ngSubmit)="onSubmit()" class="needs-validation" novalidate>
+      <div class="form-group">
+        <label for="pickupDate" class="form-label">Pickup Date</label>
+        <input type="date" id="pickupDate" class="form-control" formControlName="pickupDate" required (change)="calculateTotalAmount()">
+        <div *ngIf="addRentalForm.get('pickupDate')?.touched && addRentalForm.get('pickupDate')?.invalid" class="invalid-feedback">
+          Pickup date is required.
         </div>
       </div>
 
-      <!-- Drop-off Date Field -->
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="dropoffDate">Drop-off Date</label>
-          <input type="date" id="dropoffDate" class="form-control" formControlName="dropoffDate" required (change)="calculateTotalAmount()">
-          <div *ngIf="addRentalForm.get('dropoffDate')?.touched && addRentalForm.get('dropoffDate')?.invalid"
-            class="invalid-feedback">
-            Drop-off date is required.
-          </div>
+      <div class="form-group">
+        <label for="dropoffDate" class="form-label">Drop-off Date</label>
+        <input type="date" id="dropoffDate" class="form-control" formControlName="dropoffDate" required (change)="calculateTotalAmount()">
+        <div *ngIf="addRentalForm.get('dropoffDate')?.touched && addRentalForm.get('dropoffDate')?.invalid" class="invalid-feedback">
+          Drop-off date is required.
         </div>
       </div>
-    </div>
 
-    <!-- Total Amount Field -->
-    <div class="form-group">
-      <label for="totalAmount">Total Amount</label>
-      <input type="number" id="totalAmount" class="form-control" formControlName="totalAmount" readonly>
-    </div>
+      <div class="form-group">
+        <label for="totalAmount" class="form-label">Total Amount</label>
+        <input type="number" id="totalAmount" class="form-control" formControlName="totalAmount" readonly>
+      </div>
 
-    <!-- Submit Button -->
-    <div class="form-group text-center">
-      <button type="submit" class="btn btn-primary" [disabled]="addRentalForm.invalid">Submit</button>
-      <button type="button" class="btn btn-secondary" (click)="onClose()">Close</button>
-    </div>
-  </form>
+      <div class="form-group text-center">
+        <button type="submit" class="btn btn-primary view-button" [disabled]="addRentalForm.invalid">Submit</button>
+      </div>
+    </form>
+
+    <!-- Close Button -->
+  </div>
+  <button class="btn btn-secondary view-button mt-2" (click)="closeBookCar()">Cancel</button>
 </div>

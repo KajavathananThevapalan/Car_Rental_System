@@ -157,6 +157,8 @@
     font-size: 2rem;
     font-weight: bold;
     margin-bottom: 10px;
+    color: #f5d312;
+    text-align: center;
   }
   
   .facts-card p {

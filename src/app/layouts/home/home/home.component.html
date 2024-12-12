@@ -22,16 +22,16 @@
           </li>
         </ul>
         <form class="d-flex">
-          <input class="form-control me-2" type="search" [(ngModel)]="searchQuery" placeholder="Search"
+          <input class="form-control me-2" type="search" [(ngModel)]="searchQuery" name="searchQuery" placeholder="Search"
             aria-label="Search" />
-        </form>
+        </form>        
         <div>
           <div *ngIf="!isLoggedIn">
             <button type="button" class="btn view-cars-btn m-2" [routerLink]="['/login']">Login</button>
             <button type="button" class="btn highlight" [routerLink]="['/register']">Register</button>
           </div>
           <div *ngIf="isLoggedIn">
-            <button type="button" class="btn btn-success" [routerLink]="['/profile']">Hi, {{ name }}</button>
+            <button type="button" class="btn btn-success" [routerLink]="['/profile']">Hi, {{ userName }}</button>
             <button type="button" class="btn btn-secondary m-2" (click)="toggleLoginLogout()">Logout</button>
           </div>
         </div>
@@ -124,22 +124,22 @@
     <div class="facts-cards">
       <div class="facts-card">
         <div class="icon"><i class="fa-solid fa-user"></i></div>
-        <h3>16K+</h3>
+        <h3>{{ totalCustomers }}</h3>
         <p>Happy Customers</p>
       </div>
       <div class="facts-card">
         <div class="icon"><i class="fa-solid fa-car"></i></div>
-        <h3>2,547+</h3>
+        <h3>{{ totalCars }}</h3>
         <p>Total Cars</p>
       </div>
       <div class="facts-card">
         <div class="icon"><i class="fa-solid fa-book"></i></div>
-        <h3>625K+</h3>
+        <h3>{{ totalRents }}</h3>
         <p>Total Rents</p>
       </div>
       <div class="facts-card">
         <div class="icon"><i class="fa-solid fa-star"></i></div>
-        <h3>200K+</h3>
+        <h3>{{ totalReviews }}</h3>
         <p>Reviews</p>
       </div>
     </div>

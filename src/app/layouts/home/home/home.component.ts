@@ -2,8 +2,10 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { CarDetails } from "../../../models/CarDetails";
 import { UserService } from "../../../services/user.service";
-import { User } from "../../../models/User";
 import { ToastrService } from "ngx-toastr";
+import { CarService } from "../../../services/car.service";
+import { RentalService } from "../../../services/rental.service";
+import { User } from "../../../models/User";
 
 @Component({
   selector: 'app-home',
@@ -14,30 +16,36 @@ export class HomeComponent implements OnInit {
   isLoggedIn: boolean = false;
   searchQuery: string = '';
   cars: CarDetails[] = [];
-  profile!: any;
-  email!: any;
-  name!: any;
+  users: User[] = [];
+  userName!: string;
+  totalCars!: any;
+  totalReviews!: any;
+  totalRents!: any;
   totalCustomers!: number;
+  name!: string
 
-  constructor(private router: Router, private route: ActivatedRoute, private userService : UserService, private toastr: ToastrService) { }
+  constructor(private router: Router,
+    private route: ActivatedRoute,
+    private userService: UserService,
+    private carService: CarService,
+    private rentalService: RentalService,
+    private toastr: ToastrService) { }
 
   ngOnInit() {
+    this.getCountData();
     this.isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-    if (this.isLoggedIn){
-      this. getUserDetails();
+    if (this.isLoggedIn) {
+      this.getUserDetails();
     }
-    console.log(this.cars.length);
-    
+    console.log(this.users);
+
   }
 
   getUserDetails(): void {
     const userId = localStorage.getItem('UserId')
     this.userService.getUserById(Number(userId)).subscribe(
       (data) => {
-        console.log(data);        
-        this.profile = data.profileImage;
-        this.email = data.email
-        this.name = data.firstName
+        this.userName = data.firstName;
       },
       (error) => {
         this.toastr.error('Failed to load user');
@@ -59,7 +67,7 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  goToProfile(){
+  goToProfile() {
     this.router.navigate(['/profile'])
   }
 
@@ -76,5 +84,24 @@ export class HomeComponent implements OnInit {
       car.registrationNumber.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
       car.licensePlate.toLowerCase().includes(this.searchQuery.toLowerCase())
     );
+  }
+
+  getCountData(): void {
+    this.userService.getUsers().subscribe((data) => {
+      this.users = data;
+      this.totalCustomers = data.length;
+    });
+
+    // this.modelService.getModels().subscribe((count) => {
+    //   this.totalReviews = count.length;
+    // });
+
+    this.carService.getCars().subscribe((count) => {
+      this.totalCars = count.length;
+    });
+
+    this.rentalService.getrentals().subscribe((count) => {
+      this.totalRents = count.length;
+    });
   }
 }

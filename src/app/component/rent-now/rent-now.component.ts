@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { CarDetails } from '../../models/CarDetails';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -13,8 +13,9 @@ import { RentalService } from '../../services/rental.service';
   styleUrls: ['./rent-now.component.css'],
 })
 export class RentNowComponent implements OnInit {
-  @Input() carDetails: CarDetails | undefined;
-
+  @Input() carDetails!: CarDetails;
+  @Output() closePanel = new EventEmitter<void>();
+  
   rentalId: number | undefined;
   userId!: number;
   carId!: number;
@@ -22,6 +23,7 @@ export class RentNowComponent implements OnInit {
   addRentalForm: FormGroup;
   amount!: number;
   totalAmount!: number;
+  isBookCarOpen = true;
 
   constructor(
     private fb: FormBuilder,
@@ -41,9 +43,8 @@ export class RentNowComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.carId = Number(localStorage.getItem('carId'));
-    console.log('Fetched carId from localStorage:', this.carId);
-
+    this.carId = this.carDetails?.carId;
+    console.log('Car Details:', this.carDetails);
     this.loadUserData();
     this.calculateAmount(this.carId);
   }
@@ -64,7 +65,6 @@ export class RentNowComponent implements OnInit {
       const end = new Date(dropoffDate);
 
       const timeDifference = end.getTime() - start.getTime();
-
       const daysDifference = timeDifference / (1000 * 3600 * 24);
 
       if (daysDifference < 0) {
@@ -85,8 +85,6 @@ export class RentNowComponent implements OnInit {
         const decodedToken: any = jwtDecode(authToken);
         const userId = decodedToken?.Id;
         this.userId = userId;
-        // console.log('Decoded userId:', this.userId);
-
         this.addRentalForm.patchValue({
           carId: this.carId,
           userId: this.userId,
@@ -101,30 +99,24 @@ export class RentNowComponent implements OnInit {
     }
   }
 
+  closeBookCar(): void {
+    this.isBookCarOpen = false;
+    this.closePanel.emit();
+  }
+
   onSubmit(): void {
     const rental = this.addRentalForm.value;
-      // console.log('Rental data before submission:', rental);
-  
     rental.pickupDate = new Date(rental.pickupDate).toISOString();
     rental.dropoffDate = new Date(rental.dropoffDate).toISOString();
-  
-    console.log('Rental data after formatting dates:', rental);
-  
+
     this.rentalService.createRental(rental).subscribe(
       (data) => {
-        console.log('Create response:', data);
         this.toastr.info('Your request was successful');
         this.router.navigate(['']);
       },
       (error) => {
-        console.error('Error while booking rental:', error);
         this.toastr.error('Error adding booking. Please try again.');
       }
     );
-  }
-  
-
-  onClose(): void {
-    this.router.navigate(['']);
   }
 }
