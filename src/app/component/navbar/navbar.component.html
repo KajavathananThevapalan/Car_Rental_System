@@ -1,20 +1,43 @@
 <nav class="navbar navbar-dark bg-dark">
     <a class="navbar-brand" href="#">
         <img src="https://th.bing.com/th?id=OIP.9P-3eAqg_Q_vJO7nS3QKawHaEK&w=333&h=187&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2"
-            width="60" height="40" class="d-inline-block align-top m-2" alt="">
+            width="60" height="40" class="d-inline-block align-top m-2" alt="Logo">
         WayToGo Car Rentals
     </a>
-    <div class="d-flex">
-        <div class="dropdown-center">
-            <button type="button" class="btn dropdown-toggle bg-danger" data-bs-toggle="dropdown" data-bs-display="static"
-                aria-expanded="false">
-                <i class="bi bi-person-circle" style="font-size: 30px; cursor: pointer;"></i>
-            </button>
-            <div class="dropdown-menu p-4">
-                <div class="mb-3">
-                    <button class="btn btn-primary ml-auto" (click)="OnLogOut()"> Logout </button>
-                </div>
-            </div>
-        </div>
+    <div class="d-flex justify-content-end align-items-center">
+        <!-- Settings Button and Dropdown -->
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="settingsDropdown" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            <i class="bi bi-person-circle" style="font-size: 30px; cursor: pointer;"></i>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="settingsDropdown">
+            <li><button class="dropdown-item" (click)="openChangePassword()">Change Password</button></li>
+            <li><button class="dropdown-item" (click)="logout()">Logout</button></li>
+        </ul>
     </div>
 </nav>
+
+<div class="change-password-side-panel" [ngClass]="{'open': isChangePasswordOpen}">
+    <div class="side-panel-content">
+        <h3>Change Password</h3>
+        <form (ngSubmit)="onSubmitPasswordChange()">
+            <div class="mb-3">
+                <label for="currentPassword" class="form-label">Current Password</label>
+                <input type="password" id="currentPassword" class="form-control" [(ngModel)]="currentPassword"
+                    name="currentPassword" required />
+            </div>
+            <div class="mb-3">
+                <label for="newPassword" class="form-label">New Password</label>
+                <input type="password" id="newPassword" class="form-control" [(ngModel)]="newPassword"
+                    name="newPassword" required />
+            </div>
+            <div class="mb-3">
+                <label for="confirmPassword" class="form-label">Confirm New Password</label>
+                <input type="password" id="confirmPassword" class="form-control" [(ngModel)]="confirmPassword"
+                    name="confirmPassword" required />
+            </div>
+            <button type="submit" class="btn btn-primary">Change Password</button>
+        </form>
+        <button class="btn btn-secondary mt-2" (click)="closeChangePassword()">Cancel</button>
+    </div>
+</div>

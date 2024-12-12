@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
   profile!: any;
   email!: any;
   name!: any;
+  totalCustomers!: number;
 
   constructor(private router: Router, private route: ActivatedRoute, private userService : UserService, private toastr: ToastrService) { }
 
@@ -25,6 +26,8 @@ export class HomeComponent implements OnInit {
     if (this.isLoggedIn){
       this. getUserDetails();
     }
+    console.log(this.cars.length);
+    
   }
 
   getUserDetails(): void {
@@ -44,8 +47,8 @@ export class HomeComponent implements OnInit {
 
   toggleLoginLogout() {
     if (this.isLoggedIn) {
-      localStorage.setItem('isLoggedIn', 'false');
       if (confirm('Are you sure you want to logout?')) {
+        localStorage.setItem('isLoggedIn', 'false');
         this.isLoggedIn = false;
         localStorage.removeItem('UserId')
         localStorage.removeItem('authToken')

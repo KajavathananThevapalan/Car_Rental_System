@@ -30,4 +30,8 @@ export class UserService {
   updateUser(UserId: any, User: any) {
     return this.http.put(this.url + '/' + UserId, User);
   }
+  
+  changePassword(UserId: number, passwordChangeRequest: any) {
+    return this.http.put(this.url + '/' + 'changePassword/'+ UserId, passwordChangeRequest);
+  }
 }

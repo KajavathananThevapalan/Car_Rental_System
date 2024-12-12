@@ -3,7 +3,7 @@ export interface Rental {
     rentalStartDate: Date;
     rentalEndDate: Date;
     totalAmount: number;
-    status: string;
+    rentalStatus: string;
     carId: number;
     userId: number;
 }

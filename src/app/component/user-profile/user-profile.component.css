@@ -1,112 +1,172 @@
-/* Loading state */
-.loading {
-    text-align: center;
-    font-size: 18px;
-    color: #555;
+/* Profile container */
+.profile-container {
+  margin: 20px auto;
+  padding: 20px;
+  max-width: 1100px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+}
+
+/* Profile Header Section */
+.profile-header h2 {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.profile-header p {
+  color: #6c757d;
+}
+
+/* Profile Image */
+.profile-image img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border: 5px solid #f9f9f9;
+  border-radius: 50%; /* Makes the image rounded */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+}
+
+/* User Info Section */
+.user-info h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.user-info p {
+  margin: 5px 0;
+}
+
+/* Rentals and Reservations Tables */
+.table th, .table td {
+  vertical-align: middle;
+  text-align: center;
+}
+
+.table td {
+  padding: 10px;
+}
+
+/* Buttons */
+.text-center .btn {
+  width: 150px;
+  font-size: 1rem;
+}
+
+.text-center .btn-secondary {
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+.text-center .btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.text-center .btn:hover {
+  opacity: 0.9;
+}
+
+.m-2 {
+  margin: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .user-info .row {
+    flex-direction: column;
   }
-  
-  /* Error message */
-  .error-message {
-    color: red;
-    font-weight: bold;
-    text-align: center;
-    margin: 20px;
+
+  .rentals-reservations .row {
+    flex-direction: column;
   }
-  
-  /* Profile Card */
-  .user-profile {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Profile Header */
-  .profile-header {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .profile-header h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-  
-  /* User Avatar */
-  .user-avatar {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-top: 10px;
-  }
-  
-  /* Profile Details */
-  .profile-details {
-    margin-top: 20px;
-  }
-  
-  .profile-item {
-    margin: 10px 0;
-    font-size: 16px;
-  }
-  
-  .profile-item strong {
-    color: #333;
-  }
-  
-  .profile-item span {
-    color: #777;
-  }
-  
-  /* Profile Actions */
-  .profile-actions {
-    text-align: center;
-    margin-top: 20px;
-  }
-  
-  .profile-actions .btn {
-    padding: 10px 20px;
-    background-color: #007bff;
-    border: none;
-    color: white;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .profile-actions .btn:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Rentals Section */
-.rentals-section {
-    margin-top: 30px;
-  }
-  
-  .rentals-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  .rentals-table th, .rentals-table td {
-    padding: 10px;
-    text-align: left;
-    border: 1px solid #ddd;
-  }
-  
-  .rentals-table th {
-    background-color: #f4f4f4;
-  }
-  
-  .rentals-table tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-  
-  .no-rentals {
-    margin-top: 20px;
-    font-size: 16px;
-    color: #777;
-  }
-  
+}
+
+
+.text-right {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.dropdown-toggle::after {
+  margin-left: 5px; /* Space for the dropdown arrow */
+}
+
+.profile-container {
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+}
+
+.profile-header {
+  margin-bottom: 20px;
+}
+
+.profile-image img {
+  max-width: 150px;
+  max-height: 150px;
+}
+
+.rentals-reservations .table th,
+.rentals-reservations .table td {
+  text-align: center;
+}
+
+/* For Settings Button */
+.text-right {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.dropdown-toggle::after {
+  margin-left: 5px; /* Space for the dropdown arrow */
+}
+
+.profile-container {
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+}
+
+.profile-header {
+  margin-bottom: 20px;
+}
+
+.profile-image img {
+  max-width: 150px;
+  max-height: 150px;
+}
+
+.rentals-reservations .table th,
+.rentals-reservations .table td {
+  text-align: center;
+}
+
+/* Side Panel Styles */
+.change-password-side-panel {
+  position: fixed;
+  top: 0;
+  right: -300px; /* Hidden off-screen initially */
+  width: 300px;
+  height: 100%;
+  background-color: #fff;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  transition: right 0.3s ease-in-out;
+}
+
+.change-password-side-panel.open {
+  right: 0; /* Slide in */
+}
+
+.side-panel-content h3 {
+  margin-bottom: 20px;
+}
+
+.side-panel-content button {
+  width: 100%;
+}

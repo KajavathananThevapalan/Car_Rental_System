@@ -1,76 +1,241 @@
-<div *ngIf="isLoading" class="loading">
-    <p>Loading...</p>
+<!-- Settings Button and Dropdown -->
+<div class="text-right">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="settingsDropdown" data-bs-toggle="dropdown"
+    aria-expanded="false">
+    Settings
+  </button>
+  <div>
+    <button class="btn btn-secondary m-2" (click)="goBack()">Home</button>
+  </div>
+  <ul class="dropdown-menu" aria-labelledby="settingsDropdown">
+    <li><button class="dropdown-item" (click)="editUser(user.userId)">Edit Profile</button></li>
+    <li><button class="dropdown-item" (click)="openChangePassword()">Change Password</button></li>
+    <li><button class="dropdown-item" (click)="toggleLoginLogout()">Logout</button></li>
+  </ul>
 </div>
 
-<div *ngIf="errorMessage" class="error-message">
-    <p>{{ errorMessage }}</p>
+<!-- Profile Section -->
+<div *ngIf="isLoading" class="loading-spinner">
+  <p>Loading user details...</p>
 </div>
 
-<div *ngIf="!isLoading && !errorMessage" class="user-profile">
-    <div class="profile-card">
-        <!-- User Profile Header -->
-        <div class="profile-header">
-            <h2>User Profile</h2>
-            <img *ngIf="user.avatar" [src]="user.avatar" alt="User Avatar" class="user-avatar" />
-        </div>
-
-        <!-- User Profile Details -->
-        <div class="profile-details">
-            <div class="profile-item">
-                <strong>Name:</strong>
-                <span>{{ user.firstName + ' ' + user.lastName || 'N/A' }}</span>
-            </div>
-            <div class="profile-item">
-                <strong>Email:</strong>
-                <span>{{ user.email || 'N/A' }}</span>
-            </div>
-            <div class="profile-item">
-                <strong>Phone:</strong>
-                <span>{{ user.phone || 'N/A' }}</span>
-            </div>
-            <div class="profile-item">
-                <strong>Address:</strong>
-                <span>{{ user.address.addressLine1 + ', ' + user.address.addressLine2 + ', ' + user.address.city + ', ' + user.address.district || 'N/A' }}</span>
-            </div>
-            <div class="profile-item">
-                <strong>Role:</strong>
-                <span>{{ user.userRole || 'N/A' }}</span>
-            </div>
-        </div>
-
-        <!-- Edit Profile Button -->
-        <div class="profile-actions">
-            <button (click)="editProfile()" class="btn btn-primary">Edit Profile</button>
-        </div>
-
-        <!-- Rentals Section -->
-        <div *ngIf="rentals.length > 0" class="rentals-section">
-            <h3>User Rentals</h3>
-            <table class="rentals-table">
-                <thead>
-                    <tr>
-                        <th>Rented Date</th>
-                        <th>Rental Start Date</th>
-                        <th>Rental End Date</th>
-                        <th>Amount</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let rental of rentals">
-                        <td>{{ rental.createdAt }}</td>
-                        <td>{{ rental.rentalStartDate }}</td>
-                        <td>{{ rental.rentalEndDate }}</td>
-                        <td>{{ rental.totalAmount | date }}</td>
-                        <td>{{ rental.rentalStatus }}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- No Rentals Message -->
-        <div *ngIf="rentals.length === 0" class="no-rentals">
-            <p>No rentals found.</p>
-        </div>
+<!-- User Info Section -->
+<div *ngIf="!isLoading && user">
+  <div class="profile-container">
+    <!-- Profile Header Section -->
+    <div class="profile-header text-center">
+      <h2>Welcome {{ user.firstName }}</h2>
+      <p class="text-muted">View and manage your details</p>
     </div>
-</div>
+
+    <!-- User Information Section -->
+    <div class="user-info">
+      <div class="row">
+        <div class="col-md-6">
+          <h3>User Details</h3>
+          <p><strong>NIC:</strong> {{ user.nic || 'Not available' }}</p>
+          <p><strong>Driving Licence No:</strong> {{ user.drivingLicenceNo || 'Not available' }}</p>
+          <p><strong>Email:</strong> {{ user.email || 'Not available' }}</p>
+          <p><strong>Phone:</strong> {{ user.phone || 'Not available' }}</p>
+        </div>
+        <div class="col-md-6 text-center">
+          <!-- User Profile Image with Rounded Corners -->
+          <div class="profile-image">
+            <img
+              [src]="user.profileImage || 'https://th.bing.com/th/id/R.1a169ee0e11d6f85260b7864aa916f2c?rik=F6uhG3K5RxD0Bg&pid=ImgRaw&r=0'"
+              alt="User Profile" class="rounded-circle" />
+          </div>
+          <h3>{{ user.firstName + ' ' + user.lastName }}</h3>
+        </div>
+      </div>
+    </div>
+
+    <!-- Address Section -->
+    <div class="address-section">
+      <h3>Address</h3>
+      <p><strong>Address:</strong> {{ user.address?.addressLine1 || 'Not available' }}, {{ user.address?.addressLine2 ||
+        'Not available' }},
+        {{ user.address?.city || 'Not available' }}, {{ user.address?.district || 'Not available' }}, {{
+        user.address?.country || 'Not available' }}</p>
+      <p><strong>Registered On:</strong> {{ user.createdAt | date }}</p>
+    </div>
+
+    <!-- Rentals Section -->
+    <div class="rentals-reservations">
+      <!-- Pending Rentals -->
+      <div class="row">
+        <div class="col-md-6">
+          <h3>Pending Rentals</h3>
+          <div *ngIf="rentalsByStatus.pending.length > 0; else noPendingRentals">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Rental Id</th>
+                  <th scope="col">Start Date</th>
+                  <th scope="col">End Date</th>
+                  <th scope="col">Total Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let rental of rentalsByStatus.pending">
+                  <td>{{ rental.rentalId }}</td>
+                  <td>{{ rental.rentalStartDate | date }}</td>
+                  <td>{{ rental.rentalEndDate | date }}</td>
+                  <td>{{ rental.totalAmount | currency }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <ng-template #noPendingRentals>
+            <p>No pending rentals found.</p>
+          </ng-template>
+        </div>
+
+        <!-- Declined Rentals -->
+        <div class="col-md-6">
+          <h3>Declined Rentals</h3>
+          <div *ngIf="rentalsByStatus.declined.length > 0; else noDeclinedRentals">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Rental Id</th>
+                  <th scope="col">Start Date</th>
+                  <th scope="col">End Date</th>
+                  <th scope="col">Total Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let rental of rentalsByStatus.declined">
+                  <td>{{ rental.rentalId }}</td>
+                  <td>{{ rental.rentalStartDate | date }}</td>
+                  <td>{{ rental.rentalEndDate | date }}</td>
+                  <td>{{ rental.totalAmount | currency }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <ng-template #noDeclinedRentals>
+            <p>No declined rentals found.</p>
+          </ng-template>
+        </div>
+      </div>
+
+      <!-- Booked Rentals -->
+      <div class="row">
+        <div class="col-md-6">
+          <h3>Booked Rentals</h3>
+          <div *ngIf="rentalsByStatus.booked.length > 0; else noBookedRentals">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Rental Id</th>
+                  <th scope="col">Start Date</th>
+                  <th scope="col">End Date</th>
+                  <th scope="col">Total Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let rental of rentalsByStatus.booked">
+                  <td>{{ rental.rentalId }}</td>
+                  <td>{{ rental.rentalStartDate | date }}</td>
+                  <td>{{ rental.rentalEndDate | date }}</td>
+                  <td>{{ rental.totalAmount | currency }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <ng-template #noBookedRentals>
+            <p>No booked rentals found.</p>
+          </ng-template>
+        </div>
+
+        <!-- Rented Rentals -->
+        <div class="col-md-6">
+          <h3>Rented Rentals</h3>
+          <div *ngIf="rentalsByStatus.rented.length > 0; else noRentedRentals">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Rental Id</th>
+                  <th scope="col">Start Date</th>
+                  <th scope="col">End Date</th>
+                  <th scope="col">Total Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let rental of rentalsByStatus.rented">
+                  <td>{{ rental.rentalId }}</td>
+                  <td>{{ rental.rentalStartDate | date }}</td>
+                  <td>{{ rental.rentalEndDate | date }}</td>
+                  <td>{{ rental.totalAmount | currency }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <ng-template #noRentedRentals>
+            <p>No rented rentals found.</p>
+          </ng-template>
+        </div>
+      </div>
+
+      <!-- Returned Rentals -->
+      <div class="row">
+        <div class="col-md-6">
+          <h3>Returned Rentals</h3>
+          <div *ngIf="rentalsByStatus.returned.length > 0; else noReturnedRentals">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Rental Id</th>
+                  <th scope="col">Start Date</th>
+                  <th scope="col">End Date</th>
+                  <th scope="col">Total Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let rental of rentalsByStatus.returned">
+                  <td>{{ rental.rentalId }}</td>
+                  <td>{{ rental.rentalStartDate | date }}</td>
+                  <td>{{ rental.rentalEndDate | date }}</td>
+                  <td>{{ rental.totalAmount | currency }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <ng-template #noReturnedRentals>
+            <p>No returned rentals found.</p>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+
+    <!-- Change Password Side Dropdown -->
+    <div class="change-password-side-panel" [ngClass]="{'open': isChangePasswordOpen}">
+      <div class="side-panel-content">
+        <h3>Change Password</h3>
+        <form (ngSubmit)="onSubmitPasswordChange(user.userId)">
+          <div class="mb-3">
+            <label for="currentPassword" class="form-label">Current Password</label>
+            <input type="password" id="currentPassword" class="form-control" [(ngModel)]="currentPassword"
+              name="currentPassword" required />
+          </div>
+          <div class="mb-3">
+            <label for="newPassword" class="form-label">New Password</label>
+            <input type="password" id="newPassword" class="form-control" [(ngModel)]="newPassword" name="newPassword"
+              required />
+          </div>
+          <div class="mb-3">
+            <label for="confirmPassword" class="form-label">Confirm New Password</label>
+            <input type="password" id="confirmPassword" class="form-control" [(ngModel)]="confirmPassword"
+              name="confirmPassword" required />
+          </div>
+          <button type="submit" class="btn btn-primary">Change Password</button>
+        </form>
+        <button class="btn btn-secondary mt-2" (click)="closeChangePassword()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!isLoading && !user">
+    <p>User not found.</p>
+  </div>

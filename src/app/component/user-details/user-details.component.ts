@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { UserService } from "../../services/user.service";
+import { Rental } from "../../models/Rental";
 
 @Component({
   selector: 'app-user-details',
@@ -12,6 +13,15 @@ export class UserDetailsComponent implements OnInit {
   userId!: number;
   user: any;
   isLoading: boolean = true;
+  rentals: Rental[] = [];
+  errorMessage: string = '';
+  rentalsByStatus: { [key: string]: Rental[] } = {
+    pending: [],
+    declined: [],
+    booked: [],
+    rented: [],
+    returned: []
+  };
 
   constructor(
     private route: ActivatedRoute,
@@ -26,16 +36,27 @@ export class UserDetailsComponent implements OnInit {
   }
 
   getUserDetails(): void {
-    this.userService.getUserById(this.userId).subscribe(
-      (data) => {        
-        this.user = data;
-        // console.log(this.user);
+    this.isLoading = true;
+    const userId = localStorage.getItem('UserId');
+    this.userService.getUserById(Number(userId)).subscribe(
+      (data) => {
         this.isLoading = false;
+        this.user = data;
+        this.rentals = this.user.rentals || [];
+        console.log(this.user.rentals);
+        
+        this.rentalsByStatus = {
+          pending: this.rentals.filter(rental => rental.rentalStatus === 'Pending'),
+          declined: this.rentals.filter(rental => rental.rentalStatus === 'Declined'),
+          booked: this.rentals.filter(rental => rental.rentalStatus === 'Booked'),
+          rented: this.rentals.filter(rental => rental.rentalStatus === 'Rented'),
+          returned: this.rentals.filter(rental => rental.rentalStatus === 'Returned')
+        };
       },
       (error) => {
-        this.toastr.error('Error loading user details');
         this.isLoading = false;
-        console.error('Error fetching user details:', error);
+        this.errorMessage = 'Failed to load user profile. Please try again later.';
+        this.toastr.error(this.errorMessage);
       }
     );
   }

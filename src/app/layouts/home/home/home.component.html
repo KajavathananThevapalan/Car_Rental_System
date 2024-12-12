@@ -1,171 +1,161 @@
 <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-      <div class="container">
-        <a class="navbar-brand" href="#!">WayToGo</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#home">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#about">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#services">Services</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#contactus">Contact Us</a>
-            </li>
-          </ul>
-          <form class="d-flex">
-            <input
-              class="form-control me-2"
-              type="search"
-              [(ngModel)]="searchQuery"
-              placeholder="Search"
-              aria-label="Search"
-            />
-          </form>
-          <div>
-            <div *ngIf="!isLoggedIn">
-              <button type="button" class="btn btn-info m-2" [routerLink]="['/login']">Login</button>
-              <button type="button" class="btn btn-warning" [routerLink]="['/register']">Register</button>
-            </div>
-            <div *ngIf="isLoggedIn">
-              <button type="button" class="btn btn-success" [routerLink]="['/profile']">Hi, {{ name }}</button>
-              <button type="button" class="btn btn-secondary m-2" (click)="toggleLoginLogout()">Logout</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </nav>
-  </header>
-  
-  <section id="home">
-    <div class="hero-section">
-      <div class="hero-content">
-        <p class="trusted">🚗 100% Trusted car rental platform in Sri Lanka</p>
-        <h1>
-          Find Your Best <br />
-          <span class="highlight">Dream Car for Rental</span>
-        </h1>
-        <p class="description">
-          Experience the ultimate in comfort, performance, and sophistication with
-          our luxury car rentals. From sleek sedans and stylish coupes to spacious
-          SUVs and elegant convertibles, we offer a range of premium vehicles to
-          suit your preferences and lifestyle.
-        </p>
-        <button class="view-cars-btn">View all Cars →</button>
-      </div>
-      <div class="hero-image">
-        <img
-          src="https://th.bing.com/th/id/R.095bb4a6cc306a537d3d9a60e34fd220?rik=nYGmWmypJSPLUg&riu=http%3a%2f%2f3.bp.blogspot.com%2f-hw58JcwlBPI%2fUQPIqBpC4VI%2fAAAAAAAAAA0%2fz6Fk2qtyRxI%2fw1200-h630-p-k-no-nu%2fam2.jpg&ehk=JHJ%2bnXQnaerKIvOXe0MptQ1TN22TPZtpcEx9JMh25%2bE%3d&risl=&pid=ImgRaw&r=0"
-          alt="Luxury Car"
-        />
-      </div>
-    </div>
-  </section>
-  
-  <section id="about" class="py-5">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
     <div class="container">
-      <div class="row align-items-center">
-        <!-- Left Section: Image with Text Overlay -->
-        <div class="col-lg-6">
-          <div class="position-relative rounded overflow-hidden shadow">
-            <img
-              src="https://s1.1zoom.me/prev/563/Bentley_Bentayga_Grey_562805_600x400.jpg" 
-              alt="Car Image"
-              class="img-fluid rounded"
-            />
-            <div
-              class="position-absolute bg-warning text-white py-2 px-3"
-              style="left: 0; top: 50%; transform: translateY(-50%); writing-mode: vertical-rl; text-align: center; font-weight: bold; border-radius: 0 5px 5px 0;"
-            >
-              15+ years of experiences
-            </div>
+      <a class="navbar-brand" href="#!">WayToGo</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#services">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contactus">Contact Us</a>
+          </li>
+        </ul>
+        <form class="d-flex">
+          <input class="form-control me-2" type="search" [(ngModel)]="searchQuery" placeholder="Search"
+            aria-label="Search" />
+        </form>
+        <div>
+          <div *ngIf="!isLoggedIn">
+            <button type="button" class="btn view-cars-btn m-2" [routerLink]="['/login']">Login</button>
+            <button type="button" class="btn highlight" [routerLink]="['/register']">Register</button>
           </div>
-        </div>
-  
-        <!-- Right Section: Content -->
-        <div class="col-lg-6 mt-4 mt-lg-0">
-          <h6 class="text-primary text-uppercase">About Our Company</h6>
-          <h2 class="fw-bold mb-4">Best Solution For Car Rental Services</h2>
-          <p class="text-muted">
-            Welcome to WayToGo Car Rentals, your premier car rental service in Sri Lanka, offering a seamless and stress-free experience for all your travel needs. Whether you're here for business, leisure, or an adventure across this beautiful island, we provide reliable, comfortable, and affordable vehicles to suit your journey.          </p>
-          <p class="text-muted">
-            At WayToGo Car Rentals, we are passionate about providing top-notch car rental services with exceptional customer care. With years of experience in the industry, we understand the diverse needs of travelers visiting Sri Lanka. Our fleet includes a wide variety of vehicles, ranging from compact cars for solo travelers to spacious SUVs and luxury cars for those seeking an elevated experience.          </p>
-          <ul class="list-unstyled row">
-            <li class="col-sm-6 mb-2 d-flex align-items-center">
-              <i class="bi bi-check-circle-fill text-primary me-2"></i>
-              <span>Wide Selection of Vehicles</span>
-            </li>
-            <li class="col-sm-6 mb-2 d-flex align-items-center">
-              <i class="bi bi-check-circle-fill text-primary me-2"></i>
-              <span>Affordable Rates</span>
-            </li>
-            <li class="col-sm-6 mb-2 d-flex align-items-center">
-              <i class="bi bi-check-circle-fill text-primary me-2"></i>
-              <span>Easy Booking Process</span>
-            </li>
-            <li class="col-sm-6 mb-2 d-flex align-items-center">
-              <i class="bi bi-check-circle-fill text-primary me-2"></i>
-              <span>24/7 Customer Support</span>
-            </li>
-          </ul>
+          <div *ngIf="isLoggedIn">
+            <button type="button" class="btn btn-success" [routerLink]="['/profile']">Hi, {{ name }}</button>
+            <button type="button" class="btn btn-secondary m-2" (click)="toggleLoginLogout()">Logout</button>
+          </div>
         </div>
       </div>
     </div>
+  </nav>
+</header>
 
-    <div class="container">
-      <div class="facts-header">
-        <h2>Facts By The Numbers</h2>
+<section id="home">
+  <div class="hero-section">
+    <div class="hero-content">
+      <p class="trusted">🚗 100% Trusted car rental platform in Sri Lanka</p>
+      <h1>
+        Find Your Best <br />
+        <span class="highlight">Dream Car for Rental</span>
+      </h1>
+      <p class="description">
+        Experience the ultimate in comfort, performance, and sophistication with
+        our luxury car rentals. From sleek sedans and stylish coupes to spacious
+        SUVs and elegant convertibles, we offer a range of premium vehicles to
+        suit your preferences and lifestyle.
+      </p>
+      <a href="#list-cars">
+        <button class="btn view-cars-btn">View all Cars →</button>
+      </a>
+    </div>
+    <div class="hero-image">
+      <img
+        src="https://th.bing.com/th/id/R.095bb4a6cc306a537d3d9a60e34fd220?rik=nYGmWmypJSPLUg&riu=http%3a%2f%2f3.bp.blogspot.com%2f-hw58JcwlBPI%2fUQPIqBpC4VI%2fAAAAAAAAAA0%2fz6Fk2qtyRxI%2fw1200-h630-p-k-no-nu%2fam2.jpg&ehk=JHJ%2bnXQnaerKIvOXe0MptQ1TN22TPZtpcEx9JMh25%2bE%3d&risl=&pid=ImgRaw&r=0"
+        alt="Luxury Car" />
+    </div>
+  </div>
+</section>
+
+<section id="about" class="py-5">
+  <div class="container">
+    <div class="row align-items-center">
+      <!-- Left Section: Image with Text Overlay -->
+      <div class="col-lg-6">
+        <div class="position-relative rounded overflow-hidden shadow">
+          <img src="https://s1.1zoom.me/prev/563/Bentley_Bentayga_Grey_562805_600x400.jpg" alt="Car Image"
+            class="img-fluid rounded" />
+          <div class="position-absolute bg-warning text-white py-2 px-3"
+            style="left: 0; top: 50%; transform: translateY(-50%); writing-mode: vertical-rl; text-align: center; font-weight: bold; border-radius: 0 5px 5px 0;">
+            15+ years of experiences
+          </div>
+        </div>
       </div>
-      <div class="facts-cards">
-        <div class="facts-card">
-          <div class="icon"><i class="fa-solid fa-user"></i></div>
-          <h3>16K+</h3>
-          <p>Happy Customers</p>
-        </div>
-        <div class="facts-card">
-          <div class="icon"><i class="fa-solid fa-car"></i></div>
-          <h3>2,547+</h3>
-          <p>Total Cars</p>
-        </div>
-        <div class="facts-card">
-          <div class="icon"><i class="fa-solid fa-book"></i></div>
-          <h3>625K+</h3>
-          <p>Total Rents</p>
-        </div>
-        <div class="facts-card">
-          <div class="icon"><i class="fa-solid fa-star"></i></div>
-          <h3>200K+</h3>
-          <p>Reviews</p>
-        </div>
+
+      <!-- Right Section: Content -->
+      <div class="col-lg-6 mt-4 mt-lg-0">
+        <h6 class="text-primary text-uppercase">About Our Company</h6>
+        <h2 class="fw-bold mb-4">Best Solution For Car Rental Services</h2>
+        <p class="text-muted">
+          Welcome to WayToGo Car Rentals, your premier car rental service in Sri Lanka, offering a seamless and
+          stress-free experience for all your travel needs. Whether you're here for business, leisure, or an adventure
+          across this beautiful island, we provide reliable, comfortable, and affordable vehicles to suit your journey.
+        </p>
+        <p class="text-muted">
+          At WayToGo Car Rentals, we are passionate about providing top-notch car rental services with exceptional
+          customer care. With years of experience in the industry, we understand the diverse needs of travelers visiting
+          Sri Lanka. Our fleet includes a wide variety of vehicles, ranging from compact cars for solo travelers to
+          spacious SUVs and luxury cars for those seeking an elevated experience. </p>
+        <ul class="list-unstyled row">
+          <li class="col-sm-6 mb-2 d-flex align-items-center">
+            <i class="bi bi-check-circle-fill text-primary me-2"></i>
+            <span>Wide Selection of Vehicles</span>
+          </li>
+          <li class="col-sm-6 mb-2 d-flex align-items-center">
+            <i class="bi bi-check-circle-fill text-primary me-2"></i>
+            <span>Affordable Rates</span>
+          </li>
+          <li class="col-sm-6 mb-2 d-flex align-items-center">
+            <i class="bi bi-check-circle-fill text-primary me-2"></i>
+            <span>Easy Booking Process</span>
+          </li>
+          <li class="col-sm-6 mb-2 d-flex align-items-center">
+            <i class="bi bi-check-circle-fill text-primary me-2"></i>
+            <span>24/7 Customer Support</span>
+          </li>
+        </ul>
       </div>
     </div>
-  </section>
+  </div>
+
+  <div class="container">
+    <div class="facts-header">
+      <h2>Facts By The Numbers</h2>
+    </div>
+    <div class="facts-cards">
+      <div class="facts-card">
+        <div class="icon"><i class="fa-solid fa-user"></i></div>
+        <h3>16K+</h3>
+        <p>Happy Customers</p>
+      </div>
+      <div class="facts-card">
+        <div class="icon"><i class="fa-solid fa-car"></i></div>
+        <h3>2,547+</h3>
+        <p>Total Cars</p>
+      </div>
+      <div class="facts-card">
+        <div class="icon"><i class="fa-solid fa-book"></i></div>
+        <h3>625K+</h3>
+        <p>Total Rents</p>
+      </div>
+      <div class="facts-card">
+        <div class="icon"><i class="fa-solid fa-star"></i></div>
+        <h3>200K+</h3>
+        <p>Reviews</p>
+      </div>
+    </div>
+  </div>
+</section>
 
 <main>
-    <div class="container my-5 py-5">
-        <app-list-cars [searchQuery]="searchQuery"></app-list-cars>
-    </div>
+  <div id="list-cars" class="container my-5 py-5">
+    <app-list-cars [searchQuery]="searchQuery"></app-list-cars>
+  </div>
 </main>
 
 <section id="contactus" class="py-5" style="background-color: black;">
   <div class="container">
     <div class="row g-4 align-items-center">
-      
+
       <!-- Left Section: Location -->
       <div class="col-md-6">
         <div class="card bg-dark text-white shadow-sm border-0">
@@ -173,11 +163,7 @@
             <h5 class="card-title text-warning mb-4">Our Location</h5>
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3021.98263954414!2d-73.99723028459313!3d40.74282087932896!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259af18ed8d5d%3A0x8e532ec72b91b4f8!2s198%20W%2021st%20St%2C%20New%20York%2C%20NY%2010011%2C%20USA!5e0!3m2!1sen!2sin!4v1614730369000!5m2!1sen!2sin"
-              width="100%"
-              height="300"
-              style="border:0;"
-              allowfullscreen=""
-              loading="lazy">
+              width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy">
             </iframe>
           </div>
         </div>
@@ -191,15 +177,18 @@
             <form action="#" method="POST">
               <div class="form-group mb-3">
                 <label for="name" class="text-warning">Your Name</label>
-                <input type="text" id="name" class="form-control bg-light text-dark" placeholder="Enter your name" required />
+                <input type="text" id="name" class="form-control bg-light text-dark" placeholder="Enter your name"
+                  required />
               </div>
               <div class="form-group mb-3">
                 <label for="email" class="text-warning">Your Email</label>
-                <input type="email" id="email" class="form-control bg-light text-dark" placeholder="Enter your email" required />
+                <input type="email" id="email" class="form-control bg-light text-dark" placeholder="Enter your email"
+                  required />
               </div>
               <div class="form-group mb-3">
                 <label for="message" class="text-warning">Message</label>
-                <textarea id="message" class="form-control bg-light text-dark" rows="5" placeholder="Type your message here..." required></textarea>
+                <textarea id="message" class="form-control bg-light text-dark" rows="5"
+                  placeholder="Type your message here..." required></textarea>
               </div>
               <button type="submit" class="btn btn-warning w-100">Send Message</button>
             </form>
@@ -248,6 +237,3 @@
     <p class="text-center mb-0">© 2024 WayToGo Car Rental. All rights reserved.</p>
   </div>
 </footer>
-
-
-

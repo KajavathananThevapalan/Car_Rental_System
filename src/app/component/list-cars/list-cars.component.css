@@ -68,7 +68,7 @@
 
 /* View Button Styling */
 .view-button {
-    background-color: #ff5733; /* Button color */
+    width: 100%;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -81,7 +81,7 @@
 
 /* Button hover effect */
 .view-button:hover {
-    background-color: #e04a2c; /* Darker button color on hover */
+    background-color: #f7941d;
 }
 
 

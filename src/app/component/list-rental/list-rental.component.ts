@@ -36,6 +36,13 @@ export class ListRentalComponent {
       (data) => {
         this.isLoading = false;
         this.rentals = data;
+
+        this.rentals.sort((a, b) => {
+          const dateA = new Date(a.createdAt).getTime();
+          const dateB = new Date(b.createdAt).getTime();
+          return dateB - dateA;
+        });
+  
         console.log(data);
         
         this.totalItems = this.rentals.length;
@@ -49,6 +56,7 @@ export class ListRentalComponent {
       }
     );
   }
+  
 
   filterRentals(): void {
     let filteredRentals = this.rentals;

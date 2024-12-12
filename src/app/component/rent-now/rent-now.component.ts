@@ -85,7 +85,7 @@ export class RentNowComponent implements OnInit {
         const decodedToken: any = jwtDecode(authToken);
         const userId = decodedToken?.Id;
         this.userId = userId;
-        console.log('Decoded userId:', this.userId);
+        // console.log('Decoded userId:', this.userId);
 
         this.addRentalForm.patchValue({
           carId: this.carId,
@@ -103,11 +103,8 @@ export class RentNowComponent implements OnInit {
 
   onSubmit(): void {
     const rental = this.addRentalForm.value;
+      // console.log('Rental data before submission:', rental);
   
-    // Check the values of pickupDate and dropoffDate
-    console.log('Rental data before submission:', rental);
-  
-    // Optionally, format the dates if required (e.g., converting to ISO 8601 format)
     rental.pickupDate = new Date(rental.pickupDate).toISOString();
     rental.dropoffDate = new Date(rental.dropoffDate).toISOString();
   

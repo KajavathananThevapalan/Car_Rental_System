@@ -1,0 +1,116 @@
+<div *ngIf="isLoading" class="loading-spinner">
+    <p>Loading user details...</p>
+  </div>
+  
+  <div *ngIf="!isLoading && user">
+    <h2>Edit User</h2>
+  
+    <form [formGroup]="editUserForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <!-- User Details -->
+        <div class="col-md-8">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="firstName" class="form-label">First Name</label>
+              <input id="firstName" formControlName="firstName" name="firstName" type="text" class="form-control" />
+            </div>
+  
+            <div class="col-md-6 mb-3">
+              <label for="lastName" class="form-label">Last Name</label>
+              <input id="lastName" formControlName="lastName" name="lastName" type="text" class="form-control" />
+            </div>
+  
+            <div class="col-md-6 mb-3">
+              <label for="nic" class="form-label">NIC</label>
+              <input id="nic" formControlName="nic" name="nic" type="text" class="form-control" />
+            </div>
+  
+            <div class="col-md-6 mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input id="email" formControlName="email" name="email" type="email" class="form-control" />
+            </div>
+  
+            <div class="col-md-6 mb-3">
+              <label for="phone" class="form-label">Phone</label>
+              <input id="phone" formControlName="phone" name="phone" type="text" class="form-control" />
+            </div>
+  
+            <div class="col-md-6 mb-3">
+              <label for="profileImage" class="form-label">Profile Image</label>
+              <input id="profileImage" formControlName="profileImage" name="profileImage" type="text"
+                class="form-control" />
+            </div>
+  
+            <div>
+              <h3>Driving Licence Information</h3>
+              <!-- Driving License Number -->
+              <div class="col-md-6 mb-3">
+                <label for="drivingLicenceNo" class="form-label">Driving Licence Number</label>
+                <input id="drivingLicenceNo" formControlName="drivingLicenceNo" name="drivingLicenceNo" type="text"
+                  class="form-control" />
+              </div>
+  
+              <!-- Image Upload Section -->
+              <div class="row">
+                <!-- Driving License Front Image -->
+                <div class="col-md-6 mb-3">
+                  <label for="drivingLicenseFront" class="form-label">Driving Licence Front Image</label>
+                  <input id="drivingLicenseFront" formControlName="drivingLicenseFront" name="drivingLicenseFront" type="text"
+                    class="form-control" />
+                </div>
+  
+                <!-- Driving License Back Image -->
+                <div class="col-md-6 mb-3">
+                  <label for="drivingLicenseBack" class="form-label">Driving Licence Back Image</label>
+                  <input id="drivingLicenseBack" formControlName="drivingLicenseBack" name="drivingLicenseBack" type="text"
+                    class="form-control" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Address Details -->
+        <div class="col-md-4">
+          <div formGroupName="address" class="row">
+            <div class="col-md-12 mb-3">
+              <label for="addressLine1" class="form-label">Address Line 1</label>
+              <input id="addressLine1" formControlName="addressLine1" name="addressLine1" type="text"
+                class="form-control" />
+            </div>
+  
+            <div class="col-md-12 mb-3">
+              <label for="addressLine2" class="form-label">Address Line 2</label>
+              <input id="addressLine2" formControlName="addressLine2" name="addressLine2" type="text"
+                class="form-control" />
+            </div>
+  
+            <div class="col-md-6 mb-3">
+              <label for="city" class="form-label">City</label>
+              <input id="city" formControlName="city" name="city" type="text" class="form-control" />
+            </div>
+  
+            <div class="col-md-6 mb-3">
+              <label for="district" class="form-label">District</label>
+              <input id="district" formControlName="district" name="district" type="text" class="form-control" />
+            </div>
+  
+            <div class="col-md-6 mb-3">
+              <label for="country" class="form-label">Country</label>
+              <input id="country" formControlName="country" name="country" type="text" class="form-control" />
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Submit Button -->
+      <div class="d-flex justify-content-center mb-3">
+        <button type="submit" class="btn btn-primary btn-lg" [disabled]="editUserForm.invalid">Save Changes</button>
+      </div>
+    </form>
+  </div>
+  
+  <div *ngIf="!isLoading && !user">
+    <p>User not found.</p>
+  </div>
+  

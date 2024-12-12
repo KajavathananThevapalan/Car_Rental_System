@@ -1,39 +1,42 @@
 <nav class="navbar navbar-light bg-light">
-    <ul>
-      <h3>Manage Users</h3>
-    </ul>
-    <ul class="flex-grow-1">
-      <input class="form-control" type="search" [(ngModel)]="searchQuery" placeholder="Search" aria-label="Search" (input)="filterUsers()">
-    </ul>
-    <ul>
-      <button type="button" [routerLink]="['/register']" class="btn btn-dark">
-        <i class="bi bi-plus-lg"></i> New User</button>
-    </ul>
-  </nav>
-  
-  <div *ngIf="isLoading" class="loading-spinner">
-    <p>Loading users...</p>
-  </div>
-  
-  <div *ngIf="!isLoading && errorMessage" class="error-message">
-    <p>{{ errorMessage }}</p>
-  </div>
-  
-  <div *ngIf="!isLoading && !errorMessage">
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">User ID</th>
-          <th scope="col">Full Name</th>
-          <th scope="col">NIC</th>
-          <th scope="col">Driving Licence NO</th>
-          <th scope="col">Email</th>
-          <th scope="col">Phone</th>
-          <th scope="col">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let user of paginatedUsers">
+  <ul>
+    <h3>Manage Users</h3>
+  </ul>
+  <ul class="flex-grow-1">
+    <input class="form-control" type="search" [(ngModel)]="searchQuery" placeholder="Search" aria-label="Search"
+      (input)="filterUsers()">
+  </ul>
+  <ul>
+    <button type="button" [routerLink]="['/register']" class="btn btn-dark">
+      <i class="bi bi-plus-lg"></i> New User</button>
+  </ul>
+</nav>
+
+<div *ngIf="isLoading" class="loading-spinner">
+  <p>Loading users...</p>
+</div>
+
+<div *ngIf="!isLoading && errorMessage" class="error-message">
+  <p>{{ errorMessage }}</p>
+</div>
+
+<div *ngIf="!isLoading && !errorMessage">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">User ID</th>
+        <th scope="col">Full Name</th>
+        <th scope="col">NIC</th>
+        <th scope="col">Driving Licence NO</th>
+        <th scope="col">Email</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Wrap both *ngFor and *ngIf inside an ng-container -->
+      <ng-container *ngFor="let user of paginatedUsers">
+        <tr *ngIf="user.userRole === 'customer'">
           <td>{{ user.userId }}</td>
           <td>{{ user.firstName + ' ' + user.lastName }}</td>
           <td>{{ user.nic }}</td>
@@ -49,15 +52,16 @@
             </button>
           </td>
         </tr>
-      </tbody>
-    </table>
-  
-    <div class="pagination">
-        <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1"><img
-            src="https://img.icons8.com/ios-filled/50/000000/long-arrow-left.png" alt=""></button>
-        <span>Page {{ currentPage }} of {{ totalPages() }}</span>
-        <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages()"><img
-            src="https://img.icons8.com/ios-filled/50/000000/long-arrow-right.png" alt=""></button>
-      </div>
+      </ng-container>
+    </tbody>
+  </table>
+
+
+  <div class="pagination">
+    <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1"><img
+        src="https://img.icons8.com/ios-filled/50/000000/long-arrow-left.png" alt=""></button>
+    <span>Page {{ currentPage }} of {{ totalPages() }}</span>
+    <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages()"><img
+        src="https://img.icons8.com/ios-filled/50/000000/long-arrow-right.png" alt=""></button>
   </div>
-  
+</div>

@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { RentalService } from '../../services/rental.service';
-import { HttpClient } from '@angular/common/http';
+import { Rental } from '../../models/Rental';
 
 @Component({
   selector: 'app-user-profile',
@@ -13,32 +12,51 @@ import { HttpClient } from '@angular/common/http';
 export class UserProfileComponent implements OnInit {
 
   user: any = {};
-  rentals: any = {};
+  rentals: Rental[] = [];
+  rentalsByStatus: { [key: string]: Rental[] } = {
+    pending: [],
+    declined: [],
+    booked: [],
+    rented: [],
+    returned: []
+  };
   isLoading: boolean = true;
   errorMessage: string = '';
+  isChangePasswordOpen: boolean = false;
+  currentPassword: string = '';
+  newPassword: string = '';
+  confirmPassword: string = '';
+  isLoggedIn: boolean = false;
 
   constructor(
     private userService: UserService,
     private toastr: ToastrService,
     private router: Router,
-    private rentalService : RentalService,
-    private http: HttpClient
   ) { }
 
   ngOnInit(): void {
-    this.getUserDetails();
+    this.isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    if (this.isLoggedIn) {
+      this.getUserDetails();
+    }
   }
 
   getUserDetails(): void {
     this.isLoading = true;
-    const userId = localStorage.getItem('UserId')
+    const userId = localStorage.getItem('UserId');
     this.userService.getUserById(Number(userId)).subscribe(
       (data) => {
-        console.log(data);
-        
         this.isLoading = false;
         this.user = data;
-        this.getUserRentals(this.user.userId)
+        this.rentals = this.user.rentals || [];
+
+        this.rentalsByStatus = {
+          pending: this.rentals.filter(rental => rental.rentalStatus === 'Pending'),
+          declined: this.rentals.filter(rental => rental.rentalStatus === 'Declined'),
+          booked: this.rentals.filter(rental => rental.rentalStatus === 'Booked'),
+          rented: this.rentals.filter(rental => rental.rentalStatus === 'Rented'),
+          returned: this.rentals.filter(rental => rental.rentalStatus === 'Returned')
+        };
       },
       (error) => {
         this.isLoading = false;
@@ -48,25 +66,60 @@ export class UserProfileComponent implements OnInit {
     );
   }
 
-  getUserRentals(userId: number): void {
-    this.isLoading = true;
-    console.log(userId);
-    this.rentalService.getRentalsByUser(userId).subscribe(
-      (data) => {
-        console.log(data);
-        
-        this.isLoading = false;
-        this.rentals = data;
+  editUser(userId: number): void {
+    this.router.navigate([`/profile/edit/${userId}`]);
+  }
+
+  openChangePassword(): void {
+    this.isChangePasswordOpen = true;
+  }
+
+  closeChangePassword(): void {
+    this.isChangePasswordOpen = false;
+  }
+
+  onSubmitPasswordChange(userId: number): void {
+    if (this.newPassword !== this.confirmPassword) {
+      this.toastr.error('New Password and Confirm Password do not match.');
+      return;
+    }
+
+    const passwordChangeRequest = {
+      currentPassword: this.currentPassword,
+      newPassword: this.newPassword,
+      confirmNewPassword: this.confirmPassword
+    };
+    this.userService.changePassword(userId, passwordChangeRequest).subscribe(
+      (response) => {
+        this.toastr.success('Password changed successfully.');
+        this.closeChangePassword();
       },
       (error) => {
-        this.isLoading = false;
-        this.toastr.error('Failed to load rentals. Please try again.');
-        console.error('Error fetching rentals:', error);
+        console.log(error.error.error)
+        this.toastr.error(error.error.error);
       }
     );
   }
 
-  editProfile(): void {
-    this.router.navigate(['/edit-profile']);
+  toggleLoginLogout() {
+    if (this.isLoggedIn) {
+      if (confirm('Are you sure you want to logout?')) {
+        console.log(1);
+
+        localStorage.setItem('isLoggedIn', 'false');
+        this.isLoggedIn = false;
+        localStorage.removeItem('UserId')
+        localStorage.removeItem('authToken')
+        this.router.navigate(['']);
+      }
+    } else {
+      console.log(2);
+
+      this.router.navigate(['/login']);
+    }
+  }
+
+  goBack(): void {
+    this.router.navigate(['']);
   }
 }

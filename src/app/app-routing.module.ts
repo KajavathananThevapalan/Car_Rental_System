@@ -24,6 +24,7 @@ import { ListPaymentsComponent } from './component/list-payments/list-payments.c
 import { UserProfileComponent } from './component/user-profile/user-profile.component';
 import { SidebarComponent } from './component/sidebar/sidebar.component';
 import { PaymentComponent } from './component/payment/payment.component';
+import { EditProfileComponent } from './component/edit-profile/edit-profile.component';
 
 const routes: Routes = [
   {
@@ -55,6 +56,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'profile', component: UserProfileComponent },
+  { path: 'profile/edit/:id', component: EditProfileComponent },
   { path: '', component: HomeComponent },
   {
     path: 'car-details/:carId',

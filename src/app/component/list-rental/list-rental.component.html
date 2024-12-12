@@ -40,7 +40,7 @@
                 <td>{{ rental.rentalEndDate }}</td>
                 <td>{{ rental.rentalStatus }}</td>
                 <td>
-                    <div *ngIf="rental.rentalStatus === 'Pending' || rental.rentalStatus === 'Declined'">
+                    <div *ngIf="rental.rentalStatus === 'Pending'">
                         <button class="btn btn-success" (click)="acceptRental(rental.rentalId)">
                             <i class="bi bi-check-lg"></i>
                         </button>
@@ -53,14 +53,13 @@
                         <button class="btn btn-primary m-2 p-2" (click)="payRental(rental.rentalId)">
                             <i class="bi bi-credit-card"></i>
                         </button>
-                        <button class="btn btn-danger m-2 p-2" (click)="deleteRental(rental.rentalId)">
-                            <i class="bi bi-trash3-fill"></i>
-                        </button>
                     </div>
                     <div *ngIf="rental.rentalStatus === 'Rented'">
                         <button class="btn btn-primary m-2 p-2" (click)="Return(rental.rentalId)">
                             <i class="bi bi-arrow-left"></i>
                         </button>
+                    </div>
+                    <div *ngIf="rental.rentalStatus === 'Returned' || rental.rentalStatus === 'Declined'">
                         <button class="btn btn-danger m-2 p-2" (click)="deleteRental(rental.rentalId)">
                             <i class="bi bi-trash3-fill"></i>
                         </button>

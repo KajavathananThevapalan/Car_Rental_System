@@ -1,16 +1,15 @@
-import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormBuilder, Validators, AbstractControl } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
-import { ToastrService } from "ngx-toastr";
-import { UserService } from "../../services/user.service";
-
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { UserService } from '../../services/user.service';
 
 @Component({
-  selector: 'app-edit-user',
-  templateUrl: './edit-user.component.html',
-  styleUrls: ['./edit-user.component.css']
+  selector: 'app-edit-profile',
+  templateUrl: './edit-profile.component.html',
+  styleUrl: './edit-profile.component.css'
 })
-export class EditUserComponent implements OnInit {
+export class EditProfileComponent implements OnInit {
   editUserForm!: FormGroup;
   isLoading: boolean = true;
   user: any = null;
@@ -37,7 +36,7 @@ export class EditUserComponent implements OnInit {
       drivingLicenceNo: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       phone: ['', [Validators.required]],
-      userRole: ['customer', Validators.required],
+      userRole: ['customer'],
       profileImage: [''],
       drivingLicenseFront: ['', [Validators.required]],
       drivingLicenseBack: ['', [Validators.required]],
@@ -70,7 +69,7 @@ export class EditUserComponent implements OnInit {
       this.userService.updateUser(this.userId, this.editUserForm.value).subscribe(
         (data) => {
           this.toastr.success('User details updated successfully');
-          this.router.navigate(['/admin/list-user']);
+          this.router.navigate(['/profile']);
         },
         (error) => {
           this.toastr.error('Error updating user details');
@@ -82,7 +81,7 @@ export class EditUserComponent implements OnInit {
   }
 
   cancelEdit(): void {
-    this.router.navigate([`/admin/user/${this.userId}`]);
+    this.router.navigate(['/profile']);
   }
 
   // Utility method to get form control by name

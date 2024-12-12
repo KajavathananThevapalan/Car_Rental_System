@@ -1,0 +1,86 @@
+/* Profile container */
+.profile-container {
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 1100px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+  }
+  
+  /* Profile Header Section */
+  .profile-header h2 {
+    font-size: 2rem;
+    font-weight: 600;
+  }
+  
+  .profile-header p {
+    color: #6c757d;
+  }
+  
+  /* Profile Image */
+  .profile-image img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border: 5px solid #f9f9f9;
+    border-radius: 50%; /* Makes the image rounded */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+  }
+  
+  /* User Info Section */
+  .user-info h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .user-info p {
+    margin: 5px 0;
+  }
+  
+  /* Rentals and Reservations Tables */
+  .table th, .table td {
+    vertical-align: middle;
+    text-align: center;
+  }
+  
+  .table td {
+    padding: 10px;
+  }
+  
+  /* Buttons */
+  .text-center .btn {
+    width: 150px;
+    font-size: 1rem;
+  }
+  
+  .text-center .btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+  }
+  
+  .text-center .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  
+  .text-center .btn:hover {
+    opacity: 0.9;
+  }
+  
+  .m-2 {
+    margin: 10px;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .user-info .row {
+      flex-direction: column;
+    }
+  
+    .rentals-reservations .row {
+      flex-direction: column;
+    }
+  }
+  
