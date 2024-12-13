@@ -44,8 +44,8 @@
               </button>
               <ul class="dropdown-menu">
                 <li *ngFor="let notification of notifications">
-                  <!-- Notification Item, click to mark as read -->
-                  <a class="dropdown-item" href="#" (click)="markAsRead(notification.id)">
+                  <a class="dropdown-item" href="#" *ngIf="!notification.isRead"
+                    (click)="markAsRead(notification.notificationId)">
                     {{ notification.message }}
                   </a>
                 </li>

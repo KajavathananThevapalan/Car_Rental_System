@@ -40,29 +40,58 @@
     <h3>Customer Reviews</h3>
     <ul>
       <li *ngFor="let review of carDetails.reviews" class="review-item">
-        <strong>{{ review.user }}:</strong> {{ review.comment }}
+        <strong>{{ review.user }}:</strong> {{ review.comments }}
       </li>
     </ul>
   </div>
 
-  <!-- Add Review Form -->
-  <div class="add-review-form bg-dark text-white shadow-sm border-0">
+  <!-- Add Review Form (Only for Logged-in Users) -->
+  <div *ngIf="isLoggedIn" class="add-review-form bg-dark text-white shadow-sm border-0">
     <h4>Add Your Review</h4>
     <form (ngSubmit)="submitReview()">
       <div class="mb-3">
         <label for="user" class="form-label text-warning">Your Name</label>
         <input type="text" id="user" class="form-control" [(ngModel)]="newReview.user" name="user" required>
       </div>
+
       <div class="mb-3">
         <label for="comment" class="form-label text-warning">Your Review</label>
-        <textarea id="comment" class="form-control" [(ngModel)]="newReview.comment" name="comment" rows="4"
-          required></textarea>
+        <textarea id="comment" class="form-control" [(ngModel)]="newReview.comments" name="comments" rows="4" required></textarea>
       </div>
-      <button type="submit" class="btn btn-primary" [disabled]="!newReview.user || !newReview.comment">Submit
-        Review</button>
+
+      <!-- Rating System (1 to 5 stars) -->
+      <div class="mb-3">
+        <label for="rating" class="form-label text-warning">Your Rating</label>
+        <div>
+          <input type="radio" id="star1" name="rating" [(ngModel)]="newReview.rating" value="1" />
+          <label for="star1">☆</label>
+
+          <input type="radio" id="star2" name="rating" [(ngModel)]="newReview.rating" value="2" />
+          <label for="star2">☆</label>
+
+          <input type="radio" id="star3" name="rating" [(ngModel)]="newReview.rating" value="3" />
+          <label for="star3">☆</label>
+
+          <input type="radio" id="star4" name="rating" [(ngModel)]="newReview.rating" value="4" />
+          <label for="star4">☆</label>
+
+          <input type="radio" id="star5" name="rating" [(ngModel)]="newReview.rating" value="5" />
+          <label for="star5">☆</label>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary" [disabled]="!newReview.user || !newReview.comments || !newReview.rating">
+        Submit Review
+      </button>
     </form>
   </div>
 
+  <!-- If Not Logged In, Show Message -->
+  <div *ngIf="!isLoggedIn" class="no-review-message">
+    <p>You need to be logged in to submit a review. <a routerLink="/login">Login here</a></p>
+  </div>
+
+  <!-- No Reviews Section -->
   <div *ngIf="carDetails.reviews?.length === 0" class="no-reviews">
     <p>No reviews available.</p>
   </div>

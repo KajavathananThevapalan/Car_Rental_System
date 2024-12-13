@@ -5,6 +5,7 @@ import { UserService } from "../../../services/user.service";
 import { CarService } from "../../../services/car.service";
 import { RentalService } from "../../../services/rental.service";
 import { User } from "../../../models/User";
+import { ReviewService } from "../../../services/review.service";
 
 @Component({
   selector: 'app-home',
@@ -28,6 +29,7 @@ export class HomeComponent implements OnInit {
     private userService: UserService,
     private carService: CarService,
     private rentalService: RentalService,
+    private reviewService: ReviewService
   ) { }
 
   ngOnInit() {
@@ -51,9 +53,9 @@ export class HomeComponent implements OnInit {
       this.totalCustomers = data.length;
     });
 
-    // this.modelService.getModels().subscribe((count) => {
-    //   this.totalReviews = count.length;
-    // });
+    this.reviewService.getReviews().subscribe((count) => {
+      this.totalReviews = count.length;
+    });
 
     this.carService.getCars().subscribe((count) => {
       this.totalCars = count.length;

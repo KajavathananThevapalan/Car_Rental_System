@@ -29,8 +29,12 @@ export class HomeNavComponent {
     this.isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
     if (this.isLoggedIn) {
       this.getUserDetails();
+      this.getNotifications();  // Load notifications initially
+      // Polling to refresh notifications every 10 seconds (example)
+      setInterval(() => {
+        this.getNotifications();  // Refresh notifications
+      }, 10000); // 10000ms = 10 seconds
     }
-    this.getNotifications();
   }
 
   toggleLoginLogout() {
@@ -50,8 +54,6 @@ export class HomeNavComponent {
   getUserDetails(): void {
     this.userService.getUserById(Number(this.userId)).subscribe(
       (data) => {
-        console.log(data);
-        
         this.user = data;
         this.userName = data.firstName;
       },
@@ -62,7 +64,6 @@ export class HomeNavComponent {
   }
 
   viewAllNotifications(): void {
-    console.log('View All Notifications');
     this.router.navigate(['/notifications']);
   }
 
@@ -78,11 +79,9 @@ export class HomeNavComponent {
     );
   }
 
-  // Method to handle notification click and mark as read
   markAsRead(notificationId: number) {
     this.notificationService.MarkAsRead(notificationId).subscribe(
       (response) => {
-        // Update the unread count after the notification is marked as read
         this.notifications = this.notifications.map((notification: any) => {
           if (notification.id === notificationId) {
             notification.isRead = true;
