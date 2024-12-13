@@ -39,3 +39,91 @@
         </div>
     </a>
 </div>
+
+<div class="report-container">
+    <div class="report-header">
+        <h1 class="recent-Articles">User Details</h1>
+        <div class="searchbar">
+            <input 
+                type="text" 
+                placeholder="Enter User ID" 
+                [(ngModel)]="searchTerm" 
+                (keyup.enter)="searchUser()">
+            <div class="searchbtn">
+                <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210180758/Untitled-design-(28).png"
+                    class="icn srchicn" alt="search-icon" 
+                    (click)="searchUser()">
+            </div>
+        </div>
+        <a href="./MemberManagement.html" class="view">View All</a>
+    </div>
+
+    <div id="form-container">
+        <form id="personal-details">
+            <div class="form-group">
+                <div>
+                    <h2>Personal Details</h2>
+                </div>
+                <table>
+                    <tr>
+                        <td><label for="name">Name :</label></td>
+                        <td><input type="text" id="name" [value]="name" readonly></td>
+                    </tr>
+                    <tr>
+                        <td><label for="nic">NIC :</label></td>
+                        <td><input type="text" id="nic" [value]="nic" readonly></td>
+                    </tr>
+                    <tr>
+                        <td><label for="address">Address :</label></td>
+                        <td><input type="text" id="address" [value]="address" readonly></td>
+                    </tr>
+                    <tr>
+                        <td><label for="phone">Phone No :</label></td>
+                        <td><input type="text" id="phone" [value]="phone" readonly></td>
+                    </tr>
+                    <tr>
+                        <td><label for="email">Email :</label></td>
+                        <td><input type="text" id="email" [value]="email" readonly></td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+
+        <form id="rental-details">
+            <div class="form-group">
+                <div>
+                    <h2>Rental Details</h2>
+                </div>
+                <table>
+                    <tr>
+                        <td><label for="rentalId">Rental ID :</label></td>
+                        <td><input type="text" id="rentalId" [value]="rentalId" readonly></td>
+                    </tr>
+                    <tr>
+                        <td><label for="amount">Amount :</label></td>
+                        <td><input type="text" id="amount" [value]="amount" readonly></td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+
+        <form id="car-details">
+            <div class="form-group">
+                <div>
+                    <h2>Car Details</h2>
+                </div>
+                <table>
+                    <tr>
+                        <td><label for="brand">Brand :</label></td>
+                        <td><input type="text" id="brand" [value]="brand" readonly></td>
+                    </tr>
+                    <tr>
+                        <td><label for="model">Model :</label></td>
+                        <td><input type="text" id="model" [value]="model" readonly></td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+    </div>
+</div>
+

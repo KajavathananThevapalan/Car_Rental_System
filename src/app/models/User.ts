@@ -1,4 +1,5 @@
 import { Address } from "./Address";
+import { Rental } from "./Rental";
 
 export interface User {
   userId: number;
@@ -14,4 +15,5 @@ export interface User {
   profileImage: string;
   dirvingLicenceFront:string;
   dirvingLicenceBack:string;
+  rentals: Rental[];
 }
