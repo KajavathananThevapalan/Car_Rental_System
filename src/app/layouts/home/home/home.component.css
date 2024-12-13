@@ -245,9 +245,10 @@
 }
 
 .service-icon img {
-  width: 200px;
-  height: 120px;
+  width: 300px;
+  height: 200px;
   margin-bottom: 15px;
+  border-radius: 10px;
 }
 
 .service-card h3 {
