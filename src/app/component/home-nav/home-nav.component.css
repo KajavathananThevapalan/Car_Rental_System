@@ -1,0 +1,66 @@
+/* Navbar Styling */
+.navbar {
+    background-color: #ffffff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 15px 20px;
+  }
+  
+  .navbar .navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .navbar .nav-link {
+    color: #333333;
+    margin-right: 15px;
+    font-weight: 500;
+  }
+  
+  .navbar .nav-link:hover {
+    color: #f7941d;
+  }
+  
+  .navbar-buttons .btn {
+    margin-left: 10px;
+    font-weight: 600;
+  }  
+
+  .dropdown-toggle::after {
+    display: none;
+  }
+
+
+.side-panel-content h3 {
+  margin-bottom: 20px;
+}
+
+.side-panel-content button {
+  width: 100%;
+}
+
+/* For Settings Button */
+.text-right {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.dropdown-toggle::after {
+  margin-left: 5px; /* Space for the dropdown arrow */
+}
+
+.show {
+  display: block !important;
+}
+
+.view-cars-btn {
+  background-color: #333333;
+  color: #ffffff;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+}
+
+.highlight {
+  color: #f7941d;
+}

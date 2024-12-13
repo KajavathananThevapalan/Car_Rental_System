@@ -1,44 +1,4 @@
-<header>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-    <div class="container">
-      <a class="navbar-brand" href="#!">WayToGo</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#home">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#about">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#services">Services</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#contactus">Contact Us</a>
-          </li>
-        </ul>
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" [(ngModel)]="searchQuery" name="searchQuery" placeholder="Search"
-            aria-label="Search" />
-        </form>        
-        <div>
-          <div *ngIf="!isLoggedIn">
-            <button type="button" class="btn view-cars-btn m-2" [routerLink]="['/login']">Login</button>
-            <button type="button" class="btn highlight" [routerLink]="['/register']">Register</button>
-          </div>
-          <div *ngIf="isLoggedIn">
-            <button type="button" class="btn btn-success" [routerLink]="['/profile']">Hi, {{ userName }}</button>
-            <button type="button" class="btn btn-secondary m-2" (click)="toggleLoginLogout()">Logout</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </nav>
-</header>
+<app-home-nav></app-home-nav>
 
 <section id="home">
   <div class="hero-section">
@@ -145,6 +105,16 @@
     </div>
   </div>
 </section>
+
+<div class="container">
+  <div class="d-flex justify-content-around">
+    <h3 class="col-md-4 fw-bold">Available Cars</h3>
+    <form class="col-md-4">
+      <input class="form-control me-2" type="search" [(ngModel)]="searchQuery" name="searchQuery" placeholder="Search"
+        aria-label="Search" />
+    </form>
+  </div>
+</div>
 
 <main>
   <div id="list-cars" class="container my-5 py-5">

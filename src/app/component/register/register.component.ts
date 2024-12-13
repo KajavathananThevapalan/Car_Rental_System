@@ -4,6 +4,8 @@ import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { AuthorizationService } from "../../services/authorization.service";
 import { jwtDecode } from "jwt-decode";
+import { NotificationService } from "../../services/notification.service";
+import { UserService } from "../../services/user.service";
 
 @Component({
   selector: 'app-register',
@@ -13,11 +15,15 @@ import { jwtDecode } from "jwt-decode";
 export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
   userRole: string = '';
+  email: string = '';
+  userId!: number;
 
   constructor(
-    private fb: FormBuilder, 
-    private router: Router, 
-    private toastr: ToastrService, 
+    private fb: FormBuilder,
+    private router: Router,
+    private toastr: ToastrService,
+    private notificationService: NotificationService,
+    private userService: UserService,
     private authService: AuthorizationService
   ) {
     // Create the form group with the custom password match validator
@@ -26,14 +32,14 @@ export class RegisterComponent implements OnInit {
       lastName: [''],
       nic: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      phone: ['', [Validators.required]],
+      phone: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
       userRole: ['customer', Validators.required],
-      profileImage: [''],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      profileImage: ['https://th.bing.com/th/id/R.1a169ee0e11d6f85260b7864aa916f2c?rik=F6uhG3K5RxD0Bg&pid=ImgRaw&r=0'],
+      password: ['', [Validators.required, Validators.minLength(4)]],
       confirmpassword: ['', [Validators.required]],
       drivingLicenceNo: ['', Validators.required],
-      drivingLicenseFront: ['', [Validators.required]],
-      drivingLicenseBack: ['', [Validators.required]],
+      drivingLicenseFront: ['', [Validators.required,Validators.pattern('https?://(?:www\\.)?.+')]],
+      drivingLicenseBack: ['', [Validators.required,Validators.pattern('https?://(?:www\\.)?.+')]],
       address: this.fb.group({
         addressLine1: [''],
         addressLine2: [''],
@@ -41,14 +47,14 @@ export class RegisterComponent implements OnInit {
         district: [''],
         country: ['']
       })
-    }, { validators: this.passwordMatchValidator() });  // Apply the custom validator here
+    }, { validators: this.passwordMatchValidator() });
   }
 
   passwordMatchValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const password = control.get('password')?.value;
       const confirmPassword = control.get('confirmpassword')?.value;
-  
+
       if (password && confirmPassword && password !== confirmPassword) {
         return { passwordsDoNotMatch: true };
       }
@@ -60,20 +66,20 @@ export class RegisterComponent implements OnInit {
     this.checkUserRole();
   }
 
-  // Method to check user role from JWT token
   checkUserRole(): void {
     const authToken = localStorage.getItem('authToken');
     if (authToken) {
       try {
         const decodedToken: any = jwtDecode(authToken);
         this.userRole = decodedToken?.UserRole;
+        this.userId = Number(decodedToken?.userId);
+        this.email = decodedToken?.email;
       } catch (error) {
         console.error('Error decoding token:', error);
       }
     }
   }
 
-  // Method to handle form submission
   onSubmit() {
     if (this.registerForm.invalid) {
       this.toastr.error("Please fill out the form correctly.");
@@ -82,14 +88,28 @@ export class RegisterComponent implements OnInit {
 
     let regUser = this.registerForm.value;
 
-    // Call the registration API
     this.authService.registerUser(regUser).subscribe({
       next: (data) => {
+        const notification = {
+          email: this.email,
+          message: 'User register successful!',
+          type: 'Rental Booking',
+          userId: this.userId
+        };
+        this.notificationService.sendNotification(notification).subscribe(
+          (response) => {
+            console.log('Notification sent successfully', response);
+          },
+          (error) => {
+            console.error('Error sending notification', error);
+          }
+        );
+
         this.toastr.success("Registration successful.");
         this.router.navigate(['/login']);
       },
       error: (err) => {
-        console.error('Registration error:', err);
+        console.log('Registration error:', err.message);
         this.toastr.error("Registration failed. Please try again.");
       }
     });

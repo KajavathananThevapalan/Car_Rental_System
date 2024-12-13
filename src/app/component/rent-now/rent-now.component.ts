@@ -6,6 +6,7 @@ import { jwtDecode } from 'jwt-decode';
 import { ToastrService } from 'ngx-toastr';
 import { CarService } from '../../services/car.service';
 import { RentalService } from '../../services/rental.service';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-rent-now',
@@ -15,7 +16,7 @@ import { RentalService } from '../../services/rental.service';
 export class RentNowComponent implements OnInit {
   @Input() carDetails!: CarDetails;
   @Output() closePanel = new EventEmitter<void>();
-  
+
   rentalId: number | undefined;
   userId!: number;
   carId!: number;
@@ -24,13 +25,15 @@ export class RentNowComponent implements OnInit {
   amount!: number;
   totalAmount!: number;
   isBookCarOpen = true;
+  userEmail: string = '';
 
   constructor(
     private fb: FormBuilder,
     private rentalService: RentalService,
     private router: Router,
     private toastr: ToastrService,
-    private carService: CarService
+    private carService: CarService,
+    private notificationService: NotificationService
   ) {
     this.addRentalForm = this.fb.group({
       carId: ['', [Validators.required]],
@@ -44,15 +47,15 @@ export class RentNowComponent implements OnInit {
 
   ngOnInit(): void {
     this.carId = this.carDetails?.carId;
-    console.log('Car Details:', this.carDetails);
+    // console.log('Car Details:', this.carDetails);
     this.loadUserData();
-    this.calculateAmount(this.carId);
+    this.calculateAmount(this.carId);    
   }
 
   calculateAmount(carId: number) {
     this.carService.getCar(carId).subscribe((data) => {
       this.amount = data.pricePerDay;
-      console.log('Car price per day:', this.amount);
+      // console.log('Car price per day:', this.amount);
     });
   }
 
@@ -85,6 +88,9 @@ export class RentNowComponent implements OnInit {
         const decodedToken: any = jwtDecode(authToken);
         const userId = decodedToken?.Id;
         this.userId = userId;
+        this.userEmail = decodedToken?.Email;
+        // console.log(this.userEmail);
+
         this.addRentalForm.patchValue({
           carId: this.carId,
           userId: this.userId,
@@ -111,6 +117,21 @@ export class RentNowComponent implements OnInit {
 
     this.rentalService.createRental(rental).subscribe(
       (data) => {
+        const notification = {
+          email: this.userEmail,
+          message: 'Your car booking was successful!',
+          type: 'Rental Booking',
+          userId: rental.userId
+        };
+        this.notificationService.sendNotification(notification).subscribe(
+          (response) => {
+            console.log('Notification sent successfully', response);
+          },
+          (error) => {
+            console.error('Error sending notification', error);
+          }
+        );
+
         this.toastr.info('Your request was successful');
         this.router.navigate(['']);
       },

@@ -46,15 +46,15 @@
   </div>
 
   <!-- Add Review Form -->
-  <div class="add-review-form">
+  <div class="add-review-form bg-dark text-white shadow-sm border-0">
     <h4>Add Your Review</h4>
     <form (ngSubmit)="submitReview()">
       <div class="mb-3">
-        <label for="user" class="form-label">Your Name</label>
+        <label for="user" class="form-label text-warning">Your Name</label>
         <input type="text" id="user" class="form-control" [(ngModel)]="newReview.user" name="user" required>
       </div>
       <div class="mb-3">
-        <label for="comment" class="form-label">Your Review</label>
+        <label for="comment" class="form-label text-warning">Your Review</label>
         <textarea id="comment" class="form-control" [(ngModel)]="newReview.comment" name="comment" rows="4"
           required></textarea>
       </div>

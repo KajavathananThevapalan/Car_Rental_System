@@ -37,6 +37,7 @@ import { SidebarComponent } from './component/sidebar/sidebar.component';
 import { NavbarComponent } from './component/navbar/navbar.component';
 import { PaymentComponent } from './component/payment/payment.component';
 import { EditProfileComponent } from "./component/edit-profile/edit-profile.component";
+import { HomeNavComponent } from './component/home-nav/home-nav.component';
 
 
 @NgModule({
@@ -70,6 +71,7 @@ import { EditProfileComponent } from "./component/edit-profile/edit-profile.comp
     NavbarComponent,
     PaymentComponent,
     EditProfileComponent,
+    HomeNavComponent,
   ],
   imports: [
     FormsModule,

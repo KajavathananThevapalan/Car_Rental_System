@@ -49,7 +49,7 @@ const routes: Routes = [
       { path: 'user/:id', component: UserDetailsComponent },
       { path: 'user/edit/:id', component: EditUserComponent },
       { path: 'list-rentals', component: ListRentalComponent },
-      { path: 'list-reservations', component: ListReservationComponent },
+      // { path: 'list-reservations', component: ListReservationComponent },
       { path: 'list-payments', component: ListPaymentsComponent },
     ]
   },
