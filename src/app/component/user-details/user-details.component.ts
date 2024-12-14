@@ -31,14 +31,15 @@ export class UserDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {    
-    this.userId = Number(this.route.snapshot.paramMap.get('id'));
-    this.getUserDetails();
+    this.route.paramMap.subscribe(params => {
+      this.userId = Number(params.get('id'));
+      this.getUserDetails();
+    });
   }
 
   getUserDetails(): void {
     this.isLoading = true;
-    const userId = localStorage.getItem('UserId');
-    this.userService.getUserById(Number(userId)).subscribe(
+    this.userService.getUserById(this.userId).subscribe(
       (data) => {
         this.isLoading = false;
         this.user = data;
@@ -65,7 +66,7 @@ export class UserDetailsComponent implements OnInit {
     this.router.navigate(['/admin/list-user']);
   }
 
-   editUser(userId: number): void {
+  editUser(userId: number): void {
     this.router.navigate([`/admin/user/edit/${userId}`]);
   }
 }

@@ -4,7 +4,8 @@ import { CarService } from "../../services/car.service";
 import { ModelService } from "../../services/model.service";
 import { UserService } from "../../services/user.service";
 import { User } from "../../models/User";
-import { Car, Model, Brand } from "../../services/admin-service.service";
+import { Model, Brand } from "../../services/admin-service.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-dashboard',
@@ -13,13 +14,11 @@ import { Car, Model, Brand } from "../../services/admin-service.service";
 })
 export class DashboardComponent implements OnInit {
 
-  // Data for the cards
   brands!: number;
   models!: number;
   cars!: number;
   customers!: number;
 
-  // Personal, rental, and car details for the form
   name: string = '';
   nic: string = '';
   address: string = '';
@@ -30,21 +29,20 @@ export class DashboardComponent implements OnInit {
   brand: string = '';
   model: string = '';
 
-  // Search term for user
   searchTerm: string = '';
 
   constructor(
     private userService: UserService, 
     private carService: CarService, 
     private brandService: BrandService, 
-    private modelService: ModelService
+    private modelService: ModelService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.getDashboardData();
   }
 
-  // Fetch dashboard data (counts)
   getDashboardData(): void {
     this.userService.getUsers().subscribe((users) => {
       this.customers = users.length;
@@ -63,7 +61,6 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  // Fetch user details based on the search term (user ID)
   searchUser(): void {
     if (this.searchTerm) {
       this.userService.getUserById(Number(this.searchTerm)).subscribe((user: User) => {
@@ -73,26 +70,21 @@ export class DashboardComponent implements OnInit {
           this.address = `${user.address.addressLine1}, ${user.address.addressLine2}, ${user.address.city}, ${user.address.district}`;
           this.phone = user.phone;
           this.email = user.email;
-
-          // Check rentals and get the first rental (or any logic you need)
+          
           if (user.rentals && user.rentals.length > 0) {
-            this.rentalId = user.rentals[0].rentalId.toString(); // Use the first rental ID
-            this.amount = (user.rentals[0].totalAmount).toString(); // Use the first rental amount
-
-            // Fetch the car details based on carId
+            this.rentalId = user.rentals[0].rentalId.toString();
+            this.amount = (user.rentals[0].totalAmount).toString();
             const carId = user.rentals[0].carId;
             this.carService.getCar(carId).subscribe((car) => {
               if (car) {
-                // Fetch the model details based on modelId from the car
                 const modelId = car.modelId;
                 this.modelService.getModel(modelId).subscribe((model: Model) => {
                   if (model) {
-                    this.model = model.name; // Assuming the model has a 'name' property
-                    // Fetch the brand details based on brandId from the model
+                    this.model = model.name;
                     const brandId = model.brandId;
                     this.brandService.getBrand(Number(brandId)).subscribe((brand: Brand) => {
                       if (brand) {
-                        this.brand = brand.name; // Assuming the brand has a 'name' property
+                        this.brand = brand.name;
                       }
                     });
                   }
@@ -113,7 +105,6 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  // Clear user details if no user is found
   clearUserDetails(): void {
     this.name = '';
     this.nic = '';

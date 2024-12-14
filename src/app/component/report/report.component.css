@@ -1,0 +1,101 @@
+/* Report Container */
+.report-container {
+  width: 90%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.report-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.report-header h1 {
+  font-size: 2.5rem;
+  color: #333;
+}
+
+.report-header .error {
+  color: red;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.report-section {
+  background-color: #fff;
+  margin-bottom: 20px;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.report-section h3 {
+  font-size: 1.8rem;
+  color: #007BFF;
+  margin-bottom: 15px;
+}
+
+.report-section p {
+  font-size: 1.2rem;
+  color: #333;
+  margin: 10px 0;
+}
+
+.report-section p strong {
+  color: #007BFF;
+}
+
+/* Styling for the total values */
+.report-section p {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 500;
+}
+
+.report-section p span {
+  font-weight: bold;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .report-container {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .report-header h1 {
+    font-size: 2rem;
+  }
+
+  .report-section h3 {
+    font-size: 1.6rem;
+  }
+
+  .report-section p {
+    font-size: 1rem;
+  }
+}
+
+/* Hover Effect */
+.report-section:hover {
+  transform: translateY(-5px);
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Add styles for the sections */
+.report-section:nth-child(even) {
+  background-color: #f1f1f1;
+}
+
+.report-section:nth-child(odd) {
+  background-color: #fff;
+}
+
+/* Borders between sections */
+.report-section:not(:last-child) {
+  border-bottom: 2px solid #ddd;
+}

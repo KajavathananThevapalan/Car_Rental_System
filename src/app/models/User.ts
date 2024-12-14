@@ -10,7 +10,7 @@ export interface User {
   email: string;
   password: string;
   phone: string;
-  role: 'Customer' | 'Admin';
+  userRole: 'customer' | 'admin';
   address: Address;
   profileImage: string;
   dirvingLicenceFront:string;

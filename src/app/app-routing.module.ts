@@ -25,6 +25,7 @@ import { UserProfileComponent } from './component/user-profile/user-profile.comp
 import { SidebarComponent } from './component/sidebar/sidebar.component';
 import { PaymentComponent } from './component/payment/payment.component';
 import { EditProfileComponent } from './component/edit-profile/edit-profile.component';
+import { ReportComponent } from './component/report/report.component';
 
 const routes: Routes = [
   {
@@ -49,7 +50,7 @@ const routes: Routes = [
       { path: 'user/:id', component: UserDetailsComponent },
       { path: 'user/edit/:id', component: EditUserComponent },
       { path: 'list-rentals', component: ListRentalComponent },
-      // { path: 'list-reservations', component: ListReservationComponent },
+      { path: 'reports', component: ReportComponent },
       { path: 'list-payments', component: ListPaymentsComponent },
     ]
   },

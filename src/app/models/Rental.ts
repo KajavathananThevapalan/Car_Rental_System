@@ -1,3 +1,5 @@
+import { Payment } from "./Payment";
+
 export interface Rental {
     rentalId: number;
     createdAt: Date;
@@ -7,4 +9,6 @@ export interface Rental {
     rentalStatus: string;
     carId: number;
     userId: number;
+    payments: Payment[];
+    userName: string;
 }

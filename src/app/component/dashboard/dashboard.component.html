@@ -44,18 +44,15 @@
     <div class="report-header">
         <h1 class="recent-Articles">User Details</h1>
         <div class="searchbar">
-            <input 
-                type="text" 
-                placeholder="Enter User ID" 
-                [(ngModel)]="searchTerm" 
-                (keyup.enter)="searchUser()">
+            <input type="text" placeholder="Enter User ID" [(ngModel)]="searchTerm" (keyup.enter)="searchUser()">
             <div class="searchbtn">
-                <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210180758/Untitled-design-(28).png"
-                    class="icn srchicn" alt="search-icon" 
-                    (click)="searchUser()">
+                <i class="bi bi-search" (click)="searchUser()"></i>
             </div>
         </div>
-        <a href="./MemberManagement.html" class="view">View All</a>
+
+        <a [routerLink]="['/admin/user', searchTerm]" class="view" [class.disabled]="!searchTerm"
+            [attr.tabindex]="searchTerm ? 0 : -1" [attr.disabled]="!searchTerm ? true : null">View All</a>
+
     </div>
 
     <div id="form-container">
@@ -78,7 +75,7 @@
                         <td><input type="text" id="address" [value]="address" readonly></td>
                     </tr>
                     <tr>
-                        <td><label for="phone">Phone No :</label></td>
+                        <td><label for="phone">Phone :</label></td>
                         <td><input type="text" id="phone" [value]="phone" readonly></td>
                     </tr>
                     <tr>
@@ -126,4 +123,3 @@
         </form>
     </div>
 </div>
-

@@ -38,6 +38,7 @@ import { NavbarComponent } from './component/navbar/navbar.component';
 import { PaymentComponent } from './component/payment/payment.component';
 import { EditProfileComponent } from "./component/edit-profile/edit-profile.component";
 import { HomeNavComponent } from './component/home-nav/home-nav.component';
+import { ReportComponent } from './component/report/report.component';
 
 
 @NgModule({
@@ -72,6 +73,7 @@ import { HomeNavComponent } from './component/home-nav/home-nav.component';
     PaymentComponent,
     EditProfileComponent,
     HomeNavComponent,
+    ReportComponent,
   ],
   imports: [
     FormsModule,

@@ -1,0 +1,54 @@
+<div class="report-container">
+    <div class="report-header">
+        <h1>Car Rental Report</h1>
+        <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+    </div>
+
+    <div class="report-section">
+        <h3>Rentals Activity</h3>
+        <p><span>Total Reservations:</span> <strong>{{ totalRentals + totalDeclined }}</strong></p>
+        <p><span>Total Rentals:</span> <strong>{{ totalRentals }}</strong></p>
+        <p><span>Total Completed Rentals:</span> <strong>{{ totalCompleted }}</strong></p>
+        <p><span>Total Pending Rentals:</span> <strong>{{ totalPending }}</strong></p>
+        <p><span>Total Booked Rentals:</span> <strong>{{ totalBooked }}</strong></p>
+        <p><span>Total Declined Rentals:</span> <strong>{{ totalDeclined }}</strong></p>
+        <p><span>Total Returned Rentals:</span> <strong>{{ totalReturned }}</strong></p>
+        <p><span>Total Rented Rentals:</span> <strong>{{ totalRented }}</strong></p>
+    </div>
+
+    <div class="report-section">
+        <h3>Brand Activity</h3>
+        <p><span>Total Brands:</span> <strong>{{ totalBrands }}</strong></p>
+    </div>
+
+    <div class="report-section">
+        <h3>Model Activity</h3>
+        <p><span>Total Models:</span> <strong>{{ totalModels }}</strong></p>
+        <p><span>Gasoline Type Models:</span> <strong>{{ GasolineTypeModel }}</strong></p>
+        <p><span>Diesel Type Models:</span> <strong>{{ DieselTypeModel }}</strong></p>
+        <p><span>Electric Type Models:</span> <strong>{{ ElectricTypeModel }}</strong></p>
+        <p><span>Hybrid Type Models:</span> <strong>{{ HybridTypeModel }}</strong></p>
+    </div>
+
+    <div class="report-section">
+        <h3>Car Activity</h3>
+        <p><span>Total Cars:</span> <strong>{{ totalCars }}</strong></p>
+        <p><span>Available Cars:</span> <strong>{{ availableCars }}</strong></p>
+        <p><span>Rented Cars:</span> <strong>{{ rentedCars }}</strong></p>
+        <p><span>Reserved Cars:</span> <strong>{{ reservedCars }}</strong></p>
+    </div>
+
+    <div class="report-section">
+        <h3>Payment Activity</h3>
+        <p><span>Total Payments:</span> <strong>{{ totalPayments }}</strong></p>
+        <p><span>Completed Payments:</span> <strong>{{ completePayments }}</strong></p>
+        <p><span>Cash Payments:</span> <strong>{{ cashPayments }}</strong></p>
+    </div>
+
+    <div class="report-section">
+        <h3>User Activity</h3>
+        <p><span>Total Users:</span> <strong>{{ totalUsers }}</strong></p>
+        <p><span>Admin Users:</span> <strong>{{ adminUsers }}</strong></p>
+        <p><span>Customers:</span> <strong>{{ normalUsers }}</strong></p>
+    </div>
+</div>
