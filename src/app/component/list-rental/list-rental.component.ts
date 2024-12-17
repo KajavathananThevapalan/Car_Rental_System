@@ -175,7 +175,7 @@ export class ListRentalComponent {
 
   returnRental(rentalId: number): void {
     if (confirm('Are you sure you want to return this rental?')) {
-      this.rentalService.updateRentalStatus(rentalId, 'Returned').subscribe(
+      this.rentalService.updateRentalStatus(rentalId, 'Available').subscribe(
         () => {
           this.toastr.success('Returned Successfully');
           this.getRentals();

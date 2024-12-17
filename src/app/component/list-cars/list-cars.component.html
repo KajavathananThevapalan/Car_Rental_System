@@ -12,19 +12,21 @@
     <!-- Display Paginated Cars -->
     <div *ngIf="paginatedCars.length > 0" class="cardBox">
         <div *ngFor="let car of paginatedCars">
-            <div class="card" style="width: 18rem;">
-                <img [src]="car.frotView ? car.frotView : 'default-image-url.jpg'" class="card-img-top car-image" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">{{ car.status }}</h5>
-                    <div class="d-flex justify-content-between">
-                        <p class="card-text">{{ car.color }}</p>
-                        <p class="card-text">{{ car.yearOfManufacture }}</p>
+            <div *ngFor="let status of car.rentals">
+                <div class="card" style="width: 18rem;" *ngIf="status.rentalStatus == 'Available'">
+                    <img [src]="car.frotView ? car.frotView : 'default-image-url.jpg'" class="card-img-top car-image" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ status.rentalStatus }}</h5>
+                        <div class="d-flex justify-content-between">
+                            <p class="card-text">{{ car.color }}</p>
+                            <p class="card-text">{{ car.yearOfManufacture }}</p>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <p class="card-text">{{ car.pricePerDay | currency }}</p>
+                            <p class="card-text">View Count: {{ car.viewCount }}</p>
+                        </div>
+                        <button class="btn btn-warning view-button" (click)="viewCarDetails(car)">View</button>
                     </div>
-                    <div class="d-flex justify-content-between">
-                        <p class="card-text">{{ car.pricePerDay | currency }}</p>
-                        <p class="card-text">View Count: {{ car.viewCount }}</p>
-                    </div>
-                    <button class="btn btn-warning view-button" (click)="viewCarDetails(car)">View</button>
                 </div>
             </div>
         </div>

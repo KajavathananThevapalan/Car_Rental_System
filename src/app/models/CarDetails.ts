@@ -1,4 +1,5 @@
 import { CarImage } from "./CarImage";
+import { Rental } from "./Rental";
 
 export interface CarDetails {
     carId: number;
@@ -16,7 +17,7 @@ export interface CarDetails {
     modelId: number;
     reviews: any[];
     reservations: any | null;
-    rentals: any | null;
+    rentals: Rental[] | null;
     frotView: string;
     backView: string;
     sideView: string;
